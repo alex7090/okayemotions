@@ -1,0 +1,169 @@
+<style>
+    .table {
+        margin-top: 6%;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .content {
+        width: 94%;
+        margin: 4em auto;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: justify;
+    }
+
+    .logo {
+        line-height: 60px;
+        position: fixed;
+        float: left;
+        margin: 16px 46px;
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px;
+        letter-spacing: 2px;
+    }
+
+
+    nav ul {
+        line-height: 60px;
+        list-style: none;
+        background: rgba(0, 0, 0, 0);
+        overflow: hidden;
+        color: #fff;
+        padding: 0;
+        text-align: right;
+        margin: 0;
+        padding-right: 40px;
+        transition: 1s;
+    }
+
+    nav.black ul {
+        background: #000;
+    }
+
+    nav ul li {
+        display: inline-block;
+        padding: 16px 40px;
+        ;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 16px;
+    }
+
+
+    @media(max-width: 786px) {
+
+        .logo {
+            position: fixed;
+            top: 0;
+            margin-top: 16px;
+        }
+
+        nav ul {
+            max-height: 0px;
+            background: #000;
+        }
+
+        nav.black ul {
+            background: #000;
+        }
+
+        .showing {
+            max-height: 34em;
+        }
+
+        nav ul li {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .menu-icon {
+            display: block;
+        }
+
+    }
+</style>
+<header>
+    <nav>
+        <div class="menu-icon">
+            <i class="fa fa-bars fa-2x"></i>
+        </div>
+        <div class="logo">
+            <a href="/">LOGO</a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/data">Données</a></li>
+                <li><a href="/new">Envoyer</a></li>
+                <li><a href="/user/register">Inscription</a></li>
+                <li><a href="/user/login">Connexion</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<table id="table">
+    <thead>
+        <tr>
+            <th data-field="id">Item ID</th>
+            <th data-field="fname">First Name</th>
+            <th data-field="lname">Last Name</th>
+            <th data-field="email">email</th>
+            <th data-field="vname">Video Name</th>
+            <th data-field="credit">Credit</th>
+            <th data-field="media">Media</th>
+            <th data-field="link">Link</th>
+            <th>Show Name</th>
+        </tr>
+    </thead>
+</table>
+<script>
+    var $table = $('#table');
+    var data = '<%- JSON.stringify(data) %>';
+    var data_json = JSON.parse(data);
+    console.log(data);
+    $(function () {
+        $('#table').bootstrapTable({
+            data: data_json,
+            columns: [{}, {}, {}, {}, {}, {}, {}, {
+                field: 'operate',
+                title: 'Link',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: function (value, row, index) {
+                    if (row.type == 'link') {
+                        return row.link;
+                    } else {
+                        return '<button class="btn btn-success" onclick=""> Download video</button>';
+                    }
+                }
+            },
+            {
+                field: 'operate',
+                title: 'Video',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: function (value, row, index) {
+                    if (row.type == 'link') {
+                        return '<button class="btn btn-success" onclick=" window.open(\'https://' + row.link + '\',\'_blank\')"> View</button>';
+                    } else {
+                        return '<button class="btn btn-success" onclick=" window.open(\'watch?video=' + row.link + '\',\'_blank\')"> View</button>';
+                    }
+                }
+            }
+            ]
+        });
+    });
+</script>
