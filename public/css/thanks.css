@@ -1,0 +1,88 @@
+@font-face {
+    font-family: "apercu";
+    src: url('ApercuProLight.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-style: italic;
+    src: url('ApercuProItalic.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-weight: bold;
+    src: url('ApercuProBold.otf');
+}
+
+.btn-primary {
+    padding: 0.7em;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 25%;
+    margin-top: 1.5em;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    font-family: apercu;
+    background-color: #00bfdb;
+    border-color: #00bfdb;
+}
+
+.btn-primary:hover {
+    font-family: apercu;
+    background-color: #01a6c0;
+    border-color: #01a6c0;
+}
+
+.myText {
+    position: inherit;
+    padding-top: 5%;
+    font-size: 4em;
+    font-family: "apercu";
+    font-weight: bold;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: black;
+}
+
+nav {
+    /* position: fixed; */
+    width: 100%;
+    line-height: 60px;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+.socialbtns, .socialbtns ul, .socialbtns li {
+    margin: 0;
+    padding: 5px;
+}
+
+.socialbtns li {
+    list-style: none outside none;
+    display: inline-block;
+}
+
+.socialbtns .fab {
+    height: 1.5em;
+    width: 1.5em;
+    color: #000;
+    background-color: #FFF;
+    border: 1px solid #000;
+    padding-top: 12px;
+    border-radius: 22px;
+    -moz-border-radius: 22px;
+    -webkit-border-radius: 22px;
+    -o-border-radius: 22px;
+}
+
+.socialbtns .fab:hover {
+    color: #ffffff;
+    background-color: #000;
+    border: 1px solid #000;
+}

@@ -1,0 +1,461 @@
+@font-face {
+    font-family: "apercu";
+    src: url('ApercuProLight.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-style: italic;
+    src: url('ApercuProItalic.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-weight: bold;
+    src: url('ApercuProBold.otf');
+}
+
+body {
+    font-family: "apercu";
+}
+
+p {
+    font-family: "apercu";
+    /* color: #919191; */
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+:root {
+    --input-padding-x: 1.5rem;
+    --input-padding-y: 0.75rem;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited, .btn-primary:focus {
+    font-family: apercu;
+    background-color: #00bfdb;
+    border-color: #00bfdb;
+}
+
+.btn-primary:hover {
+    font-family: apercu;
+    background-color: #01a6c0;
+    border-color: #01a6c0;
+}
+
+.choices__list {
+    z-index: 10;
+}
+
+.login, .image {
+    min-height: 100vh;
+}
+
+.bg-image {
+    /* background-image: url('https://source.unsplash.com/WEQbe2jBg40/600x1200'); */
+    background-size: cover;
+    background-position: center;
+}
+
+.login-heading {
+    font-weight: 300;
+}
+
+.btn-login {
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+}
+
+.form-empty-shell {
+    position: relative;
+    margin-bottom: 2.5rem;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.form-label-group-test {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.form-label-group>input, .form-label-group>label {
+    padding: var(--input-padding-y) var(--input-padding-x);
+    height: auto;
+    border-radius: 2rem;
+}
+
+.form-label-group>select {
+    height: 3.1rem;
+    color: #919191;
+}
+
+.form-label-group>input, .form-label-group>select {
+    background-color: #f6f6f6;
+}
+
+.form-label-group>label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+    /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #919191;
+    cursor: text;
+    /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+    padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+    padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+    padding-top: calc(var(--input-padding-y) / 3);
+    padding-bottom: calc(var(--input-padding-y) / 3);
+    /* font-size: 0.9rem; */
+    font-size:smaller;
+    color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+
+@supports (-ms-ime-align: auto) {
+    .form-label-group>label {
+        display: none;
+    }
+    .form-label-group input::-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    .form-label-group>label {
+        display: none;
+    }
+    .form-label-group input:-ms-input-placeholder {
+        color: #777;
+    }
+}
+
+nav {
+    /* position: fixed; */
+    width: 100%;
+    line-height: 60px;
+}
+
+.video-container {
+    margin-top: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.cam_video {
+    border-radius: 80px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.cam_photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    z-index: 10;
+}
+
+.choices__inner {
+    border-radius: 25px;
+}
+
+.choices__input {
+    padding: 0.3rem 1rem;
+    font-size: 1.063rem;
+}
+
+.choices__input::placeholder {
+    width: 100%;
+    font-family: "apercu";
+    color: #919191;
+}
+
+div.laptop-wrapper {
+    position: relative;
+    padding-top: 25px;
+    padding-bottom: 67.5%;
+    width: 100%;
+}
+
+div.laptop-wrapper video {
+    object-fit: fill;
+    box-sizing: border-box;
+    padding-left: 34%;
+    padding-right: 34%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+div.laptop-wrapper foo {
+    box-sizing: border-box;
+    background: url(test2.png) center center no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.clear {
+    display: inline-block;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+    width: 20px;
+    border: none;
+    background: none;
+}
+
+#clear-image img {
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.sign {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#myForm {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+    box-orient: vertical;
+}
+
+#a {
+    -webkit-box-ordinal-group: 2;
+    -moz-box-ordinal-group: 2;
+    box-ordinal-group: 2;
+}
+
+#b {
+    -webkit-box-ordinal-group: 3;
+    -moz-box-ordinal-group: 3;
+    box-ordinal-group: 3;
+}
+
+#c {
+    -webkit-box-ordinal-group: 4;
+    -moz-box-ordinal-group: 4;
+    box-ordinal-group: 4;
+}
+
+#d {
+    -webkit-box-ordinal-group: 5;
+    -moz-box-ordinal-group: 5;
+    box-ordinal-group: 5;
+}
+
+#e {
+    -webkit-box-ordinal-group: 6;
+    -moz-box-ordinal-group: 6;
+    box-ordinal-group: 6;
+}
+
+#f {
+    -webkit-box-ordinal-group: 7;
+    -moz-box-ordinal-group: 7;
+    box-ordinal-group: 7;
+}
+
+#g {
+    -webkit-box-ordinal-group: 8;
+    -moz-box-ordinal-group: 8;
+    box-ordinal-group: 8;
+}
+
+#h {
+    -webkit-box-ordinal-group: 10;
+    -moz-box-ordinal-group: 10;
+    box-ordinal-group: 10;
+}
+
+#i {
+    -webkit-box-ordinal-group: 11;
+    -moz-box-ordinal-group: 11;
+    box-ordinal-group: 11;
+}
+
+#j {
+    -webkit-box-ordinal-group: 12;
+    -moz-box-ordinal-group: 12;
+    box-ordinal-group: 12;
+}
+
+#k {
+    -webkit-box-ordinal-group: 13;
+    -moz-box-ordinal-group: 13;
+    box-ordinal-group: 13;
+}
+
+#l {
+    -webkit-box-ordinal-group: 15;
+    -moz-box-ordinal-group: 15;
+    box-ordinal-group: 15;
+}
+
+#m {
+    -webkit-box-ordinal-group: 16;
+    -moz-box-ordinal-group: 16;
+    box-ordinal-group: 16;
+}
+
+#n {
+    -webkit-box-ordinal-group: 17;
+    -moz-box-ordinal-group: 17;
+    box-ordinal-group: 17;
+}
+
+#o {
+    -webkit-box-ordinal-group: 14;
+    -moz-box-ordinal-group: 14;
+    box-ordinal-group: 14;
+}
+
+#p {
+    -webkit-box-ordinal-group: 18;
+    -moz-box-ordinal-group: 18;
+    box-ordinal-group: 18;
+}
+
+#zzz {
+    -webkit-box-ordinal-group: 9;
+    -moz-box-ordinal-group: 9;
+    box-ordinal-group: 9;
+}
+
+.btn-success, .btn-success:active, .btn-success:visited, .btn-success:focus {
+    font-family: apercu;
+    position: relative;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 100px;
+    background-color: #00bfdb;
+    border-color: #00bfdb;
+}
+
+.btn-success:hover {
+    background-color: #01a6c0;
+    border-color: #01a6c0;
+}
+
+
+
+
+
+.input-file-container {
+    position: relative;
+    width: 100%;
+}
+
+.js .input-file-trigger {
+    font-family: apercu;
+    font-weight: bold;
+    border-radius: 100px;
+    display: block;
+    padding: 0.82rem 40px;
+    background: #00bfdb;
+    color: #fff;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+}
+
+.js .input-file {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 225px;
+    opacity: 0;
+    padding: 14px 0;
+    cursor: pointer;
+}
+
+.js .input-file:hover+.input-file-trigger, .js .input-file:focus+.input-file-trigger, .js .input-file-trigger:hover, .js .input-file-trigger:focus {
+    background: #01a6c0;
+    color: #fff;
+}
+
+.file-return {
+    margin: 0;
+}
+
+.file-return:not(:empty) {
+    margin: 1em 0;
+}
+
+.js .file-return {
+    font-style: italic;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+.js .file-return:not(:empty):before {
+    content: "Selected file: ";
+    font-style: normal;
+    font-weight: normal;
+}

@@ -21,6 +21,7 @@
     "nodemon": "^2.0.4"
   },
   "dependencies": {
+    "@serabusinessdesign/bootstrap-signature-input": "^0.1.18",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -35,6 +36,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "pdfkit": "^0.11.0",
     "pg": "^8.2.1",
     "req-flash": "0.0.3",
     "uuid": "^8.3.2"

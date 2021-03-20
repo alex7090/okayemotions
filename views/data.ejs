@@ -1,118 +1,23 @@
-<style>
-    .table {
-        margin-top: 6%;
-    }
+<link rel="stylesheet" type="text/css" href="data.css">
 
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
-    .content {
-        width: 94%;
-        margin: 4em auto;
-        font-size: 20px;
-        line-height: 30px;
-        text-align: justify;
-    }
-
-    .logo {
-        line-height: 60px;
-        position: fixed;
-        float: left;
-        margin: 16px 46px;
-        color: #fff;
-        font-weight: bold;
-        font-size: 20px;
-        letter-spacing: 2px;
-    }
-
-
-    nav ul {
-        line-height: 60px;
-        list-style: none;
-        background: rgba(0, 0, 0, 0);
-        overflow: hidden;
-        color: #fff;
-        padding: 0;
-        text-align: right;
-        margin: 0;
-        padding-right: 40px;
-        transition: 1s;
-    }
-
-    nav.black ul {
-        background: #000;
-    }
-
-    nav ul li {
-        display: inline-block;
-        padding: 16px 40px;
-        ;
-    }
-
-    nav ul li a {
-        text-decoration: none;
-        color: #fff;
-        font-size: 16px;
-    }
-
-
-    @media(max-width: 786px) {
-
-        .logo {
-            position: fixed;
-            top: 0;
-            margin-top: 16px;
-        }
-
-        nav ul {
-            max-height: 0px;
-            background: #000;
-        }
-
-        nav.black ul {
-            background: #000;
-        }
-
-        .showing {
-            max-height: 34em;
-        }
-
-        nav ul li {
-            box-sizing: border-box;
-            width: 100%;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .menu-icon {
-            display: block;
-        }
-
-    }
-</style>
 <header>
     <nav>
-        <div class="menu-icon">
-            <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-            <a href="/">LOGO</a>
-        </div>
-        <div class="menu">
-            <ul>
-                <li><a href="/data">Données</a></li>
-                <li><a href="/new">Envoyer</a></li>
-                <li><a href="/user/register">Inscription</a></li>
-                <li><a href="/user/login">Connexion</a></li>
-            </ul>
-        </div>
+        <a class="navbar-brand" href="/">
+            <img src="logo.png" width="25%">
+        </a>
     </nav>
 </header>
-<table id="table">
+<div id="toolbar">
+    <select onchange="myFunction()" id="choices-multiple-remove-button" name="tag" class="form-control rounded-pill"
+        placeholder="Select tags" multiple>
+        <option value="animals">Animals</option>
+        <option value="family">Family</option>
+        <option value="lovestory">Love story </option>
+        <option value="inspiring">Inspiring </option>
+        <option value="other">Other</option>
+    </select>
+</div>
+<table id="table" data-page-list="[6, 10, 25, 50, 100, all]" data-toolbar="#toolbar">
     <thead>
         <tr>
             <th data-field="id">Item ID</th>
@@ -120,35 +25,38 @@
             <th data-field="lname">Last Name</th>
             <th data-field="email">email</th>
             <th data-field="vname">Video Name</th>
+            <th data-field="platform">Media</th>
             <th data-field="credit">Credit</th>
-            <th data-field="media">Media</th>
-            <th data-field="link">Link</th>
-            <th>Show Name</th>
+            <th data-field="description">Description</th>
         </tr>
     </thead>
 </table>
+
 <script>
     var $table = $('#table');
     var data = '<%- JSON.stringify(data) %>';
     var data_json = JSON.parse(data);
-    console.log(data);
+    console.log(data_json);
     $(function () {
         $('#table').bootstrapTable({
+            height: 550,
             data: data_json,
-            columns: [{}, {}, {}, {}, {}, {}, {}, {
-                field: 'operate',
-                title: 'Link',
+            pagination: true,
+            search: true,
+            columns: [{}, {}, {}, {}, {}, {
+                field: 'tag',
+                title: 'Tag',
                 align: 'center',
                 valign: 'middle',
                 clickToSelect: false,
                 formatter: function (value, row, index) {
-                    if (row.type == 'link') {
-                        return row.link;
+                    if (row.tag == 'lovestory') {
+                        return 'love story';
                     } else {
-                        return '<button class="btn btn-success" onclick=""> Download video</button>';
+                        return row.tag;
                     }
                 }
-            },
+            }, {}, {},
             {
                 field: 'operate',
                 title: 'Video',
@@ -157,13 +65,51 @@
                 clickToSelect: false,
                 formatter: function (value, row, index) {
                     if (row.type == 'link') {
-                        return '<button class="btn btn-success" onclick=" window.open(\'https://' + row.link + '\',\'_blank\')"> View</button>';
+                        return '<button class="btn btn-success" onclick=" window.open(\'' + row.link + '\',\'_blank\')"> View</button>';
                     } else {
-                        return '<button class="btn btn-success" onclick=" window.open(\'watch?video=' + row.link + '\',\'_blank\')"> View</button>';
+                        return '<button class="btn btn-success" onclick=" window.open(\'watch?ext=' + row.ext + '&video=' + row.vname + '&storage=' + row.storage + '\',\'_blank\')"> View</button>';
                     }
+                }
+            },
+            {
+                field: 'contract',
+                title: 'contract',
+                align: 'center',
+                valign: 'middle',
+                clickToSelect: false,
+                formatter: function (value, row, index) {
+                    return '<button class="btn btn-success" onclick=" window.open(\'contract?storage=' + row.storage + '\',\'_blank\')"> View</button>';
                 }
             }
             ]
+        });
+    });
+
+    function test() {
+        data_json.splice(1, 5);
+        $('#table').bootstrapTable({ data: data_json });
+        $('#table').bootstrapTable('load', data_json);
+        console.log(data_json);
+    }
+
+    function myFunction() {
+        var values = $('#choices-multiple-remove-button').val();
+        var new_data = JSON.parse(data);
+        var filtered = new_data;
+        if (values.length != 0) {
+            var filtered = new_data.filter(function (item) {
+                return values.indexOf(item.tag) >= 0;
+            });
+        }
+        $('#table').bootstrapTable({ data: filtered });
+        $('#table').bootstrapTable('load', filtered);
+    }
+    $(document).ready(function () {
+        var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+            removeItemButton: true,
+            maxItemCount: 5,
+            searchResultLimit: 5,
+            renderChoiceLimit: 5
         });
     });
 </script>

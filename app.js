@@ -22,8 +22,9 @@ app.use(passport.session());
 
 app.use(flash());
 
-app.use(express.static(__dirname + '/views'));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/css')));
+app.use(express.static(path.join(__dirname, 'public/images')));
 app.set('views', [__dirname + '/views']);
 
 app.use(express.json());
