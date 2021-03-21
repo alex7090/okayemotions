@@ -7,6 +7,7 @@ const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+
 const app = express();
 
 require('./config/passport')(passport);

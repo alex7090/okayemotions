@@ -92,22 +92,22 @@
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4 font-weight-bold">Submit a Video</h3>
                             <form id="myForm" action="/upload" method="POST" enctype='multipart/form-data'
-                                onsubmit="submitForm()">
+                                onsubmit="submitForm(event)">
                                 <div id="a" class="form-label-group">
-                                    <input name="firstName" id="firstName" class="form-control" placeholder="First Name"
-                                        required autofocus>
+                                    <input name="firstName" id="firstName" class="form-control"
+                                        placeholder="First Name">
                                     <label for="firstName">First Name</label>
                                 </div>
 
                                 <div id="b" class="form-label-group">
                                     <input name="lastName" id="lastName" class="form-control" placeholder="Last Name"
-                                        required autofocus>
+                                        required>
                                     <label for="lastName">Last Name</label>
                                 </div>
 
                                 <div id="c" class="form-label-group">
                                     <input name="email" id="email" class="form-control" placeholder="Email address"
-                                        required autofocus>
+                                        required>
                                     <label for="email">Email</label>
                                 </div>
 
@@ -158,25 +158,27 @@
                                     <input type="checkbox" class="custom-control-input" name="customCheck1"
                                         id="customCheck1" required>
                                     <label class="custom-control-label" for="customCheck1">
-                                        <p>Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                            dolore magna aliqua.</p>
+                                        <p>I have not signed any exclusive agreements for this clip with anyone else.
+                                        </p>
                                     </label>
                                 </div>
                                 <div id="m" class="custom-control custom-checkbox mb-3">
                                     <input type="checkbox" class="custom-control-input" name="customCheck2"
                                         id="customCheck2" required>
                                     <label class="custom-control-label" for="customCheck2">
-                                        <p>Lorem ipsum dolor sit amet,
-                                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                                            dolore magna aliqua.</p>
+                                        <p>I am the sole rights holder of the Content, I am over 18 years old and I
+                                            accept the below Terms & Conditions OR I am the parent or legal guardian of
+                                            the sole rights holder of the Content who is under 18 years old and I accept
+                                            the below Terms & Conditions on the right’s holder’s behalf as agent or
+                                            attorney, as if I was the rights holder for these purposes.</p>
                                     </label>
                                 </div>
                                 <div id="l">
                                     <div id="signature-pad" class="signature-pad">
                                         <div class="signature-pad--body">
                                             <canvas></canvas>
-                                            <input type="hidden" name="signature" id="signature" required>
+                                            <input data-rule-signature="true" type="hidden" name="signature"
+                                                id="signature">
                                         </div>
                                         <div class="signature-pad--footer">
 
@@ -188,6 +190,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <p style="padding-left: 10%;padding-right: 10%;">By signing above, I agree that all
+                                        information submitted through this form is
+                                        true and accurate, and I understand that I am transferring important rights and
+                                        granting an exclusive license to the content submitted. I have reviewed and
+                                        agree to the <a href="/lca" target="_blank" style="color:#00bfdb">Licensing
+                                            Agreement</a>, <a href="/tc" target="_blank" style="color:#00bfdb">Terms and
+                                            Conditions</a>, and <a href="/ppo" target="_blank"
+                                            style="color:#00bfdb">Privacy Policy</a>.</p>
                                 </div>
                                 <div id="o" class="row">
 
@@ -311,11 +321,11 @@
         // When zoomed out to less than 100%, for some very strange reason,
         // some browsers report devicePixelRatio as less than 1
         // and only part of the canvas is cleared then.
-        var ratio = Math.max(window.devicePixelRatio || 1, 1);
-
+        var ratio = Math.max(window.devicePixelRatio * 0.5 || 1, 1);
+        console.log(canvas.offsetHeight);
         // This part causes the canvas to be cleared
         canvas.width = canvas.offsetWidth * ratio;
-        canvas.height = canvas.offsetHeight * ratio * ratio;
+        canvas.height = (canvas.offsetHeight * ratio);
         canvas.getContext("2d").scale(ratio, ratio);
 
         // This library does not listen for canvas changes, so after the canvas is automatically
@@ -367,11 +377,17 @@
         signaturePad.clear();
     });
 
-    function submitForm() {
-        var tmp = document.getElementById('myForm');
-        console.log(tmp);
-        document.getElementById('signature').value = signaturePad.toDataURL('image/png');
+    function submitForm(e) {
+        var form = document.getElementById("myForm");
+        e.preventDefault();
+        if (signaturePad.isEmpty() == true) {
+            alert("Please sign the form")
+        } else {
+            document.getElementById('signature').value = signaturePad.toDataURL('image/png');
+            form.submit();
+        }
     }
+
 </script>
 
 <script>
