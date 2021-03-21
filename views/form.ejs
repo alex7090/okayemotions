@@ -204,7 +204,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-label-group link-custom">
                                             <input name="link" id="link" class="form-control" placeholder="Video Link"
-                                                required autofocus>
+                                                required>
                                             <label id="link-lab" for="link">Link</label>
                                         </div>
                                     </div>
@@ -338,7 +338,7 @@
 
     // On mobile devices it might make more sense to listen to orientation change,
     // rather than window resize events.
-    window.onresize = resizeCanvas;
+    // window.onresize = resizeCanvas;
     resizeCanvas();
 
     function download(dataURL, filename) {
