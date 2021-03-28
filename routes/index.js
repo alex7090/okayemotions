@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        console.log(req.body)
         var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link } = req.body;
         const ext = path.extname(file.originalname);
         const id = uuid();
@@ -46,13 +45,89 @@ const storage = multer.diskStorage({
                     .fontSize(12)
                     .text(`This Agreement is made between : ${firstName} ${lastName}`)
                     .moveDown()
-                    .text('Hereinafter referred to as the « Assignor », on the one hand ;')
+                    .text('Hereinafter referred to as the « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the one hand ;')
                     .moveDown()
-                    .text('AND Okayemotions')
+                    .text('AND ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions')
+                    .font('Times-Roman')
                     .moveDown()
-                    .text('Hereinafter referred to as the « Assignee » or « Okayemotions », on the otherhand.')
+                    .text('Hereinafter referred to as the « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », or « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the otherhand.')
                     .moveDown()
-                    .text('The Assignor and the Assignee are hereinafter collectively referred to as the “Parties” and individually, as the context requires, as “Party”.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' and the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' are hereinafter collectively referred to as the “', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('” and individually, as the context requires, as “', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('”.')
                     .moveDown()
                     .moveDown()
                     .font('Times-Bold')
@@ -61,22 +136,174 @@ const storage = multer.diskStorage({
                     })
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The purpose of this contract is to define the terms and conditions under which the Assignor transfers exclusively to the Assignee, who accepts it, the intellectual property rights on the Content, except the moral rights, for its exploitation by the Assignee. The Assignee shall select the contents proposed by the Assignor to publish them on its accounts « Okayemotions », on the social networks, including Instagram and TikTok. The content will be published on the social networks by crediting the username provided by the Assignor. The publication thus allows the Assignor to gain in visibility.')
+                    .text('The purpose of this contract is to define the terms and conditions under which the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' transfers exclusively to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', who accepts it, the intellectual property rights on the Content, except the moral rights, for its exploitation by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee.', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' shall select the contents proposed by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to publish them on its accounts « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the social networks, including Instagram and TikTok. The content will be published on the social networks by crediting the username provided by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('. The publication thus allows the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to gain visibility.')
                     .moveDown()
-                    .text('By the present contract, the Assignor declares that he is the author of the content that he assigns.')
+                    .font('Times-Roman')
+                    .text('By the present contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' declares that he is the author of the content that he assigns.')
                     .moveDown()
-                    .text('As the Assignor, you affirm that you have read and understand the entire contract.')
+                    .font('Times-Roman')
+                    .text('As the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', you affirm that you have read and understand the entire contract.')
                     .moveDown()
                     .text('You acknowledge that you are 18 (eighteen) years old or older in order to submit your content to us and assign your rights. If you are under 18 years old, it is possible that your parents assume this responsibility and assign the copyright to us on your behalf. We allow the possibility for your legal guardian to sign this document. If you are the representative of a juridical person, you guarantee that you have obtained the rights and the necessary authorizations from the persons concerned to transmit the present content to us.')
                     .moveDown()
-                    .text('By signing the contract, you accept that all information contained therein is transmitted to Okayemotions, and understand that you assign your intellectual property rights to the latter.')
+                    .text('By signing the contract, you accept that all information contained therein is transmitted to ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', and understand that you assign your intellectual property rights to the latter.')
                     .moveDown()
                     .addPage()
                     .font('Times-Bold')
                     .text('        1. THE CONTENT')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The content assigned under this contract corresponds to all elements covered by the copyright communicated by the Assignor to the Assignee, and mainly videos intended for broadcast on social networks. The Content that the Assignor accepts to assign to the Assignee may take the form of:')
+                    .text('The content assigned under this contract corresponds to all elements covered by the copyright communicated by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', and mainly videos intended for broadcast on social networks. The Content that the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' accepts to assign to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' may take the form of:')
                     .moveDown()
                     .text('        · Sounds, music')
                     .moveDown()
@@ -98,21 +325,164 @@ const storage = multer.diskStorage({
                     .moveDown()
                     .text('        · Voice recording')
                     .moveDown()
-                    .text('By the present contract, the Assignor guarantees that the content is not contrary to the public policy rules and to the good morals. In any case, the content transmitted will be regularly controlled and the Assignee has the right to refuse it. In case of refusal, none of the rules of this contract shall apply.')
+                    .font('Times-Roman')
+                    .text('By the present contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the content is not contrary to the public policy rules and to the good morals. In any case, the content transmitted will be regularly controlled and the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('  has the right to refuse it. In case of refusal, none of the rules of this contract shall apply.')
                     .moveDown()
-                    .text("Okayemotions reserves the right to refuse the Content submitted by the Assignor if it doesn't respect the selection criteria of Okayemotions (duration, story, editing, quality, etc).")
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' reserves the right to refuse the Content submitted by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" if it doesn't respect the selection criteria of ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" (duration, story, editing, quality, etc).")
                     .moveDown()
-                    .text('The Assignor warrants that the content does not contain any viruses or anything dubious or suspicious and detrimental to Okayemotions. As the Assignor, you always have the option to continue broadcasting the Content on your personal accounts on social networks such as Facebook, YouTube, Instagram or Snapchat for personal use.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' warrants that the content does not contain any viruses or anything dubious or suspicious and detrimental to ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(". As the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', you always have the option to continue broadcasting the Content on your personal accounts on social networks such as Facebook, YouTube, Instagram or Snapchat for personal use.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        2. THE RIGHTS ASSIGNED')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The Assignor guarantees that the Content has not been assigned to third parties inthe past and will not be assigned in the future.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the Content has not been assigned to third parties inthe past and will not be assigned in the future.')
                     .moveDown()
-                    .text('The Parties agree that the rights of the content are assigned by the Assignor to the Assignee on an exclusive basis for direct or indirect exploitation, including for commercial use by the Assignee.')
+                    .text('The Parties agree that the rights of the content are assigned by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" on an exclusive basis for direct or indirect exploitation, including for commercial use by the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text('Okayemotions becomes the Assignee of all exploitation rights of the Assignor on the content, meaning the reproduction rights, representation, secondary and derived uses of the content.')
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' becomes the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" of all exploitation rights of the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' on the content, meaning the reproduction rights, representation, secondary and derived uses of the content.')
                     .moveDown()
                     .text('The reproduction right includes notably:')
                     .moveDown()
@@ -122,7 +492,7 @@ const storage = multer.diskStorage({
                     .moveDown()
                     .text('- the right to translate, arrange, modify, adapt and transform all or part in any form of the Content;')
                     .moveDown()
-                    .text('- the right to put or have put into circulation and to exploit or have exploited theContents on all supports.')
+                    .text('- the right to put or have put into circulation and to exploit or have exploited the Contents on all supports.')
                     .moveDown()
                     .text('The right of representation includes notably the right to represent or have represented the Contents to the public in whole or in part, by any existing or to be discovered means of communication, notably via the social networks Instagram and TikTok.')
                     .moveDown()
@@ -132,9 +502,59 @@ const storage = multer.diskStorage({
                     .text('        3. THE COUNTERPART OF THE ASSIGNMENT IN A FORM OF CREDIT(VISIBILITY)')
                     .moveDown()
                     .font('Times-Roman')
-                    .text("In counterpart of all exclusive rights assigned by the Assignor, the Assignee offers the visibility to the Assignor on the " + ' Okayemotions "' + " social networks accounts  where the Contents are published. However, the present Contract is not monetized and doesn't give rise to any financial consideration.")
+                    .text('In counterpart of all exclusive rights assigned by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" offers the visibility to the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" on the " + ' Okayemotions "' + " social networks accounts  where the Contents are published. However, the present Contract is not monetized and doesn't give rise to any financial consideration.")
                     .moveDown()
-                    .text('To this day, the Assignor uses only the social networks Instagram and TikTok, but Okayemotions reserves the right to publish the Content on other social networks in the future.')
+                    .text('To this day, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' uses only the social networks Instagram and TikTok, but ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' reserves the right to publish the Content on other social networks in the future.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        4. DURATION OF THE RIGHTS ASSIGNED')
@@ -148,15 +568,53 @@ const storage = multer.diskStorage({
                     .font('Times-Roman')
                     .text('The Contract is concluded for the entire duration of the copyright protection.')
                     .moveDown()
-                    .text('In case one of one of the Parties wishes to terminate the Contract, he must informthe other Party by writing within a period of at least 30 days. You will find a file in PDF format (Annex n°1) to be filled in and sent to us by e-mail at the following address: contact@okayemotions.com.')
+                    .text('In case one of one of the Parties wishes to terminate the Contract, he must inform the other Party by writing within a period of at least 30 days. You will find a file in PDF format (Annex n°1) to be filled in and sent to us by e-mail at the following address: ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .fillColor('blue')
+                    .text('​contact@okayemotions.com​.')
+                    .fillColor('black')
                     .moveDown()
                     .text('The Contract may also be terminated by mutual consent. The termination of the Contract must be confirmed by e-mail by both parties to the Contract. You agree that we can use your email address to send you this notification.')
                     .moveDown()
-                    .text('In the case of a breach of contract by either Party to the Contract, Okayemotions will cease any further publication of the assigned Content 30 days after confirmation of such agreement; notwithstanding the foregoing, the Content can continue to remain on our pages, and possibly monetized.')
+                    .text('In the case of a breach of contract by either ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the Contract, ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will cease any further publication of the assigned Content 30 days after confirmation of such agreement; notwithstanding the foregoing, the Content can continue to remain on our pages, and possibly monetized.')
+
+
                     .moveDown()
-                    .text('All agreements relating to the Content that began prior to the termination date will continue beyond the termination date.')
+                    .text('All agreements relating to the Content ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('that began prior to the termination date', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will continue beyond the termination date.')
                     .moveDown()
-                    .text('If you fail to comply with any term of this agreement, we may terminate this agreement')
+                    .text('If you fail to comply with any term of this agreement, we may terminate this agreement.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        6. TERRITORIALITY')
@@ -167,8 +625,15 @@ const storage = multer.diskStorage({
                     .font('Times-Bold')
                     .text('        7. CLAIM')
                     .moveDown()
+
                     .font('Times-Roman')
-                    .text('For any claim or inconvenience, we kindly ask you to contact us at the following email address: contact@okayemotions.com')
+                    .text('For any claim or inconvenience, we kindly ask you to contact us at the following email address: ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .fillColor('blue')
+                    .text('​contact@okayemotions.com​.')
+                    .fillColor('black')
                     .moveDown()
                     .text('In return of your request, you will receive a confirmation and return by e-mail to your personal address.')
                     .moveDown()
@@ -176,9 +641,170 @@ const storage = multer.diskStorage({
                     .text('        8. GUARANTEE')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The Assignor guarantees to the Assignee the full and free enjoyment of the rights assigned, against any and all troubles, claims and evictions. The Assignor declares that he is the author of the content and declares that, where applicable, he has concluded a contract of assignment of image rights with the persons appearing in the content, which covers the use made of it by the Assignee. The Assignor guarantees that the contents are entirely original and do not contain any borrowed work of any nature whatsoever, which would be susceptible of directly or indirectly engaging the responsibility of the Assignee. ')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" the full and free enjoyment of the rights assigned, against any and all troubles, claims and evictions. The ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' declares that he is the author of the content and declares that, where applicable, he has concluded a contract of assignment of image rights with the persons appearing in the content, which covers the use made of it by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the contents are entirely original and do not contain any borrowed work of any nature whatsoever, which would be susceptible of directly or indirectly engaging the responsibility of the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text("In particular, if the content contains any distinctive signs of any kind whatsoever, illustrations, texts, tables, graphics, photographs, trademarks, and/or other elements belonging to third parties, the Assignor undertakes to have obtained in advance of the effective date of the assignment all necessary authorizations for their use by the Assignee within the framework of the present contract. The Assignor guarantees the Assignee against its personal actions and against any claim or eviction of any kind (in particular, any action for counterfeit, copyright infringement, plagiarism or unfair competition) that may be brought against the Assignee by a third party, having as its basis and/or origin the exploitation of the content, the present assignment of the rights to this content, their reproduction by the Assignee under the conditions of the present contract, and in any other form, the execution of this contract. In this respect, the Assignor undertakes to reimburse the Assignee for all indemnification that the Assignee would be ordered to pay as well as the attorney's fees that the Assignee would have to incur in order to organize its defense in this respect.")
+                    .font('Times-Roman')
+                    .text('In particular, if the content contains any distinctive signs of any kind whatsoever, illustrations, texts, tables, graphics, photographs, trademarks, and/or other elements belonging to third parties, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' undertakes to have obtained in advance of the effective date of the assignment all necessary authorizations for their use by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" within the framework of the present contract. The ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' against its personal actions and against any claim or eviction of any kind (in particular, any action for counterfeit, copyright infringement, plagiarism or unfair competition) that may be brought against the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' by a third party, having as its basis and/or origin the exploitation of the content, the present assignment of the rights to this content, their reproduction by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' under the conditions of the present contract, and in any other form, the execution of this contract. In this respect, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' undertakes to reimburse the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' for all indemnification that the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" would be ordered to pay as well as the attorney's fees that the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" would have to incur in order to organize its defense in this respect.")
                     .moveDown()
                     .font('Times-Bold')
                     .text('        9. APPLICABLE LAW AND THE COMPETENT JURISDICTION')
@@ -186,19 +812,109 @@ const storage = multer.diskStorage({
                     .font('Times-Roman')
                     .text('The present contract is to be governed for all purposes by and construed in accordance with the governing law of French.')
                     .moveDown()
-                    .text('An amicable phase is advocated before any judicial proceedings by the Parties tothe Contract. As a Party to the Contract, in case of disagreement or problem theAssignor undertakes to contact Okayemotions via the PDF form attached to theContract and to send a claim before initiating any judicial proceedings.')
+                    .text('An amicable phase is advocated before any judicial proceedings by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the Contract. As a ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" to the Contract, in case of disagreement or problem the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" undertakes to contact ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' via the PDF form attached to the Contract and to send a claim before initiating any judicial proceedings.')
                     .moveDown()
-                    .text('In case of any dispute in relation to the present Contract, the Parties attribute anexclusive competence to the jurisdictions of Paris (French).')
+                    .text('In case of any dispute in relation to the present Contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' attribute anexclusive competence to the jurisdictions of Paris (French).')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        10. SIGNATURE AND PERSONAL INFORMATION')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('By signing the present contract you affirm that you have taken knowledge of the preceding provisions. You assign your intellectual property rights relating to the content exclusively to the Okayemotions company.')
+                    .text('By signing the present contract you affirm that you have taken knowledge of the preceding provisions. You assign your intellectual property rights relating to the content ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('exclusively', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions company', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text('You must mention your last name, first name, e-mail address, and an electronic signature will be requested. You also attest that these informations are yours and exclude Okayemotions from any responsibility in case of usurped identity and information.')
+                    .text('You must mention your last name, first name, e-mail address, and an electronic signature will be requested. You also attest that these informations are yours and exclude ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' from any responsibility in case of usurped identity and information.')
                     .moveDown()
-                    .text('Automatically after the electronic signature of the Contract a file containing the ersonal information that you have shared with Okayemotions will be generated. We commit ourselves to not share this personal information with third parties and to limit their use to a strictly professional purpose.')
+                    .text('Automatically after the electronic signature of the Contract a file containing the personal information that you have shared with ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will be generated. We commit ourselves to not share this personal information with third parties and to limit their use to a strictly professional purpose.')
                     .moveDown()
                     .text("In particular, your personal information will be used in the case of a dispute relating to the Content to demonstrate your right of authorship of the Content.")
                     .moveDown()
@@ -259,6 +975,9 @@ const storage = multer.diskStorage({
                     .text('Clip URL or Filename');
                 doc.end();
                 query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + id + "', 'file', '" + ext + "', '" + description + "', '" + tag + "', '" + id + "')", [], (err, rows) => {
+                    console.log("id = " + id);
+                    console.log("name = " + name);
+                    console.log("ext = " + ext);
                     cb(null, `./${id}/${name}${ext}`);
                 });
             }
@@ -272,7 +991,7 @@ const upload = multer({ storage });
 router.post('/upload', upload.single('file'), (req, res) => {
     var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link } = req.body;
     if (req.file) {
-        console.log(req.file);
+        console.log("FILLLLLE");
         res.render('thanks');
     } else {
         const id = uuid();
@@ -302,13 +1021,89 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .fontSize(12)
                     .text(`This Agreement is made between : ${firstName} ${lastName}`)
                     .moveDown()
-                    .text('Hereinafter referred to as the « Assignor », on the one hand ;')
+                    .text('Hereinafter referred to as the « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the one hand ;')
                     .moveDown()
-                    .text('AND Okayemotions')
+                    .text('AND ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions')
+                    .font('Times-Roman')
                     .moveDown()
-                    .text('Hereinafter referred to as the « Assignee » or « Okayemotions », on the otherhand.')
+                    .text('Hereinafter referred to as the « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », or « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the otherhand.')
                     .moveDown()
-                    .text('The Assignor and the Assignee are hereinafter collectively referred to as the “Parties” and individually, as the context requires, as “Party”.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' and the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' are hereinafter collectively referred to as the “', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('” and individually, as the context requires, as “', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('”.')
                     .moveDown()
                     .moveDown()
                     .font('Times-Bold')
@@ -317,22 +1112,174 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     })
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The purpose of this contract is to define the terms and conditions under which the Assignor transfers exclusively to the Assignee, who accepts it, the intellectual property rights on the Content, except the moral rights, for its exploitation by the Assignee. The Assignee shall select the contents proposed by the Assignor to publish them on its accounts « Okayemotions », on the social networks, including Instagram and TikTok. The content will be published on the social networks by crediting the username provided by the Assignor. The publication thus allows the Assignor to gain in visibility.')
+                    .text('The purpose of this contract is to define the terms and conditions under which the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' transfers exclusively to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', who accepts it, the intellectual property rights on the Content, except the moral rights, for its exploitation by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee.', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' shall select the contents proposed by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to publish them on its accounts « ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' », on the social networks, including Instagram and TikTok. The content will be published on the social networks by crediting the username provided by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('. The publication thus allows the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to gain visibility.')
                     .moveDown()
-                    .text('By the present contract, the Assignor declares that he is the author of the content that he assigns.')
+                    .font('Times-Roman')
+                    .text('By the present contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' declares that he is the author of the content that he assigns.')
                     .moveDown()
-                    .text('As the Assignor, you affirm that you have read and understand the entire contract.')
+                    .font('Times-Roman')
+                    .text('As the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', you affirm that you have read and understand the entire contract.')
                     .moveDown()
                     .text('You acknowledge that you are 18 (eighteen) years old or older in order to submit your content to us and assign your rights. If you are under 18 years old, it is possible that your parents assume this responsibility and assign the copyright to us on your behalf. We allow the possibility for your legal guardian to sign this document. If you are the representative of a juridical person, you guarantee that you have obtained the rights and the necessary authorizations from the persons concerned to transmit the present content to us.')
                     .moveDown()
-                    .text('By signing the contract, you accept that all information contained therein is transmitted to Okayemotions, and understand that you assign your intellectual property rights to the latter.')
+                    .text('By signing the contract, you accept that all information contained therein is transmitted to ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', and understand that you assign your intellectual property rights to the latter.')
                     .moveDown()
                     .addPage()
                     .font('Times-Bold')
                     .text('        1. THE CONTENT')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The content assigned under this contract corresponds to all elements covered by the copyright communicated by the Assignor to the Assignee, and mainly videos intended for broadcast on social networks. The Content that the Assignor accepts to assign to the Assignee may take the form of:')
+                    .text('The content assigned under this contract corresponds to all elements covered by the copyright communicated by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', and mainly videos intended for broadcast on social networks. The Content that the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' accepts to assign to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' may take the form of:')
                     .moveDown()
                     .text('        · Sounds, music')
                     .moveDown()
@@ -354,21 +1301,164 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .moveDown()
                     .text('        · Voice recording')
                     .moveDown()
-                    .text('By the present contract, the Assignor guarantees that the content is not contrary to the public policy rules and to the good morals. In any case, the content transmitted will be regularly controlled and the Assignee has the right to refuse it. In case of refusal, none of the rules of this contract shall apply.')
+                    .font('Times-Roman')
+                    .text('By the present contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the content is not contrary to the public policy rules and to the good morals. In any case, the content transmitted will be regularly controlled and the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('  has the right to refuse it. In case of refusal, none of the rules of this contract shall apply.')
                     .moveDown()
-                    .text("Okayemotions reserves the right to refuse the Content submitted by the Assignor if it doesn't respect the selection criteria of Okayemotions (duration, story, editing, quality, etc).")
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' reserves the right to refuse the Content submitted by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" if it doesn't respect the selection criteria of ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" (duration, story, editing, quality, etc).")
                     .moveDown()
-                    .text('The Assignor warrants that the content does not contain any viruses or anything dubious or suspicious and detrimental to Okayemotions. As the Assignor, you always have the option to continue broadcasting the Content on your personal accounts on social networks such as Facebook, YouTube, Instagram or Snapchat for personal use.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' warrants that the content does not contain any viruses or anything dubious or suspicious and detrimental to ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(". As the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', you always have the option to continue broadcasting the Content on your personal accounts on social networks such as Facebook, YouTube, Instagram or Snapchat for personal use.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        2. THE RIGHTS ASSIGNED')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The Assignor guarantees that the Content has not been assigned to third parties inthe past and will not be assigned in the future.')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the Content has not been assigned to third parties inthe past and will not be assigned in the future.')
                     .moveDown()
-                    .text('The Parties agree that the rights of the content are assigned by the Assignor to the Assignee on an exclusive basis for direct or indirect exploitation, including for commercial use by the Assignee.')
+                    .text('The Parties agree that the rights of the content are assigned by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" on an exclusive basis for direct or indirect exploitation, including for commercial use by the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text('Okayemotions becomes the Assignee of all exploitation rights of the Assignor on the content, meaning the reproduction rights, representation, secondary and derived uses of the content.')
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' becomes the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" of all exploitation rights of the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' on the content, meaning the reproduction rights, representation, secondary and derived uses of the content.')
                     .moveDown()
                     .text('The reproduction right includes notably:')
                     .moveDown()
@@ -378,7 +1468,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .moveDown()
                     .text('- the right to translate, arrange, modify, adapt and transform all or part in any form of the Content;')
                     .moveDown()
-                    .text('- the right to put or have put into circulation and to exploit or have exploited theContents on all supports.')
+                    .text('- the right to put or have put into circulation and to exploit or have exploited the Contents on all supports.')
                     .moveDown()
                     .text('The right of representation includes notably the right to represent or have represented the Contents to the public in whole or in part, by any existing or to be discovered means of communication, notably via the social networks Instagram and TikTok.')
                     .moveDown()
@@ -388,9 +1478,59 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .text('        3. THE COUNTERPART OF THE ASSIGNMENT IN A FORM OF CREDIT(VISIBILITY)')
                     .moveDown()
                     .font('Times-Roman')
-                    .text("In counterpart of all exclusive rights assigned by the Assignor, the Assignee offers the visibility to the Assignor on the " + ' Okayemotions "' + " social networks accounts  where the Contents are published. However, the present Contract is not monetized and doesn't give rise to any financial consideration.")
+                    .text('In counterpart of all exclusive rights assigned by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(', the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" offers the visibility to the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" on the " + ' Okayemotions "' + " social networks accounts  where the Contents are published. However, the present Contract is not monetized and doesn't give rise to any financial consideration.")
                     .moveDown()
-                    .text('To this day, the Assignor uses only the social networks Instagram and TikTok, but Okayemotions reserves the right to publish the Content on other social networks in the future.')
+                    .text('To this day, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' uses only the social networks Instagram and TikTok, but ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' reserves the right to publish the Content on other social networks in the future.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        4. DURATION OF THE RIGHTS ASSIGNED')
@@ -404,15 +1544,53 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .font('Times-Roman')
                     .text('The Contract is concluded for the entire duration of the copyright protection.')
                     .moveDown()
-                    .text('In case one of one of the Parties wishes to terminate the Contract, he must informthe other Party by writing within a period of at least 30 days. You will find a file in PDF format (Annex n°1) to be filled in and sent to us by e-mail at the following address: contact@okayemotions.com.')
+                    .text('In case one of one of the Parties wishes to terminate the Contract, he must inform the other Party by writing within a period of at least 30 days. You will find a file in PDF format (Annex n°1) to be filled in and sent to us by e-mail at the following address: ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .fillColor('blue')
+                    .text('​contact@okayemotions.com​.')
+                    .fillColor('black')
                     .moveDown()
                     .text('The Contract may also be terminated by mutual consent. The termination of the Contract must be confirmed by e-mail by both parties to the Contract. You agree that we can use your email address to send you this notification.')
                     .moveDown()
-                    .text('In the case of a breach of contract by either Party to the Contract, Okayemotions will cease any further publication of the assigned Content 30 days after confirmation of such agreement; notwithstanding the foregoing, the Content can continue to remain on our pages, and possibly monetized.')
+                    .text('In the case of a breach of contract by either ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the Contract, ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will cease any further publication of the assigned Content 30 days after confirmation of such agreement; notwithstanding the foregoing, the Content can continue to remain on our pages, and possibly monetized.')
+
+
                     .moveDown()
-                    .text('All agreements relating to the Content that began prior to the termination date will continue beyond the termination date.')
+                    .text('All agreements relating to the Content ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('that began prior to the termination date', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will continue beyond the termination date.')
                     .moveDown()
-                    .text('If you fail to comply with any term of this agreement, we may terminate this agreement')
+                    .text('If you fail to comply with any term of this agreement, we may terminate this agreement.')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        6. TERRITORIALITY')
@@ -423,8 +1601,15 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .font('Times-Bold')
                     .text('        7. CLAIM')
                     .moveDown()
+
                     .font('Times-Roman')
-                    .text('For any claim or inconvenience, we kindly ask you to contact us at the following email address: contact@okayemotions.com')
+                    .text('For any claim or inconvenience, we kindly ask you to contact us at the following email address: ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .fillColor('blue')
+                    .text('​contact@okayemotions.com​.')
+                    .fillColor('black')
                     .moveDown()
                     .text('In return of your request, you will receive a confirmation and return by e-mail to your personal address.')
                     .moveDown()
@@ -432,9 +1617,170 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .text('        8. GUARANTEE')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('The Assignor guarantees to the Assignee the full and free enjoyment of the rights assigned, against any and all troubles, claims and evictions. The Assignor declares that he is the author of the content and declares that, where applicable, he has concluded a contract of assignment of image rights with the persons appearing in the content, which covers the use made of it by the Assignee. The Assignor guarantees that the contents are entirely original and do not contain any borrowed work of any nature whatsoever, which would be susceptible of directly or indirectly engaging the responsibility of the Assignee. ')
+                    .text('The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" the full and free enjoyment of the rights assigned, against any and all troubles, claims and evictions. The ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' declares that he is the author of the content and declares that, where applicable, he has concluded a contract of assignment of image rights with the persons appearing in the content, which covers the use made of it by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' The ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees that the contents are entirely original and do not contain any borrowed work of any nature whatsoever, which would be susceptible of directly or indirectly engaging the responsibility of the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text("In particular, if the content contains any distinctive signs of any kind whatsoever, illustrations, texts, tables, graphics, photographs, trademarks, and/or other elements belonging to third parties, the Assignor undertakes to have obtained in advance of the effective date of the assignment all necessary authorizations for their use by the Assignee within the framework of the present contract. The Assignor guarantees the Assignee against its personal actions and against any claim or eviction of any kind (in particular, any action for counterfeit, copyright infringement, plagiarism or unfair competition) that may be brought against the Assignee by a third party, having as its basis and/or origin the exploitation of the content, the present assignment of the rights to this content, their reproduction by the Assignee under the conditions of the present contract, and in any other form, the execution of this contract. In this respect, the Assignor undertakes to reimburse the Assignee for all indemnification that the Assignee would be ordered to pay as well as the attorney's fees that the Assignee would have to incur in order to organize its defense in this respect.")
+                    .font('Times-Roman')
+                    .text('In particular, if the content contains any distinctive signs of any kind whatsoever, illustrations, texts, tables, graphics, photographs, trademarks, and/or other elements belonging to third parties, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' undertakes to have obtained in advance of the effective date of the assignment all necessary authorizations for their use by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" within the framework of the present contract. The ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' guarantees the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' against its personal actions and against any claim or eviction of any kind (in particular, any action for counterfeit, copyright infringement, plagiarism or unfair competition) that may be brought against the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' by a third party, having as its basis and/or origin the exploitation of the content, the present assignment of the rights to this content, their reproduction by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' under the conditions of the present contract, and in any other form, the execution of this contract. In this respect, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' undertakes to reimburse the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' for all indemnification that the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" would be ordered to pay as well as the attorney's fees that the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignee', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" would have to incur in order to organize its defense in this respect.")
                     .moveDown()
                     .font('Times-Bold')
                     .text('        9. APPLICABLE LAW AND THE COMPETENT JURISDICTION')
@@ -442,19 +1788,109 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .font('Times-Roman')
                     .text('The present contract is to be governed for all purposes by and construed in accordance with the governing law of French.')
                     .moveDown()
-                    .text('An amicable phase is advocated before any judicial proceedings by the Parties tothe Contract. As a Party to the Contract, in case of disagreement or problem theAssignor undertakes to contact Okayemotions via the PDF form attached to theContract and to send a claim before initiating any judicial proceedings.')
+                    .text('An amicable phase is advocated before any judicial proceedings by the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the Contract. As a ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Party', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" to the Contract, in case of disagreement or problem the ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-BoldItalic')
+                    .text('Assignor', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(" undertakes to contact ", {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' via the PDF form attached to the Contract and to send a claim before initiating any judicial proceedings.')
                     .moveDown()
-                    .text('In case of any dispute in relation to the present Contract, the Parties attribute anexclusive competence to the jurisdictions of Paris (French).')
+                    .text('In case of any dispute in relation to the present Contract, the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Parties', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' attribute anexclusive competence to the jurisdictions of Paris (French).')
                     .moveDown()
                     .font('Times-Bold')
                     .text('        10. SIGNATURE AND PERSONAL INFORMATION')
                     .moveDown()
                     .font('Times-Roman')
-                    .text('By signing the present contract you affirm that you have taken knowledge of the preceding provisions. You assign your intellectual property rights relating to the content exclusively to the Okayemotions company.')
+                    .text('By signing the present contract you affirm that you have taken knowledge of the preceding provisions. You assign your intellectual property rights relating to the content ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('exclusively', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' to the ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions company', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text('.')
                     .moveDown()
-                    .text('You must mention your last name, first name, e-mail address, and an electronic signature will be requested. You also attest that these informations are yours and exclude Okayemotions from any responsibility in case of usurped identity and information.')
+                    .text('You must mention your last name, first name, e-mail address, and an electronic signature will be requested. You also attest that these informations are yours and exclude ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' from any responsibility in case of usurped identity and information.')
                     .moveDown()
-                    .text('Automatically after the electronic signature of the Contract a file containing the ersonal information that you have shared with Okayemotions will be generated. We commit ourselves to not share this personal information with third parties and to limit their use to a strictly professional purpose.')
+                    .text('Automatically after the electronic signature of the Contract a file containing the personal information that you have shared with ', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Bold')
+                    .text('Okayemotions', {
+                        //here it is, 
+                        continued: true
+                    })
+                    .font('Times-Roman')
+                    .text(' will be generated. We commit ourselves to not share this personal information with third parties and to limit their use to a strictly professional purpose.')
                     .moveDown()
                     .text("In particular, your personal information will be used in the case of a dispute relating to the Content to demonstrate your right of authorship of the Content.")
                     .moveDown()
@@ -514,7 +1950,6 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .font('Times-Roman')
                     .text('Clip URL or Filename');
                 doc.end();
-                console.log(firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link);
                 query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + link + "', 'link', 'link', '" + description + "', '" + tag + "', '" + id + "')", [], (err, rows) => {
                     res.render('thanks');
                 });
@@ -568,7 +2003,7 @@ router.get('/thanks', (req, res) => {
 
 });
 
-router.get('/data', (req, res) => {
+router.get('/data', ensureAuthenticated, (req, res) => {
     query("SELECT * from public.data", [], (err, rows) => {
         if (err) return next(err);
         console.log(rows);
@@ -578,11 +2013,11 @@ router.get('/data', (req, res) => {
     });
 });
 
-router.get('/watch', (req, res) => {
+router.get('/watch', ensureAuthenticated, (req, res) => {
     res.render('video');
 });
 
-router.get("/video", function (req, res) {
+router.get("/video", ensureAuthenticated, function (req, res) {
     console.log(req.query);
     const range = req.headers.range;
     if (!range) {
@@ -606,11 +2041,11 @@ router.get("/video", function (req, res) {
 });
 
 
-router.get('/download', (req, res) => {
+router.get('/download', ensureAuthenticated, (req, res) => {
     res.download(`uploads/${req.query.storage}/${req.query.video}`);
 });
 
-router.get('/contract', (req, res) => {
+router.get('/contract', ensureAuthenticated, (req, res) => {
     let storage = req.query.storage;
     console.log(path.resolve(`uploads/${storage}/contrat.pdf`))
     res.sendFile(path.resolve(`uploads/${storage}/contrat.pdf`));

@@ -6,13 +6,13 @@ var query = require('../config/query');
 
 
 router.get('/' , (req, res) => {
-    res.render('login');
+    res.render('password');
 
 });
 
 router.post('/', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/data',
         failureRedirect: '/auth',
         failureFlash: true
     })(req, res, next);
@@ -21,7 +21,7 @@ router.post('/', (req, res, next) => {
 router.get('/logout', ensureAuthenticated, (req, res) => {
     req.logout();
     req.flash('success_msg', 'You are now logged out');
-    res.redirect('/auth');
+    res.redirect('/');
 });
 
 
