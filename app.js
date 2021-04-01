@@ -9,6 +9,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 const app = express();
+var device = require('express-device');
 
 require('./config/passport')(passport);
 
@@ -38,6 +39,8 @@ app.use(expressLayouts);
 app.set('view engine', 'ejs')
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(device.capture());
 
 app.use('/', require('./routes/index'));
 app.use('/auth/', require('./routes/auth'));

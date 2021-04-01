@@ -73,6 +73,7 @@
         margin-top: 5px;
         margin-bottom: 5px;
         padding-left: 1rem;
+        width: fit-content;
     }
 </style>
 <header>
@@ -90,137 +91,161 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4 font-weight-bold">Submit a Video</h3>
-                            <form id="myForm" action="/upload" method="POST" enctype='multipart/form-data'
-                                onsubmit="submitForm(event)">
-                                <div id="a" class="form-label-group">
-                                    <input name="firstName" id="firstName" class="form-control"
-                                        placeholder="First Name">
-                                    <label for="firstName">First Name</label>
-                                </div>
+                            <% if(platform=="PHONE" ) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="border-radius: 25px;">
 
-                                <div id="b" class="form-label-group">
-                                    <input name="lastName" id="lastName" class="form-control" placeholder="Last Name"
-                                        required>
-                                    <label for="lastName">Last Name</label>
+                                    <h4 class="alert-heading">WARNING</h4>
+                                    <p style="font-family: 'apercu'; font-weight: bold;">It looks like you are
+                                        on a mobile device. For an optimal experience, visit us on a Desktop</p>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-
-                                <div id="c" class="form-label-group">
-                                    <input name="email" id="email" class="form-control" placeholder="Email address"
-                                        required>
-                                    <label for="email">Email</label>
-                                </div>
-
-                                <div id="d" class="form-empty-shell"></div>
-
-                                <div id="e" class="form-label-group">
-                                    <input name="name" id="name" class="form-control" placeholder="Video Name" required>
-                                    <label for="name">Video Name</label>
-                                </div>
-                                <div id="f" class="form-label-group">
-                                    <select id="my_select" class="form-control rounded-pill" name="plateform"
-                                        id="plateform" required>
-                                        <option value="">--Choose a platform to be credited on--</option>
-                                        <option value="Youtube">YouTube</option>
-                                        <option value="TikTok">TikTok</option>
-                                        <option value="Instagram">Instagram</option>
-                                    </select>
-                                </div>
-                                <div id="g" class="form-label-group my-credit">
-                                    <input type="credit" id="credit" name="credit" class="form-control"
-                                        placeholder="Credit" required />
-                                    <label for="credit">Credit</label>
-                                </div>
-                                <div id="zzz">
-                                    <select id="choices-multiple-remove-button" name="tag"
-                                        class="form-control rounded-pill" placeholder="Select Category          "
-                                        multiple>
-                                        <option value="animals">Animals</option>
-                                        <option value="family">Family</option>
-                                        <option value="lovestory">Love story </option>
-                                        <option value="inspiring">Inspiring </option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div id="h" class="form-empty-shell"></div>
-
-                                <div id="i" class="form-empty-shell"></div>
-
-                                <div id="j" class="form-label-group my-description">
-                                    <input id="description" name="description" class="form-control"
-                                        placeholder="Description">
-                                    <label for="description">Description (optional)</label>
-                                </div>
-
-                                <div id="k" class="form-empty-shell"></div>
-
-                                <div id="n" class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" name="customCheck1"
-                                        id="customCheck1" required>
-                                    <label class="custom-control-label" for="customCheck1">
-                                        <p>I have not signed any exclusive agreements for this clip with anyone else.
-                                        </p>
-                                    </label>
-                                </div>
-                                <div id="m" class="custom-control custom-checkbox mb-3">
-                                    <input type="checkbox" class="custom-control-input" name="customCheck2"
-                                        id="customCheck2" required>
-                                    <label class="custom-control-label" for="customCheck2">
-                                        <p>I am the sole rights holder of the Content, I am over 18 years old and I
-                                            accept the below Terms & Conditions OR I am the parent or legal guardian of
-                                            the sole rights holder of the Content who is under 18 years old and I accept
-                                            the below Terms & Conditions on the right’s holder’s behalf as agent or
-                                            attorney, as if I was the rights holder for these purposes.</p>
-                                    </label>
-                                </div>
-                                <div id="l">
-                                    <div id="signature-pad" class="signature-pad">
-                                        <div class="signature-pad--body">
-                                            <canvas></canvas>
-                                            <input data-rule-signature="true" type="hidden" name="signature"
-                                                id="signature">
+                                <% } %>
+                                    <h3 class="login-heading mb-4 font-weight-bold">Submit a Video</h3>
+                                    <form id="myForm" action="/upload" method="POST" enctype='multipart/form-data'
+                                        onsubmit="submitForm(event)">
+                                        <div id="a" class="form-label-group">
+                                            <input name="firstName" id="firstName" class="form-control"
+                                                placeholder="First Name">
+                                            <label for="firstName">First Name</label>
                                         </div>
-                                        <div class="signature-pad--footer">
 
-                                            <div class="signature-pad--actions">
-                                                <div>
-                                                    <button type="button" class="button clear"
-                                                        data-action="clear">Clear</button>
+                                        <div id="b" class="form-label-group">
+                                            <input name="lastName" id="lastName" class="form-control"
+                                                placeholder="Last Name" required>
+                                            <label for="lastName">Last Name</label>
+                                        </div>
+
+                                        <div id="c" class="form-label-group">
+                                            <input name="email" id="email" class="form-control"
+                                                placeholder="Email address" required>
+                                            <label for="email">Email</label>
+                                        </div>
+
+                                        <div id="d" class="form-empty-shell"></div>
+
+                                        <div id="e" class="form-label-group">
+                                            <input name="name" id="name" class="form-control" placeholder="Video Name"
+                                                required>
+                                            <label for="name">Video Name</label>
+                                        </div>
+                                        <div id="f" class="form-label-group">
+                                            <select id="my_select" class="form-control rounded-pill" name="plateform"
+                                                id="plateform" required>
+                                                <option value="">--Choose a platform to be credited on--
+                                                </option>
+                                                <option value="Youtube">YouTube</option>
+                                                <option value="TikTok">TikTok</option>
+                                                <option value="Instagram">Instagram</option>
+                                            </select>
+                                        </div>
+                                        <div id="g" class="form-label-group my-credit">
+                                            <input type="credit" id="credit" name="credit" class="form-control"
+                                                placeholder="Credit" required />
+                                            <label for="credit">Credit</label>
+                                        </div>
+                                        <div id="zzz">
+                                            <select id="choices-multiple-remove-button" name="tag"
+                                                class="form-control rounded-pill"
+                                                placeholder="Select Category          " multiple>
+                                                <option value="animals">Animals</option>
+                                                <option value="family">Family</option>
+                                                <option value="lovestory">Love story </option>
+                                                <option value="inspiring">Inspiring </option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                        </div>
+                                        <div id="h" class="form-empty-shell"></div>
+
+                                        <div id="i" class="form-empty-shell"></div>
+
+                                        <div id="j" class="form-label-group my-description">
+                                            <input id="description" name="description" class="form-control"
+                                                placeholder="Description">
+                                            <label for="description">Description (optional)</label>
+                                        </div>
+
+                                        <div id="k" class="form-empty-shell"></div>
+
+                                        <div id="n" class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" name="customCheck1"
+                                                id="customCheck1" required>
+                                            <label class="custom-control-label" for="customCheck1">
+                                                <p>I have not signed any exclusive agreements for this clip with
+                                                    anyone else.
+                                                </p>
+                                            </label>
+                                        </div>
+                                        <div id="m" class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" name="customCheck2"
+                                                id="customCheck2" required>
+                                            <label class="custom-control-label" for="customCheck2">
+                                                <p>I am the sole rights holder of the Content, I am over 18
+                                                    years old and I
+                                                    accept the below Terms & Conditions OR I am the parent or
+                                                    legal guardian of
+                                                    the sole rights holder of the Content who is under 18 years
+                                                    old and I accept
+                                                    the below Terms & Conditions on the right’s holder’s behalf
+                                                    as agent or
+                                                    attorney, as if I was the rights holder for these purposes.
+                                                </p>
+                                            </label>
+                                        </div>
+                                        <div id="l">
+                                            <div id="signature-pad" class="signature-pad">
+                                                <div class="signature-pad--body">
+                                                    <canvas></canvas>
+                                                    <input data-rule-signature="true" type="hidden" name="signature"
+                                                        id="signature">
+                                                </div>
+                                                <div class="signature-pad--footer">
+
+                                                    <div class="signature-pad--actions">
+                                                        <div>
+                                                            <button type="button" class="button clear"
+                                                                data-action="clear">Clear</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <p style="padding-left: 10%;padding-right: 10%;">By signing above, I
+                                                agree that all
+                                                information submitted through this form is
+                                                true and accurate, and I understand that I am transferring
+                                                important rights and
+                                                granting an exclusive license to the content submitted. I have
+                                                reviewed and
+                                                agree to the <a href="/lca" target="_blank"
+                                                    style="color:#00bfdb">Licensing
+                                                    Agreement</a>, <a href="/tc" target="_blank"
+                                                    style="color:#00bfdb">Terms and
+                                                    Conditions</a>, and <a href="/ppo" target="_blank"
+                                                    style="color:#00bfdb">Privacy Policy</a>.</p>
                                         </div>
-                                    </div>
-                                    <p style="padding-left: 10%;padding-right: 10%;">By signing above, I agree that all
-                                        information submitted through this form is
-                                        true and accurate, and I understand that I am transferring important rights and
-                                        granting an exclusive license to the content submitted. I have reviewed and
-                                        agree to the <a href="/lca" target="_blank" style="color:#00bfdb">Licensing
-                                            Agreement</a>, <a href="/tc" target="_blank" style="color:#00bfdb">Terms and
-                                            Conditions</a>, and <a href="/ppo" target="_blank"
-                                            style="color:#00bfdb">Privacy Policy</a>.</p>
-                                </div>
-                                <div id="o" class="row">
+                                        <div id="o" class="row">
 
-                                    <div class="col-sm-6">
-                                        <div class="form-label-group link-custom">
-                                            <input name="link" id="link" class="form-control" placeholder="Video Link"
-                                                required>
-                                            <label id="link-lab" for="link">Link</label>
+                                            <div class="col-sm-6">
+                                                <div class="form-label-group link-custom">
+                                                    <input name="link" id="link" class="form-control"
+                                                        placeholder="Video Link" required>
+                                                    <label id="link-lab" for="link">Link</label>
+                                                </div>
+                                            </div>
+                                            <p>OR</p>
+                                            <div class="col-sm-5">
+                                                <div class="input-file-container">
+                                                    <input class="input-file" id="file" type="file" name="file">
+                                                    <label for="file" class="input-file-trigger">Upload</label>
+                                                </div>
+                                                <p class="file-return"></p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <p>OR</p>
-                                    <div class="col-sm-5">
-                                        <div class="input-file-container">
-                                            <input class="input-file" id="file" type="file" name="file">
-                                            <label for="file" class="input-file-trigger">Upload</label>
-                                        </div>
-                                        <p class="file-return"></p>
-                                    </div>
-                                </div>
-                                <button id="p"
-                                    class="btn btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
-                                    type="submit">Send</button>
-                            </form>
+                                        <button id="p"
+                                            class="btn btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                                            type="submit">Send</button>
+                                    </form>
                         </div>
                     </div>
                 </div>

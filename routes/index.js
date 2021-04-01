@@ -6,8 +6,10 @@ const path = require('path');
 var query = require('../config/query');
 const uuid = require('uuid').v4;
 const fs = require("fs");
+const disk = require('diskusage');
 const PDFDocument = require('pdfkit');
-
+const os = require('os');
+let _path = os.platform() === 'win32' ? 'c:' : '/';
 
 
 const storage = multer.diskStorage({
@@ -1959,6 +1961,47 @@ router.post('/upload', upload.single('file'), (req, res) => {
 });
 
 
+router.post('/delete', (req, res) => {
+    const { ID } = req.body;
+    let errors = [];
+    let folder;
+
+    console.log(ID);
+    query("SELECT * FROM public.data WHERE id=" + ID + ";", [], (err, rows) => {
+        if (err) {
+            errors.push({
+                msg: "ID does not exists"
+            })
+            res.status(400).send({
+                errors,
+                success: false
+            });
+        } else {
+            folder = rows[0].storage;
+            query("DELETE FROM public.data WHERE id=" + ID + ";", [], (err, rows) => {
+                if (err) {
+                    errors.push({
+                        msg: "Error trying to delete data"
+                    })
+                    res.status(300).send({
+                        errors,
+                        success: false
+                    });
+                } else {
+                    console.log(folder);
+                    fs.rmdirSync("uploads/" + folder + "/", { recursive: true, force: true });
+                    res.status(200).send({
+                        msg: "Great Success",
+                        success: true
+                    });
+                }
+            });
+        }
+    });
+
+});
+
+
 
 
 
@@ -1995,7 +2038,10 @@ router.get('/tc', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    res.render('form');
+    console.log(req.device.type.toUpperCase());
+    res.render('form', {
+        platform: req.device.type.toUpperCase()
+    });
 
 });
 router.get('/thanks', (req, res) => {
@@ -2007,8 +2053,13 @@ router.get('/data', ensureAuthenticated, (req, res) => {
     query("SELECT * from public.data", [], (err, rows) => {
         if (err) return next(err);
         console.log(rows);
+        let info = disk.checkSync(_path);
+        console.log(info.available);
+        console.log(info.free);
+        console.log(info.total);
         res.render('data', {
-            data: rows
+            data: rows,
+            size: info.available
         });
     });
 });
