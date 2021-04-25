@@ -2051,7 +2051,7 @@ router.get('/thanks', (req, res) => {
 
 router.get('/data', ensureAuthenticated, (req, res) => {
     query("SELECT * from public.data", [], (err, rows) => {
-        if (err) return next(err);
+        if (err) return console.log(err);
         console.log(rows);
         let info = disk.checkSync(_path);
         console.log(info.available);
