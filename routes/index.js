@@ -17,7 +17,8 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link } = req.body;
+        var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link , date, city} = req.body;
+        console.log(date, city);
         const ext = path.extname(file.originalname);
         const id = uuid();
         const filepath = `${file.originalname}`;
@@ -29,7 +30,7 @@ const storage = multer.diskStorage({
                 let ts = Date.now();
 
                 let date_ob = new Date(ts);
-                let date = date_ob.getDate();
+                let _date = date_ob.getDate();
                 let month = date_ob.getMonth() + 1;
                 let year = date_ob.getFullYear();
 
@@ -951,7 +952,7 @@ const storage = multer.diskStorage({
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
-                    .text(year + "-" + month + "-" + date)
+                    .text(year + "-" + month + "-" + _date)
                     .text(`                                                              `, {
                         underline: true,
                     })
@@ -974,9 +975,35 @@ const storage = multer.diskStorage({
                         underline: true,
                     })
                     .font('Times-Roman')
-                    .text('Clip URL or Filename');
+                    .text('Clip URL or Filename')
+
+
+
+
+
+                    .moveDown()
+                    .moveDown()
+                    .font('Times-Italic')
+                    .text(city)
+                    .text(`                                                              `, {
+                        underline: true,
+                    })
+                    .font('Times-Roman')
+                    .text('Was recorded in')
+
+
+                    
+                    .moveDown()
+                    .moveDown()
+                    .font('Times-Italic')
+                    .text(date)
+                    .text(`                                                              `, {
+                        underline: true,
+                    })
+                    .font('Times-Roman')
+                    .text('Was recorded the');
                 doc.end();
-                query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + id + "', 'file', '" + ext + "', '" + description + "', '" + tag + "', '" + id + "')", [], (err, rows) => {
+                query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage, city, date) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + id + "', 'file', '" + ext + "', '" + description + "', '" + tag + "', '" + id + "', '" + city + "', '" + date + "')", [], (err, rows) => {
                     console.log("id = " + id);
                     console.log("name = " + name);
                     console.log("ext = " + ext);
@@ -991,10 +1018,11 @@ const upload = multer({ storage });
 
 
 router.post('/upload', upload.single('file'), (req, res) => {
-    var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link } = req.body;
+    var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city } = req.body;
+    console.log(date);
+    console.log(city);
     if (req.file) {
-        console.log("FILLLLLE");
-        res.render('thanks');
+        res.redirect('thanks');
     } else {
         const id = uuid();
         fs.mkdir(`./uploads/${id}`, function (err) {
@@ -1005,7 +1033,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
                 let ts = Date.now();
 
                 let date_ob = new Date(ts);
-                let date = date_ob.getDate();
+                let _date = date_ob.getDate();
                 let month = date_ob.getMonth() + 1;
                 let year = date_ob.getFullYear();
 
@@ -1927,7 +1955,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
-                    .text(year + "-" + month + "-" + date)
+                    .text(year + "-" + month + "-" + _date)
                     .text(`                                                              `, {
                         underline: true,
                     })
@@ -1950,10 +1978,35 @@ router.post('/upload', upload.single('file'), (req, res) => {
                         underline: true,
                     })
                     .font('Times-Roman')
-                    .text('Clip URL or Filename');
+                    .text('Clip URL or Filename')
+
+
+
+
+                    .moveDown()
+                    .moveDown()
+                    .font('Times-Italic')
+                    .text(city)
+                    .text(`                                                              `, {
+                        underline: true,
+                    })
+                    .font('Times-Roman')
+                    .text('Was recorded in')
+
+
+                    
+                    .moveDown()
+                    .moveDown()
+                    .font('Times-Italic')
+                    .text(date)
+                    .text(`                                                              `, {
+                        underline: true,
+                    })
+                    .font('Times-Roman')
+                    .text('Was recorded the');
                 doc.end();
-                query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + link + "', 'link', 'link', '" + description + "', '" + tag + "', '" + id + "')", [], (err, rows) => {
-                    res.render('thanks');
+                query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage, city, date) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + link + "', 'link', 'link', '" + description + "', '" + tag + "', '" + id + "', '" + city + "', '" + date + "')", [], (err, rows) => {
+                    res.redirect('thanks');
                 });
             }
         })
