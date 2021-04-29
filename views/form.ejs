@@ -156,19 +156,21 @@
 
                                 <div id="i" class="form-empty-shell"></div>
 
-                                <div id="j" class="form-label-group my-description">
-                                    <input id="description" name="description" class="form-control"
-                                        placeholder="Description">
-                                    <label for="description">Story (tell us the story behind your video)</label>
-                                </div>
                                 <div id="j" class="form-label-group">
                                     <input type="text" id="date" name="date" class="form-control" required>
                                     <label id="test" for="date">When was this recorded?</label>
                                 </div>
                                 <div id="j" class="form-label-group">
-                                    <input name="city" id="city" class="form-control" placeholder="City"
-                                        required>
+                                    <input name="city" id="city" class="form-control" placeholder="City" required>
                                     <label for="city">Where did you record this video?</label>
+                                </div>
+                                <div id="j" class="form-label-group">
+                                    <!-- <input id="description" name="description" class="form-control"
+                                        placeholder="Description" minlength="150" required> -->
+                                    <textarea id="description" name="description" class="form-control"
+                                        placeholder="Description" rows="6" minlength="150" required></textarea>
+                                    <label id="desc-label" for="description">Story (tell us the story behind your
+                                        video, context, people, etc)</label>
                                 </div>
 
                                 <div id="k" class="form-empty-shell"></div>
@@ -267,6 +269,20 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+
+        $("#description").on('input', function (event) {
+            $("#desc-label").empty();
+            $("#desc-label").append("Story");
+            if ($("#description").val() == "" || $("#description").val() == null) {
+                $("#desc-label").empty();
+                $("#desc-label").append("Story (tell us the story behind your video)");
+            }
+
+        });
+    });
+</script>
 
 <script type="text/javascript">
     (async () => {
