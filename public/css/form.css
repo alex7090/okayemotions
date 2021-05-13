@@ -429,6 +429,7 @@ div.laptop-wrapper foo {
 
 .js .input-file-trigger {
     font-family: apercu;
+    text-align: center;
     font-weight: bold;
     border-radius: 100px;
     display: block;

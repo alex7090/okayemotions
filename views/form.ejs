@@ -169,8 +169,8 @@
                                         placeholder="Description" minlength="150" required> -->
                                     <textarea id="description" name="description" class="form-control"
                                         placeholder="Description" rows="6" minlength="150" required></textarea>
-                                    <label id="desc-label" for="description">Story (tell us the story behind your
-                                        video, context, people, etc)</label>
+                                    <label id="desc-label" for="description">Story (tell us the story behind your video:
+                                        context, people, names, location, city, etc)</label>
                                 </div>
 
                                 <div id="k" class="form-empty-shell"></div>
@@ -231,15 +231,14 @@
                                 </div>
                                 <div id="o" class="row">
 
-                                    <div class="col-sm-6">
+                                    <div id="linkcontainer" class="col-sm-12" hidden>
                                         <div class="form-label-group link-custom">
-                                            <input name="link" id="link" class="form-control" placeholder="Video Link"
-                                                required>
+                                            <input name="link" id="link" class="form-control" placeholder="Video Link">
                                             <label id="link-lab" for="link">Link</label>
                                         </div>
                                     </div>
-                                    <p>OR</p>
-                                    <div class="col-sm-5">
+                                    <!-- <p>OR</p> -->
+                                    <div class="col-sm-12">
                                         <div class="input-file-container">
                                             <input class="input-file" id="file" type="file" name="file">
                                             <label for="file" class="input-file-trigger">Upload</label>
@@ -325,6 +324,7 @@
 <script>
     document.querySelector("html").classList.add('js');
 
+    var linkcontainer = document.getElementById("linkcontainer");
     var linklabel = document.getElementById("link-lab");
     var link = document.getElementById("link");
     var fileInput = document.querySelector(".input-file"),
@@ -344,6 +344,7 @@
         linklabel.innerHTML = "File selected";
         link.value = this.value.substring(12);
         link.readOnly = true;
+        linkcontainer.hidden = false;
 
     });
 
