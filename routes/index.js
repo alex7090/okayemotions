@@ -18,6 +18,12 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link , date, city} = req.body;
+        firstName = firstName.replace(/'/g, "''");
+        lastName = lastName.replace(/'/g, "''");
+        name = name.replace(/'/g, "''");
+        credit = credit.replace(/'/g, "''");
+        description = description.replace(/'/g, "''");
+        console.log(description);
         console.log(date, city);
         const ext = path.extname(file.originalname);
         const id = uuid();
@@ -1019,6 +1025,11 @@ const upload = multer({ storage });
 
 router.post('/upload', upload.single('file'), (req, res) => {
     var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city } = req.body;
+    firstName = firstName.replace(/'/g, "''");
+    lastName = lastName.replace(/'/g, "''");
+    name = name.replace(/'/g, "''");
+    credit = credit.replace(/'/g, "''");
+    description = description.replace(/'/g, "''");
     console.log(date);
     console.log(city);
     if (req.file) {
@@ -2105,7 +2116,8 @@ router.get('/thanks', (req, res) => {
 router.get('/data', ensureAuthenticated, (req, res) => {
     query("SELECT * from public.data", [], (err, rows) => {
         if (err) return console.log(err);
-        console.log(rows);
+
+        rows.forEach(function(obj) { obj.description = obj.description.replace(/'/g, " ");console.log(obj.description) });
         let info = disk.checkSync(_path);
         console.log(info.available);
         console.log(info.free);

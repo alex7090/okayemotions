@@ -479,3 +479,7 @@ div.laptop-wrapper foo {
 textarea {
     resize: none;
 }
+
+.alert-warning {
+    padding: 1rem;
+}
