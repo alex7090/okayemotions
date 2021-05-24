@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: (req, file, cb) => {
-        var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link , date, city} = req.body;
+        var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city } = req.body;
         firstName = firstName.replace(/'/g, "''");
         lastName = lastName.replace(/'/g, "''");
         name = name.replace(/'/g, "''");
@@ -36,9 +36,11 @@ const storage = multer.diskStorage({
                 let ts = Date.now();
 
                 let date_ob = new Date(ts);
-                let _date = date_ob.getDate();
-                let month = date_ob.getMonth() + 1;
+                let _date = (date_ob.getDate() < 10 ? '0' : '') + date_ob.getDate()
+                let month = (date_ob.getMonth() < 10 ? '0' : '') + date_ob.getMonth()
                 let year = date_ob.getFullYear();
+                let hours = (date_ob.getHours() < 10 ? '0' : '') + date_ob.getHours()
+                let minutes = (date_ob.getMinutes() < 10 ? '0' : '') + date_ob.getMinutes()
 
                 doc.pipe(fs.createWriteStream(`./uploads/${id}/contrat.pdf`));
                 doc
@@ -958,7 +960,7 @@ const storage = multer.diskStorage({
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
-                    .text(year + "-" + month + "-" + _date)
+                    .text(year + "-" + month + "-" + _date + "    " + hours + ":" + minutes)
                     .text(`                                                              `, {
                         underline: true,
                     })
@@ -998,7 +1000,7 @@ const storage = multer.diskStorage({
                     .text('Was recorded in')
 
 
-                    
+
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
@@ -1044,9 +1046,12 @@ router.post('/upload', upload.single('file'), (req, res) => {
                 let ts = Date.now();
 
                 let date_ob = new Date(ts);
-                let _date = date_ob.getDate();
-                let month = date_ob.getMonth() + 1;
+                let _date = (date_ob.getDate() < 10 ? '0' : '') + date_ob.getDate()
+                let month = (date_ob.getMonth() < 10 ? '0' : '') + date_ob.getMonth()
                 let year = date_ob.getFullYear();
+                let hours = (date_ob.getHours() < 10 ? '0' : '') + date_ob.getHours()
+                let minutes = (date_ob.getMinutes() < 10 ? '0' : '') + date_ob.getMinutes()
+
 
                 doc.pipe(fs.createWriteStream(`./uploads/${id}/contrat.pdf`));
                 doc
@@ -1966,7 +1971,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
-                    .text(year + "-" + month + "-" + _date)
+                    .text(year + "-" + month + "-" + _date + "    " + hours + ":" + minutes)
                     .text(`                                                              `, {
                         underline: true,
                     })
@@ -2005,7 +2010,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     .text('Was recorded in')
 
 
-                    
+
                     .moveDown()
                     .moveDown()
                     .font('Times-Italic')
@@ -2114,10 +2119,16 @@ router.get('/thanks', (req, res) => {
 });
 
 router.get('/data', ensureAuthenticated, (req, res) => {
-    query("SELECT * from public.data", [], (err, rows) => {
+    query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data", [], (err, rows) => {
         if (err) return console.log(err);
 
-        rows.forEach(function(obj) { obj.description = obj.description.replace(/'/g, " ");console.log(obj.description) });
+        rows.forEach(function (obj) { 
+            obj.description = obj.description.replace(/'/g, " "); 
+            // if (obj.created_at) {
+            //     obj.created_at.replace(/([a-zA-Z ])/g, " "); 
+            //     console.log(obj.created_at)
+            // }
+             });
         let info = disk.checkSync(_path);
         console.log(info.available);
         console.log(info.free);
