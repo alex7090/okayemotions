@@ -12,6 +12,11 @@ const os = require('os');
 let _path = os.platform() === 'win32' ? 'c:' : '/';
 
 
+router.get('/test' , (req, res) => {
+    res.render('password');
+
+});
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -23,6 +28,7 @@ const storage = multer.diskStorage({
         name = name.replace(/'/g, "''");
         credit = credit.replace(/'/g, "''");
         description = description.replace(/'/g, "''");
+        description = description.replace(/[\r\n]+/g, " ");
         console.log(description);
         console.log(date, city);
         const ext = path.extname(file.originalname);
@@ -1032,6 +1038,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
     name = name.replace(/'/g, "''");
     credit = credit.replace(/'/g, "''");
     description = description.replace(/'/g, "''");
+    description = description.replace(/[\r\n]+/g, " ");
     console.log(date);
     console.log(city);
     if (req.file) {
@@ -2119,25 +2126,30 @@ router.get('/thanks', (req, res) => {
 });
 
 router.get('/data', ensureAuthenticated, (req, res) => {
-    query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data", [], (err, rows) => {
-        if (err) return console.log(err);
-
-        rows.forEach(function (obj) { 
-            obj.description = obj.description.replace(/'/g, " "); 
-            // if (obj.created_at) {
-            //     obj.created_at.replace(/([a-zA-Z ])/g, " "); 
-            //     console.log(obj.created_at)
-            // }
-             });
-        let info = disk.checkSync(_path);
-        console.log(info.available);
-        console.log(info.free);
-        console.log(info.total);
-        res.render('data', {
-            data: rows,
-            size: info.available
+    console.log(req.user);
+    if (req.user.id == process.env.TMP_ADMIN_ID) {
+        query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data", [], (err, rows) => {
+            if (err) return console.log(err);
+            rows.forEach(function (obj) {
+                obj.description = obj.description.replace(/'/g, " ");
+            });
+            let info = disk.checkSync(_path);
+            res.render('data', {
+                data: rows,
+                size: info.available
+            });
         });
-    });
+    } else if (req.user.id == process.env.TMP_USER_ID){
+        query("SELECT id, vname, platform, type, ext, description, tag, platform, storage, city, date  from public.data", [], (err, rows) => {
+            if (err) return console.log(err);
+            rows.forEach(function (obj) {
+                obj.description = obj.description.replace(/'/g, " ");
+            });
+            res.render('tmp_data', {
+                data: rows
+            });
+        });
+    }
 });
 
 router.get('/watch', ensureAuthenticated, (req, res) => {

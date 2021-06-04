@@ -7,12 +7,18 @@ module.exports = function (passport) {
     passport.use(
         new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
             let errors = [];
-            user = new Object()
-            user.name = process.env.TMP_USER_NAME;
-            user.id = process.env.TMP_USER_ID;
             if (password == process.env.TMP_USER_PASSWORD) {
+                user = new Object()
+                user.name = process.env.TMP_USER_NAME;
+                user.id = process.env.TMP_USER_ID;
                 return done(null, user);
-            } else {
+            } else if (password == process.env.TMP_ADMIN_PASSWORD) {
+                user = new Object()
+                user.name = process.env.TMP_ADMIN_NAME;
+                user.id = process.env.TMP_ADMIN_ID;
+                return done(null, user);
+            }
+            else {
                 errors.push({ msg: 'Wrong password' });
                 return done(null, false, { errors });
             }
@@ -44,9 +50,15 @@ module.exports = function (passport) {
     });
 
     passport.deserializeUser((id, done) => {
-        user = new Object()
-        user.name = process.env.TMP_USER_NAME;
-        user.id = process.env.TMP_USER_ID;
+        if (id == process.env.TMP_ADMIN_ID) {
+            user = new Object()
+            user.name = process.env.TMP_ADMIN_NAME;
+            user.id = process.env.TMP_ADMIN_ID;
+        } else {
+            user = new Object()
+            user.name = process.env.TMP_USER_NAME;
+            user.id = process.env.TMP_USER_ID;
+        }
         done(null, user)
         // query('SELECT * FROM public.user WHERE id = $1', [parseInt(id, 10)], (err, rows) => {
         //     if (err) return done(err);
