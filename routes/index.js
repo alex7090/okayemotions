@@ -11,12 +11,6 @@ const PDFDocument = require('pdfkit');
 const os = require('os');
 let _path = os.platform() === 'win32' ? 'c:' : '/';
 
-
-router.get('/test' , (req, res) => {
-    res.render('password');
-
-});
-
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -2128,7 +2122,7 @@ router.get('/thanks', (req, res) => {
 router.get('/data', ensureAuthenticated, (req, res) => {
     console.log(req.user);
     if (req.user.id == process.env.TMP_ADMIN_ID) {
-        query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data", [], (err, rows) => {
+        query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data order by id desc;", [], (err, rows) => {
             if (err) return console.log(err);
             rows.forEach(function (obj) {
                 obj.description = obj.description.replace(/'/g, " ");
@@ -2140,7 +2134,7 @@ router.get('/data', ensureAuthenticated, (req, res) => {
             });
         });
     } else if (req.user.id == process.env.TMP_USER_ID){
-        query("SELECT id, vname, platform, type, ext, description, tag, platform, storage, city, date  from public.data", [], (err, rows) => {
+        query("SELECT id, vname, platform, type, ext, description, tag, platform, storage, city, date  from public.data order by id desc;", [], (err, rows) => {
             if (err) return console.log(err);
             rows.forEach(function (obj) {
                 obj.description = obj.description.replace(/'/g, " ");
