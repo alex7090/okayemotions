@@ -6,30 +6,6 @@ const fs = require("fs");
 var query = require('../config/query');
 var ffmpeg = require('ffmpeg');
 
-
-
-router.get("/miniature", function (req, res, next) {
-  query("SELECT storage, ext FROM public.data", [], (err, rows) => {
-    if (err) {
-      errors.push({
-        msg: "Error trying to delete data"
-      })
-      res.status(300).send({
-        errors,
-        success: false
-      });
-    } else {
-      console.log(rows);
-      res.send("aa");
-    }
-  });
-
-});
-
-
-
-
-
 router.get("/watch", ensureAuthenticated, function (req, res, next) {
   const ID = req.query.id;
 
