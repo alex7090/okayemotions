@@ -28,9 +28,19 @@ app.use(function(req, res, next){
     delete req.session.sessionFlash;
     next();
 });
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/css')));
 app.use(express.static(path.join(__dirname, 'public/images')));
+app.use(express.static(path.join(__dirname, 'public/js')));
+app.use('/auth', express.static(path.join(__dirname, 'public')));
+app.use('/auth', express.static(path.join(__dirname, 'public/css')));
+app.use('/auth', express.static(path.join(__dirname, 'public/images')));
+app.use('/auth', express.static(path.join(__dirname, 'public/js')));
+app.use('/error', express.static(path.join(__dirname, 'public')));
+app.use('/error', express.static(path.join(__dirname, 'public/css')));
+app.use('/error', express.static(path.join(__dirname, 'public/images')));
+app.use('/error', express.static(path.join(__dirname, 'public/js')));
 app.set('views', [__dirname + '/views']);
 
 app.use(express.json());
@@ -43,6 +53,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(device.capture());
 
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/files'));
+app.use('/', require('./routes/data'));
 app.use('/auth/', require('./routes/auth'));
 
 

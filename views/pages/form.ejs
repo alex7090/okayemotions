@@ -1,104 +1,15 @@
 <link rel="stylesheet" type="text/css" href="form.css">
-<style>
-    .signature-pad {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        font-size: 10px;
-        width: 90%;
-        height: 100%;
-        max-width: 700px;
-        max-height: 460px;
-        border: 1px solid #e8e8e8;
-        background-color: #fff;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.08) inset;
-        border-radius: 10px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 2rem;
-    }
 
-    .signature-pad::before,
-    .signature-pad::after {
-        position: absolute;
-        z-index: -1;
-        content: "";
-        width: 40%;
-        height: 10px;
-        bottom: 10px;
-        background: transparent;
-    }
-
-    .signature-pad::before {
-        left: 20px;
-        -webkit-transform: skew(-3deg) rotate(-3deg);
-        transform: skew(-3deg) rotate(-3deg);
-    }
-
-    .signature-pad::after {
-        right: 20px;
-        -webkit-transform: skew(3deg) rotate(3deg);
-        transform: skew(3deg) rotate(3deg);
-    }
-
-    .signature-pad--body {
-        position: relative;
-        -webkit-box-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        border: 1px solid #f4f4f4;
-    }
-
-    .signature-pad--body canvas {
-        position: relative;
-        left: 0;
-        top: 0;
-        width: 100%;
-        border-radius: 4px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.02) inset;
-    }
-
-    .clear {
-        font-size: 0.8rem;
-        font-family: "apercu";
-        margin-top: 5px;
-        margin-bottom: 5px;
-        padding-left: 1rem;
-        width: fit-content;
-    }
-</style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<header>
-    <nav>
-        <a class="navbar-brand" href="#">
-            <img src="logo.png" width="25%">
-        </a>
-    </nav>
-</header>
+
 <div class="container-fluid">
     <div class="row no-gutter">
-        <!-- <div class="col-md-1 col-lg-1 col-lg-offset-3"></div> -->
         <div class="col-md-8 col-lg-6 col-lg-offset-3">
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <!-- <% if(platform=="PHONE" ) { %>
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert" style="border-radius: 25px;">
-
-                                    <h4 class="alert-heading">WARNING</h4>
-                                    <p style="font-family: 'apercu'; font-weight: bold;">It looks like you are
-                                        on a mobile device. For an optimal experience, visit us on a Desktop</p>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <% } %> -->
                             <h3 class="login-heading mb-4 font-weight-bold">Submit a Video</h3>
                             <form id="myForm" action="/upload" method="POST" enctype='multipart/form-data'
                                 onsubmit="submitForm(event)">
@@ -144,7 +55,7 @@
                                 <div id="zzz">
                                     <select id="choices-multiple-remove-button" name="tag"
                                         class="form-control rounded-pill" placeholder="Select Category          "
-                                        multiple>
+                                        multiple required>
                                         <option value="animals">Animals</option>
                                         <option value="family">Family</option>
                                         <option value="lovestory">Love story </option>
@@ -165,8 +76,6 @@
                                     <label for="city">Where did you record this video (city, country)?</label>
                                 </div>
                                 <div id="j" class="form-label-group">
-                                    <!-- <input id="description" name="description" class="form-control"
-                                        placeholder="Description" minlength="150" required> -->
                                     <textarea id="description" name="description" class="form-control"
                                         placeholder="Description" rows="6" minlength="150" required></textarea>
                                     <label id="desc-label" for="description">Story (tell us the story behind your video:
@@ -242,10 +151,9 @@
                                             <label id="link-lab" for="link">Link</label>
                                         </div>
                                     </div>
-                                    <!-- <p>OR</p> -->
                                     <div class="col-sm-12">
                                         <div class="input-file-container">
-                                            <input class="input-file" id="file" type="file" name="file">
+                                            <input class="input-file" id="file" type="file" name="file" required>
                                             <label for="file" class="input-file-trigger">Upload</label>
                                         </div>
                                         <p class="file-return"></p>
@@ -272,6 +180,22 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script>
     $(document).ready(function () {
@@ -381,36 +305,14 @@
     var saveSVGButton = wrapper.querySelector("[data-action=save-svg]");
     var canvas = wrapper.querySelector("canvas");
     var signaturePad = new SignaturePad(canvas, {
-        // It's Necessary to use an opaque color when saving image as JPEG;
-        // this option can be omitted if only saving as PNG or SVG
         backgroundColor: 'rgb(255, 255, 255)'
     });
-
-    // Adjust canvas coordinate space taking into account pixel ratio,
-    // to make it look crisp on mobile devices.
-    // This also causes canvas to be cleared.
     function resizeCanvas() {
-        // When zoomed out to less than 100%, for some very strange reason,
-        // some browsers report devicePixelRatio as less than 1
-        // and only part of the canvas is cleared then.
         var ratio = Math.max(window.devicePixelRatio * 0.5 || 1, 1);
-        console.log(canvas.offsetHeight);
-        // This part causes the canvas to be cleared
         canvas.width = canvas.offsetWidth * ratio;
         canvas.height = (canvas.offsetHeight * ratio);
         canvas.getContext("2d").scale(ratio, ratio);
-
-        // This library does not listen for canvas changes, so after the canvas is automatically
-        // cleared by the browser, SignaturePad#isEmpty might still return false, even though the
-        // canvas looks empty, because the internal data of this library wasn't cleared. To make sure
-        // that the state of this library is consistent with visual state of the canvas, you
-        // have to clear it manually.
-        // signaturePad.clear();
     }
-
-    // On mobile devices it might make more sense to listen to orientation change,
-    // rather than window resize events.
-    // window.onresize = resizeCanvas;
     resizeCanvas();
 
     function download(dataURL, filename) {
@@ -427,11 +329,7 @@
 
         window.URL.revokeObjectURL(url);
     }
-
-    // One could simply use Canvas#toBlob method instead, but it's just to show
-    // that it can be done using result of SignaturePad#toDataURL.
     function dataURLToBlob(dataURL) {
-        // Code taken from https://github.com/ebidel/filer.js
         var parts = dataURL.split(';base64,');
         var contentType = parts[0].split(":")[1];
         var raw = window.atob(parts[1]);

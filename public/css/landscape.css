@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "apercu";
+    src: url('ApercuProLight.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-style: italic;
+    src: url('ApercuProItalic.otf');
+}
+
+@font-face {
+    font-family: "apercu";
+    font-weight: bold;
+    src: url('ApercuProBold.otf');
+}
+
+body, p , .btn  {
+    font-family: "apercu";
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+.tag {
+    color: #00bfdb;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-content {
+    height: 50%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.video-info {
+    margin-top: 3%;
+    height: 50%;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.video-info-description {
+    margin-top: 3%;
+}
+
+.video-info-footer {
+    margin-top: 3%;
+}
+
+.email, .social {
+    text-align: right;
+    
+}
+
+.social {
+    vertical-align: text-bottom;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+}
+
+.dot {
+    height: 5px;
+    width: 5px;
+    background-color: black;
+    border-radius: 50%;
+    display: inline-block;
+}

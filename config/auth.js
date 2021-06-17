@@ -8,5 +8,11 @@ module.exports = {
             message: 'Please, login to access the data'
         }
         res.redirect('/auth/');
+    },
+    ensureAdmin: function (req, res, next) {
+        if (req.user.id == process.env.TMP_ADMIN_ID) {
+            return next();
+        }
+        res.redirect('/error/');
     }
 }

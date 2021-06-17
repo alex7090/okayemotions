@@ -3,18 +3,7 @@
     color: black !important;
     font-size: 1.8em !important;
 }</style>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="/"><img src="logo.png" width="25%"></a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/auth/logout">logout</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
+
 <div id="toolbar">
     <select onchange="myFunction()" id="choices-multiple-remove-button" name="tag" class="form-control rounded-pill"
         placeholder="Select tags" multiple>
@@ -77,7 +66,7 @@
                     if (row.type == 'link') {
                         return '<button class="btn btn-success" onclick=" window.open(\'' + row.link + '\',\'_blank\')"> View</button>';
                     } else {
-                        return '<button class="btn btn-success" onclick=" window.open(\'watch?ext=' + row.ext + '&video=' + row.vname + '&storage=' + row.storage + '\',\'_blank\')"> View</button>';
+                        return '<button class="btn btn-success" onclick=" window.open(\'watch?id=' + row.id + '\',\'_blank\')"> View</button>';
                     }
                 }
             }

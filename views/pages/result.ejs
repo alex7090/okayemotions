@@ -1,14 +1,12 @@
 <link rel="stylesheet" type="text/css" href="thanks.css">
-
-<header>
-    <nav>
-        <a class="navbar-brand" href="/">
-            <img src="logo.png" width="25%">
-        </a>
-    </nav>
-</header>
-
-<p class="myText">Thank you! Follow us to see if your video is featured.</p>
+<% if(valid == "yes") { %>
+    
+<%- include ('./partials/thanks' ) %>
+<% } else if(valid == "admin") {%>
+    <%- include ('./partials/admin') %>
+    <% } else {%>
+<%- include ('./partials/error') %>
+    <% }%>
 <div align="center" class="socialbtns">
     <ul>
         <li><a href="https://www.tiktok.com/@okayemotions" target="_blank" class="fab fa-3x fa-tiktok"></a></li>

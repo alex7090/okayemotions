@@ -1,0 +1,167 @@
+<link rel="stylesheet" type="text/css" href="data.css">
+
+<%- include ('./partials/size_check' , {size: size}) %>
+    <div id="toolbar">
+        <select onchange="myFunction()" id="choices-multiple-remove-button" name="tag" class="form-control rounded-pill"
+            placeholder="Select tags" multiple>
+            <option value="animals">Animals</option>
+            <option value="family">Family</option>
+            <option value="lovestory">Love story </option>
+            <option value="inspiring">Inspiring </option>
+            <option value="other">Other</option>
+        </select>
+
+    </div>
+    <table id="table" data-page-list="[5, 10, 25, 50, 100, all]" data-toolbar="#toolbar" data-click-to-select="true">
+        <thead>
+            <tr>
+                <th data-field="id">Item ID</th>
+                <th data-field="fname">First Name</th>
+                <th data-field="lname">Last Name</th>
+                <th data-field="email">email</th>
+                <th data-field="vname">Video Name</th>
+                <th data-field="tag">Tag</th>
+                <th data-field="platform">Media</th>
+                <th data-field="credit">Credit</th>
+                <th data-field="description">Description</th>
+                <th data-field="city">Was recorded in</th>
+                <th data-field="date">Was recorded the</th>
+                <th data-field="signed">Was signed the</th>
+            </tr>
+        </thead>
+    </table>
+
+
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var $table = $('#table');
+        var data = '<%- JSON.stringify(data) %>';
+        var data_json = JSON.parse(data);
+        $(function () {
+            $('#table').bootstrapTable({
+                height: 550,
+                data: data_json,
+                pagination: true,
+                search: true,
+                columns: [{}, {}, {}, {}, {}, {
+                    field: 'tag',
+                    title: 'Tag',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: function (value, row, index) {
+                        if (row.tag == 'lovestory') {
+                            return 'love story';
+                        } else {
+                            return row.tag;
+                        }
+                    }
+                }, {}, {}, {
+                    field: 'description',
+                    title: 'Description',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: function (value, row, index) {return 'DESC';}
+                }, {}, {}, {},
+                {
+                    field: 'operate',
+                    title: 'Video',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: function (value, row, index) {
+                        if (row.type == 'link') {
+                            return '<button class="btn btn-success" onclick=" window.open(\'' + row.link + '\',\'_blank\')"> View</button>';
+                        } else {
+                            return '<button class="btn btn-success" onclick=" window.open(\'watch?id=' + row.id + '\',\'_blank\')"> View</button>';                        }
+                    }
+                },
+                {
+                    field: 'contract',
+                    title: 'contract',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: function (value, row, index) {
+                        return '<button class="btn btn-success" onclick=" window.open(\'contract?storage=' + row.storage + '\',\'_blank\')"> View</button>';
+                    }
+                },
+                {
+                    field: 'delete',
+                    title: 'delete',
+                    align: 'center',
+                    valign: 'middle',
+                    clickToSelect: false,
+                    formatter: function (value, row, index) {
+                        return '<button class="btn btn-danger" onclick="myDelete(' + row.id + ')"> Delete</button>';
+                    }
+                }
+                ]
+            });
+        });
+
+        function myDelete(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover it!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            ID: id
+                        };
+                        var json = JSON.stringify(data);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/delete/");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                swal("The data has been deleted!", {
+                                    icon: "success",
+                                }).then((willDelete) => {
+                                    document.location.reload();
+                                });
+                            }
+                        }
+                        xhr.send(json);
+                    } else {
+                        swal("Operation dropped", {
+                            icon: "info",
+                        });
+                    }
+                });
+        }
+
+        function test() {
+            data_json.splice(1, 5);
+            $('#table').bootstrapTable({ data: data_json });
+            $('#table').bootstrapTable('load', data_json);
+        }
+
+        function myFunction() {
+            var values = $('#choices-multiple-remove-button').val();
+            var new_data = JSON.parse(JSON.stringify(data));
+            var filtered = new_data;
+            if (values.length != 0) {
+                var filtered = new_data.filter(function (item) {
+                    return values.indexOf(item.tag) >= 0;
+                });
+            }
+            $('#table').bootstrapTable({ data: filtered });
+            $('#table').bootstrapTable('load', filtered);
+        }
+        $(document).ready(function () {
+            var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                removeItemButton: true,
+                maxItemCount: 5,
+                searchResultLimit: 5,
+                renderChoiceLimit: 5
+            });
+        });
+    </script>

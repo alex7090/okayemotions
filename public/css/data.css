@@ -13,3 +13,8 @@ html, body {
     margin-right: 3% !important;
     margin-left: 3% !important;
 }
+
+.nav a {
+    color: black !important;
+    font-size: 1.8em !important;
+}

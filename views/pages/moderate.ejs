@@ -1,0 +1,173 @@
+<link rel="stylesheet" type="text/css" href="moderate.css">
+
+<%- include ('./partials/mod_template') %>
+
+    <div class="content">
+        <div class="row">
+            <div class="col-2">
+                <div class="filter">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="animals">
+                        <label class="custom-control-label" for="animals">
+                            <p>Animals</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="family">
+                        <label class="custom-control-label" for="family">
+                            <p>Family</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="inspiring">
+                        <label class="custom-control-label" for="inspiring">
+                            <p>Inspiring</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="lovestory">
+                        <label class="custom-control-label" for="lovestory">
+                            <p>Love Story</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">
+                            <p>Other</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="search-bar p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+                        style=" margin-left: 10%;margin-right: 10%;">
+                        <div class="input-group rounded rounded-pill">
+                            <input type="search" placeholder="What're you searching for?"
+                                aria-describedby="button-addon1"
+                                class="form-control border-0 bg-light rounded rounded-pill">
+                            <div class="input-group-append rounded rounded-pill">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+                                        class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                <div id="_list" class="d-flex flex-column flex-nowrap">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        function myDelete(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Once removed, you will not be able to recover it!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+                    var data = {
+                        ID: id
+                    };
+                    var json = JSON.stringify(data);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/moderate/refuse/");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            swal("The data has been removed!", {
+                                icon: "success",
+                            }).then((willDelete) => {
+                                document.location.reload();
+                            });
+                        }
+                    }
+                    xhr.send(json);
+                } else {
+                    swal("Operation dropped", {
+                        icon: "info",
+                    });
+                }
+            });
+        }
+        function myValidate(id) {
+            swal({
+                title: "Are you sure?",
+                text: "Do you want to accept this video?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var data = {
+                            ID: id
+                        };
+                        var json = JSON.stringify(data);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/moderate/accept/");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                swal("The video has been added", {
+                                    icon: "success",
+                                }).then((willDelete) => {
+                                    document.location.reload();
+                                });
+                            }
+                        }
+                        xhr.send(json);
+                    } else {
+                        swal("Operation dropped", {
+                            icon: "info",
+                        });
+                    }
+                });
+        }
+
+        var card_counter = 1;
+        var deck_counter = 1;
+        var counter = -1;
+        var data = '<%- JSON.stringify(data) %>';
+        var data_json = JSON.parse(data);
+
+        var list = $("#_list");
+
+
+        var new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+        deck_counter++;
+
+        list.append(new_deck);
+        jQuery.each(data_json, function (i, val) {
+            counter++;
+            if (counter == 3) {
+                new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+                deck_counter++;
+                list.append(new_deck);
+                counter = 0;
+            }
+            template = $("#template").clone();
+            template.attr("id", "card" + card_counter);
+            template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
+            template.find("h4").text(val.vname)
+            template.find("p").text(val.fname + "  " + val.lname)
+            template.find("#type").find("i").text(val.tag)
+            template.find("#city").text(val.date + " - " + val.city)
+            template.find("#action").find("#add").attr("onclick", "myValidate('" + val.id + "');");
+            template.find("#action").find("#remove").attr("onclick", "myDelete('" + val.id + "');");
+            template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
+            template.removeAttr('hidden');
+            template.appendTo(`#${deck_counter - 1}`);
+            card_counter++;
+        });
+
+        while (counter < 2) {
+            console.log("add 1");
+            template = $("#empty_template").clone();
+            template.removeAttr('hidden');
+            template.appendTo(`#${deck_counter - 1}`);
+            counter++;
+        }
+    </script>

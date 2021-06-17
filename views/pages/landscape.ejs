@@ -1,0 +1,228 @@
+<link rel="stylesheet" type="text/css" href="landscape.css">
+
+<div class="video-content">
+    <video src=<%- src %> autoplay loop controls muted></video>
+</div>
+<div class="video-info">
+    <div class="video-info-header">
+        <div class="row align-items-center ">
+            <div class="col">
+                <h1>
+                    <%- data.vname %>
+                </h1>
+            </div>
+            <div class="col">
+
+                <%if (role==="admin" ) { %>
+                    <h6 class="social">
+                        <% switch (data.platform) { case 'TikTok' : %>
+                            <a href="javascript:void(0);" id="tiktok" class="fab fa-tiktok"></a>
+                            <% break; case 'Instagram' : %>
+                                <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                                <% break; case 'Youtube' : %>
+                                    <a href="javascript:void(0);" id="youtube" class="fab fa-youtube"></a>
+                                    <% break; } %>
+                                        <%- data.credit %>
+                    </h6>
+
+                    <%} %>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <h5>
+                    <%- data.fname %>
+                        <%- data.lname %>
+                </h5>
+                <p>
+                    <%- data.city %> <span class="dot"></span>
+                        <%- data.date %>
+                </p>
+            </div>
+            <div class="col-2">
+                <%if (role==="admin" ) { %>
+                    <a href="javascript:void(0);" id="contrat" class="fas fa-file-contract fa-3x"
+                        onclick="window.open('contract?storage=' +  '<%-data.storage%>','_blank')"></a>
+                    <%}%>
+            </div>
+            <div class="col-6">
+                <%if (role==="admin" ) { %>
+                    <h6 class="email">
+                        <%- data.email %>
+                    </h6>
+
+                    <h6 class="social">
+                        <div class="modal fade" id="insta" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Instagram</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="instagram" class="col-form-label">Instagram:</label>
+                                                <input type="text" class="form-control" id="instagram">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary"
+                                                onclick="insta('<%-data.id%>')">Save
+                                                changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <%if (data.instagram) { %>
+                            <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                            <%- data.instagram %>
+                                <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                    data-target="#insta">
+                                    EDIT
+                                </button>
+
+                                <%}else { %>
+                                    <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                        data-toggle="modal" data-target="#insta">
+                                        Add instagram
+                                    </button>
+                                    <%} %>
+                    </h6>
+                    <%} %>
+            </div>
+        </div>
+        <h4 class="tag">
+            <%- data.tag %>
+        </h4>
+    </div>
+    <div class="video-info-description">
+        <p>
+            <%- data.description %>
+        </p>
+    </div>
+    <div class="video-info-footer">
+        <%if (role==="admin" ) { %>
+            <button style="border-radius: 5px;" type="button" class="btn btn-primary"
+                onclick="window.open(`/download?storage=${'<%-data.storage%>'}&video=video${'<%-data.ext%>'}`)">Download
+                Video</button>
+            <button style="border-radius: 5px;" type="button" class="btn btn-danger"
+                onclick="myDelete('<%-data.id%>')">Delete</button>
+
+
+                    <div class="modal fade" id="info" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="information">Information:</label>
+                                        <textarea class="form-control" id="information" rows="3"></textarea>
+                                      </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary"
+                                        onclick="updateInfo('<%-data.id%>')">Save
+                                        changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h6 style="margin-top: 5%;">Additional Information <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
+                        data-target="#info">
+                        EDIT
+                    </button></h6>
+                    <p><%-data.info%></p>
+            <%}%>
+    </div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    
+    function updateInfo(id) {
+        var e = document.getElementById('information');
+        var data = {
+            ID: id,
+            value: e.value
+        };
+        var json = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/update/info");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                document.location.reload();
+            }
+        }
+        xhr.send(json);
+    }
+
+    function insta(id) {
+        var e = document.getElementById('instagram');
+        var data = {
+            ID: id,
+            value: e.value
+        };
+        var json = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/update/insta");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                document.location.reload();
+            }
+        }
+        xhr.send(json);
+    }
+
+    function myDelete(id) {
+        console.log(id);
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover it!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    var data = {
+                        ID: id
+                    };
+                    var json = JSON.stringify(data);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/delete/");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            swal("The data has been deleted!", {
+                                icon: "success",
+                            }).then((willDelete) => {
+                                window.location.href = '/data';
+                            });
+                        }
+                    }
+                    xhr.send(json);
+                } else {
+                    swal("Operation dropped", {
+                        icon: "info",
+                    });
+                }
+            });
+    }
+
+</script>

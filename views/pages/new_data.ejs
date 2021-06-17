@@ -1,0 +1,165 @@
+<link rel="stylesheet" type="text/css" href="new_data.css">
+
+<%- include ('./partials/card_template') %>
+
+
+    <div class="content">
+        <div class="row">
+            <div class="col-2">
+                <div class="filter">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="featured">
+                        <label class="custom-control-label" for="featured">
+                            <p>Featured</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="notfeatured">
+                        <label class="custom-control-label" for="notfeatured">
+                            <p>Not Featured</p>
+                        </label>
+                    </div>
+                    <hr />
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="animals">
+                        <label class="custom-control-label" for="animals">
+                            <p>Animals</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="family">
+                        <label class="custom-control-label" for="family">
+                            <p>Family</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="inspiring">
+                        <label class="custom-control-label" for="inspiring">
+                            <p>Inspiring</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="lovestory">
+                        <label class="custom-control-label" for="lovestory">
+                            <p>Love Story</p>
+                        </label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="other">
+                        <label class="custom-control-label" for="other">
+                            <p>Other</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="search-bar p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+                    style=" margin-left: 10%;margin-right: 10%;">
+                    <div class="input-group rounded rounded-pill">
+                        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1"
+                            class="form-control border-0 bg-light rounded rounded-pill">
+                        <div class="input-group-append rounded rounded-pill">
+                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+                                    class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="_list" class="d-flex flex-column flex-nowrap">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        function tiktok(e) {
+            let role = '<%-role%>';
+            if (role == 'admin') {
+                if (e.id == "tiktok-off") {
+                    var data = {
+                        ID: e.parentNode.parentNode.parentNode.parentNode.id
+                    };
+                    var json = JSON.stringify(data);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/update/tiktok/on");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            e.id = "tiktok-on";
+                        }
+                    }
+                    xhr.send(json);
+                } else {
+                    var data = {
+                        ID: e.parentNode.parentNode.parentNode.parentNode.id
+                    };
+                    var json = JSON.stringify(data);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/update/tiktok/off");
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            e.id = "tiktok-off";
+                        }
+                    }
+                    xhr.send(json);
+                }
+            }
+        }
+
+
+        function dollar(e) {
+            // if (e.id == "dollar-off") {
+            //     e.id = "dollar-on";
+            // } else {
+            //     e.id = "dollar-off";
+            // }
+        }
+
+        var card_counter = 1;
+        var deck_counter = 1;
+        var counter = -1;
+        var data = '<%- JSON.stringify(data) %>';
+        var data_json = JSON.parse(data);
+
+        var list = $("#_list");
+        console.log("new card deck")
+
+
+        var new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+        deck_counter++;
+
+        list.append(new_deck);
+        jQuery.each(data_json, function (i, val) {
+            counter++;
+            if (counter == 3) {
+                new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+                deck_counter++;
+                list.append(new_deck);
+                counter = 0;
+            }
+            template = $("#template").clone();
+            template.attr("id", val.id);
+            template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
+            template.find("h4").text(val.vname)
+            template.find("p").text(val.fname + "  " + val.lname)
+            template.find("#type").find("i").text(val.tag)
+            template.find("#city").text(val.date + " - " + val.city)
+            if (val.posted == 1) {
+                console.log(val.posted);
+                template.find('#tiktok-off').attr("id", "tiktok-on");
+            }
+            template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
+            template.removeAttr('hidden');
+            template.appendTo(`#${deck_counter - 1}`);
+            card_counter++;
+            console.log(val)
+        });
+        while (counter < 2) {
+            console.log("add 1");
+            template = $("#empty_template").clone();
+            template.removeAttr('hidden');
+            template.appendTo(`#${deck_counter - 1}`);
+            counter++;
+        }
+    </script>

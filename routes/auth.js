@@ -6,7 +6,7 @@ var query = require('../config/query');
 
 
 router.get('/' , (req, res) => {
-    res.render('password');
+    res.render('pages/password', {fixed: "false", user: req.user ? 'yes' : 'no'});
 
 });
 
@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/logout', ensureAuthenticated, (req, res) => {
+router.get('/logout', ensureAuthenticated, (req, res, next) => {
     req.logout();
     req.flash('success_msg', 'You are now logged out');
     res.redirect('/');
