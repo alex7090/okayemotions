@@ -146,12 +146,15 @@
                         </div>
                     </div>
                 </div>
-                <h6 style="margin-top: 5%;">Additional Information <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
+                
+                <%} %>
+                <h6 style="margin-top: 5%;">Additional Information 
+                    <%if (role==="admin" ) { %><button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
                     data-target="#info">
                     EDIT
-                </button></h6>
+                </button>
+                <%} %></h6>
                 <p><%-data.info%></p>
-                    <%} %>
 
             </div>
         </div>
