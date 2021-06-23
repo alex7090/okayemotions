@@ -1,10 +1,77 @@
 const express = require('express');
 const router = express.Router();
 const { ensureAdmin, ensureAuthenticated } = require('../config/auth');
+const multer = require('multer');
 const path = require('path');
 const fs = require("fs");
 var query = require('../config/query');
 var ffmpeg = require('ffmpeg');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    var { storage, id } = req.body;
+    console.log(id);
+    const ext = path.extname(file.originalname);
+    query("UPDATE public.data SET clips = array_append(clips, '" + file.originalname + "') WHERE id= " + id + "", [], (err, rows) => {
+      console.log("test");
+      cb(null, `./${storage}/${file.originalname}`);
+    });
+
+  },
+})
+
+const upload = multer({ storage });
+
+
+
+
+router.post('/clip/add', ensureAuthenticated, ensureAdmin, upload.single('file'), (req, res) => {
+  let url = `/watch?id=${req.body.id}`;
+  res.redirect(url);
+});
+
+
+
+
+router.post('/clip/remove', ensureAuthenticated, ensureAdmin, (req, res) => {
+  const { ID, storage, name } = req.body;
+  query("UPDATE public.data SET clips = ARRAY_REMOVE(clips, '" + name + "') WHERE id= " + ID + "", [], (err, rows) => {
+    if (err) {
+      console.error(err)
+      res.send("error");
+    }
+    fs.unlink("uploads/" + storage + "/" + name, (err) => {
+      if (err) {
+        console.error(err)
+        res.send("error");
+      }
+      res.send("ok");
+    })
+  });
+});
+
+router.get("/clip/", ensureAuthenticated, function (req, res, next) {
+  const ID = req.query.id;
+  const name = req.query.name;
+  const storage = req.query.storage;
+
+  let source = `video?storage=${storage}&video=${name}`;
+
+  res.render('pages/clip', {
+    fixed: "false",
+    user: req.user ? 'yes' : 'no',
+    role: (req.user.id == 1001) ? "admin" : "user",
+    src: source
+  });
+});
+
+
+
+
+
 
 
 
@@ -33,7 +100,7 @@ router.get("/miniature", function (req, res, next) {
 router.get("/watch", ensureAuthenticated, function (req, res, next) {
   const ID = req.query.id;
 
-  query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data WHERE id=" + ID + ";", [], (err, rows) => {
+  query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed, array_to_json(clips) AS test from public.data WHERE id=" + ID + ";", [], (err, rows) => {
     if (err) {
       if (err) return console.log(err);
     } else {

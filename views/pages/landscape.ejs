@@ -1,158 +1,318 @@
 <link rel="stylesheet" type="text/css" href="landscape.css">
 
 <div class="video-content">
-    <video src=<%- src %> autoplay loop controls muted></video>
+    <video oncontextmenu="return false;" src=<%- src %> autoplay loop controls muted></video>
 </div>
+<style>
+    .carousel-control-prev {
+        margin-left: -150px;
+    }
+
+    .carousel-control-next {
+        margin-right: -150px;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        height: 100px;
+        width: 100px;
+        outline: black;
+        background-size: 100%, 100%;
+        border-radius: 50%;
+        background-image: none;
+    }
+
+    .carousel-control-next-icon:after {
+        content: '>';
+        font-size: 55px;
+        color: red;
+    }
+
+    .carousel-control-prev-icon:after {
+        content: '<';
+        font-size: 55px;
+        color: red;
+    }
+
+    .carousel-item {
+        height: 400px;
+    }
+</style>
+
+
+
 <div class="video-info">
-    <div class="video-info-header">
-        <div class="row align-items-center ">
-            <div class="col">
-                <h1>
-                    <%- data.vname %>
-                </h1>
-            </div>
-            <div class="col">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="video-info-header">
+                    <div class="row align-items-center ">
+                        <div class="col">
+                            <h1>
+                                <%- data.vname %>
+                            </h1>
+                        </div>
+                    </div>
 
-                <%if (role==="admin" ) { %>
-                    <h6 class="social">
-                        <% switch (data.platform) { case 'TikTok' : %>
-                            <a href="javascript:void(0);" id="tiktok" class="fab fa-tiktok"></a>
-                            <% break; case 'Instagram' : %>
-                                <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
-                                <% break; case 'Youtube' : %>
-                                    <a href="javascript:void(0);" id="youtube" class="fab fa-youtube"></a>
-                                    <% break; } %>
-                                        <%- data.credit %>
-                    </h6>
+                    <div class="row">
+                        <div class="col-4">
+                            <h5>
+                                <%- data.fname %>
+                                    <%- data.lname %>
+                            </h5>
+                            <p>
+                                <%- data.city %> <span class="dot"></span>
+                                    <%- data.date %>
+                            </p>
+                        </div>
+                        <div class="col-2">
+                            <%if (role==="admin" ) { %>
+                                <a href="javascript:void(0);" id="contrat" class="fas fa-file-contract fa-3x"
+                                    onclick="window.open('contract?storage=' +  '<%-data.storage%>','_blank')"></a>
+                                <%}%>
+                        </div>
+                        <div class="col-6">
+                            <%if (role==="admin" ) { %>
+                                <h6 class="social">
+                                    <% switch (data.platform) { case 'TikTok' : %>
+                                        <a href="javascript:void(0);" id="tiktok" class="fab fa-tiktok"></a>
+                                        <% break; case 'Instagram' : %>
+                                            <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                                            <% break; case 'Youtube' : %>
+                                                <a href="javascript:void(0);" id="youtube" class="fab fa-youtube"></a>
+                                                <% break; } %>
+                                                    <%- data.credit %>
+                                </h6>
+                                <h6 class="email">
+                                    <%- data.email %>
+                                </h6>
 
-                    <%} %>
-            </div>
-        </div>
+                                <h6 class="social">
+                                    <div class="modal fade" id="insta" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Instagram</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="instagram" class="col-form-label">Instagram:</label>
+                                                        <input type="text" class="form-control" id="instagram">
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="insta('<%-data.id%>')">Save
+                                                        changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%if (data.instagram) { %>
+                                        <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                                        <%- data.instagram %>
+                                            <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                                data-toggle="modal" data-target="#insta">
+                                                EDIT
+                                            </button>
 
-        <div class="row">
-            <div class="col-4">
-                <h5>
-                    <%- data.fname %>
-                        <%- data.lname %>
-                </h5>
-                <p>
-                    <%- data.city %> <span class="dot"></span>
-                        <%- data.date %>
-                </p>
-            </div>
-            <div class="col-2">
-                <%if (role==="admin" ) { %>
-                    <a href="javascript:void(0);" id="contrat" class="fas fa-file-contract fa-3x"
-                        onclick="window.open('contract?storage=' +  '<%-data.storage%>','_blank')"></a>
+                                            <%}else { %>
+                                                <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                                    data-toggle="modal" data-target="#insta">
+                                                    Add instagram
+                                                </button>
+                                                <%} %>
+                                </h6>
+                                <%} %>
+                        </div>
+                    </div>
+                    <h4 class="tag">
+                        <%- data.tag %>
+                    </h4>
+                </div>
+                <div class="video-info-description">
+                    <p>
+                        <%- data.description %>
+                    </p>
+                </div>
+                <%if (role=="admin" ) { %>
+                    <button style="border-radius: 5px;" type="button" class="btn btn-primary"
+                        onclick="window.open(`/download?storage=${'<%-data.storage%>'}&video=video${'<%-data.ext%>'}`)">Download
+                        Video</button>
+                    <button style="border-radius: 5px;" type="button" class="btn btn-danger"
+                        onclick="myDelete('<%-data.id%>')">Delete</button>
                     <%}%>
             </div>
-            <div class="col-6">
-                <%if (role==="admin" ) { %>
-                    <h6 class="email">
-                        <%- data.email %>
-                    </h6>
-
-                    <h6 class="social">
-                        <div class="modal fade" id="insta" tabindex="-1" role="dialog"
+            <div class="carousel-item">
+                <div class="video-info-footer">
+                    <div class="row ">
+                        <div class="col">
+                            
+                <%if (role=="admin" ) { %>
+                            <div class="modal fade" id="info" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edit Instagram</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <div class="modal-body">
                                             <div class="form-group">
-                                                <label for="instagram" class="col-form-label">Instagram:</label>
-                                                <input type="text" class="form-control" id="instagram">
+                                                <label for="information">Information:</label>
+                                                <textarea class="form-control" id="information"
+                                                    rows="3"><%-data.info%></textarea>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary"
-                                                onclick="insta('<%-data.id%>')">Save
+                                                onclick="updateInfo('<%-data.id%>')">Save
                                                 changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <%if (data.instagram) { %>
-                            <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
-                            <%- data.instagram %>
-                                <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
-                                    data-target="#insta">
+                            <%}%>
+                            <h6 style="margin-top: 5%;">Additional Information
+                <%if (role=="admin" ) { %>
+                    <button style="border-radius: 5px;"
+                                    class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#info">
                                     EDIT
                                 </button>
-
-                                <%}else { %>
-                                    <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
-                                        data-toggle="modal" data-target="#insta">
-                                        Add instagram
-                                    </button>
-                                    <%} %>
-                    </h6>
-                    <%} %>
-            </div>
-        </div>
-        <h4 class="tag">
-            <%- data.tag %>
-        </h4>
-    </div>
-    <div class="video-info-description">
-        <p>
-            <%- data.description %>
-        </p>
-    </div>
-    <div class="video-info-footer">
-        <%if (role==="admin" ) { %>
-            <button style="border-radius: 5px;" type="button" class="btn btn-primary"
-                onclick="window.open(`/download?storage=${'<%-data.storage%>'}&video=video${'<%-data.ext%>'}`)">Download
-                Video</button>
-            <button style="border-radius: 5px;" type="button" class="btn btn-danger"
-                onclick="myDelete('<%-data.id%>')">Delete</button>
-
-
-                    <div class="modal fade" id="info" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
+                                <%}%>
+                            </h6>
+                            <p>
+                                <%-data.info%>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <%if (role=="admin" ) { %>
+                            <div class="modal fade" id="clips" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Add Clip</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form id="myForm" action="/clip/add" method="POST"
+                                            enctype='multipart/form-data'>
+                                            <div class="modal-body">
+                                                <div id="clips-modal"></div>
+                                                <input name="storage" id="storage" type="text" value=<%-data.storage%>
+                                                hidden>
+                                                <input name="id" id="id" type="text" value=<%-data.id%> hidden>
+                                                <div class="form-group">
+                                                    <input class="input-file" id="file" type="file" name="file">
+                                                    <label for="file" class="input-file-trigger"></label>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Add File</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="information">Information:</label>
-                                        <textarea class="form-control" id="information" rows="3"></textarea>
-                                      </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary"
-                                        onclick="updateInfo('<%-data.id%>')">Save
-                                        changes</button>
-                                </div>
+                            </div>
+                            <%}%>
+                            <h6 style="margin-top: 5%;">Additional Clips 
+                                <%if (role=="admin" ) { %>
+                                <button style="border-radius: 5px;"
+                                    class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#clips">
+                                    EDIT
+                                </button>
+                                <%}%>
+                            </h6>
+                            <div id="clips-array">
+                                <!-- <%-data.test%> -->
                             </div>
                         </div>
                     </div>
-                    <h6 style="margin-top: 5%;">Additional Information <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
-                        data-target="#info">
-                        EDIT
-                    </button></h6>
-                    <p><%-data.info%></p>
-            <%}%>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
+
 </div>
+
+<a hidden href="javascript:void(0);" id="clips-remove" class="fas fa-trash-alt" style="margin-left: 5%;"
+    onclick="removeclip(this)"></a>
 
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    
+    let role = '<%-role%>';
+    var raw_clips = '<%-data.clips%>';
+    var clips = raw_clips.split(',');
+    var clips_html = document.getElementById('clips-array');
+    if (role == 'admin') {
+    console.log('<%-role%>');
+        var clips_modal = document.getElementById('clips-modal');
+    }
+    for (i in clips) {
+        let a = document.createElement("a");
+        a.href = '/clip?storage=' + '<%-data.storage%>' + '&name=' + clips[i];
+        a.target = '_blank'
+        a.innerHTML = clips[i];
+        let p = document.createElement("p");
+        let template = $("#clips-remove").clone();
+        template.removeAttr('hidden');
+        p.innerHTML = clips[i];
+        let br = document.createElement("br");
+        a.appendChild(br);
+        template.appendTo(p);
+        if (role == 'admin') {
+            clips_modal.appendChild(p);
+        }
+        clips_html.appendChild(a);
+    }
+
+
+    function removeclip(e) {
+        let text = $(e.parentNode).text();
+        let id = '<%-data.id%>';
+        let storage = '<%-data.storage%>';
+        let data = {
+            ID: id,
+            storage: storage,
+            name: text
+        };
+        let json = JSON.stringify(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/clip/remove");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                document.location.reload();
+            }
+        }
+        xhr.send(json);
+    }
+</script>
+
+<script>
     function updateInfo(id) {
         var e = document.getElementById('information');
         var data = {
@@ -190,7 +350,6 @@
     }
 
     function myDelete(id) {
-        console.log(id);
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover it!",

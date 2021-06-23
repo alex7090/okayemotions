@@ -1,0 +1,26 @@
+<style>
+    html,
+    body {
+        height: 90%;
+        margin: 0;
+    }
+
+    .video-content {
+        height: 100%;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    video {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: block
+
+}
+
+</style>
+
+<div class="video-content">
+    <video oncontextmenu="return false;" src=<%- src %> autoplay loop controls muted></video>
+</div>
