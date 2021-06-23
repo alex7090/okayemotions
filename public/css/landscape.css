@@ -82,3 +82,7 @@ video {
     border-radius: 50%;
     display: inline-block;
 }
+
+.add-info {
+    margin-bottom: 10%;
+}
