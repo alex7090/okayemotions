@@ -1,7 +1,57 @@
 <link rel="stylesheet" type="text/css" href="form.css">
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<style>
+    .loader {
+        width: 100px;
+        height: 100px;
+        border-radius: 100%;
+        position: relative;
+        margin: 0 auto;
+        -webkit-perspective: 120px;
+        -moz-perspective: 120px;
+        -ms-perspective: 120px;
+        perspective: 120px;
+    }
+
+    .loader:before {
+        content: "";
+        position: absolute;
+        left: 25px;
+        top: 25px;
+        width: 50px;
+        height: 50px;
+        background-color: #00bfdb;
+        animation: flip 1s infinite;
+    }
+
+    @keyframes flip {
+        0% {
+            transform: rotate(0);
+        }
+
+        50% {
+            transform: rotateY(180deg);
+        }
+
+        100% {
+            transform: rotateY(180deg) rotateX(180deg);
+        }
+    }
+</style>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="loader"></div>
+                <p style="width:100%; text-align: center;">File upload in progress. Please wait ...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container-fluid">
     <div class="row no-gutter">
@@ -11,8 +61,7 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4 font-weight-bold">Submit a Video</h3>
-                            <form id="myForm" action="/upload" method="POST" enctype='multipart/form-data'
-                                onsubmit="submitForm(event)">
+                            <form id="myForm" enctype='multipart/form-data'>
                                 <div id="a" class="form-label-group">
                                     <input name="firstName" id="firstName" class="form-control"
                                         placeholder="First Name">
@@ -140,11 +189,12 @@
                                 </div>
                                 <div id="o" class="row">
                                     <div class="alert alert-info alert-dismissible fade show" role="alert">
-                                        Please make sure to upload the original video with no music, no filters and no watermarks
+                                        Please make sure to upload the original video with no music, no filters and no
+                                        watermarks
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
-                                          </button>
-                                      </div>
+                                        </button>
+                                    </div>
                                     <div id="linkcontainer" class="col-sm-12" hidden>
                                         <div class="form-label-group link-custom">
                                             <input name="link" id="link" class="form-control" placeholder="Video Link">
@@ -180,10 +230,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -357,6 +403,50 @@
             form.submit();
         }
     }
+
+    function openMod() {
+        $('#myModal').modal({ backdrop: 'static', keyboard: false })
+    }
+    function closeMod() {
+        $('#myModal').modal('hide')
+    }
+
+    $(document).ready(function () {
+        // File upload via Ajax
+        $("#myForm").on('submit', function (e) {
+            e.preventDefault();
+            if (signaturePad.isEmpty() == true) {
+                alert("Please sign the form")
+            } else {
+                document.getElementById('signature').value = signaturePad.toDataURL('image/png');
+                $.ajax({
+                    xhr: function () {
+                        var xhr = new window.XMLHttpRequest();
+                        return xhr;
+                    },
+                    type: 'POST',
+                    url: '/upload/',
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    beforeSend: function () {
+                        openMod();
+                    },
+                    error: function () {
+                        closeMod();
+                    },
+                    success: function (resp) {
+                        closeMod();
+                        window.location = "/upload?valid=yes";
+                    }
+                });
+            }
+        });
+    });
+
+
+
 
 </script>
 

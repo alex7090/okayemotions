@@ -1,5 +1,7 @@
 const PDFDocument = require('pdfkit');
 const fs = require("fs");
+var moment = require('moment'); 
+
 
 module.exports = function (firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city, ext, id, filepath) {
     fs.mkdir(`./uploads/${id}`, function (err) {
@@ -15,6 +17,9 @@ module.exports = function (firstName, lastName, email, name, plateform, credit, 
             let year = date_ob.getFullYear();
             let hours = (date_ob.getHours() < 10 ? '0' : '') + date_ob.getHours()
             let minutes = (date_ob.getMinutes() < 10 ? '0' : '') + date_ob.getMinutes()
+            
+            console.log(moment().format('MMMM Do YYYY, h:mm:ss a'))
+            
 
             doc.pipe(fs.createWriteStream(`./uploads/${id}/contrat.pdf`));
             doc
@@ -934,12 +939,12 @@ module.exports = function (firstName, lastName, email, name, plateform, credit, 
                 .moveDown()
                 .moveDown()
                 .font('Times-Italic')
-                .text(year + "-" + month + "-" + _date + "    " + hours + ":" + minutes)
+                .text(moment().format('MMMM Do YYYY, h:mm:ss a'))
                 .text(`                                                              `, {
                     underline: true,
                 })
                 .font('Times-Roman')
-                .text('Date')
+                .text('Date of submission')
                 .moveDown()
                 .moveDown()
                 .font('Times-Italic')

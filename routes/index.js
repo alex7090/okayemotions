@@ -40,17 +40,13 @@ const upload = multer({ storage });
 
 
 router.post('/upload', upload.single('file'), (req, res) => {
-    var url = `/upload?valid=${req.file ? 'yes' : 'no'}`;
-
     var video_file = fs.createReadStream(req.file.path); // Storing File path
     var video_String = JSON.stringify(video_file); // Converting Json into String of req.file.path
     var video_res = JSON.parse(video_String); // Parsing req.file.path
     try {
         var process = new ffmpeg(video_res.path);
         process.then(function (video) {
-            console.log(video.metadata.video.resolution)
             let time = '00:00:03';
-            console.log(video.metadata.video.rotate)
             if (video.metadata.duration.seconds > 50) {
                 time = '00:00:30'
             } else {
@@ -61,7 +57,6 @@ router.post('/upload', upload.single('file'), (req, res) => {
                     time = `00:00:0${div}`
                 }
             }
-            console.log(time);
             video.addCommand('-ss', time)
             video.addCommand('-vframes', '1')
             video.save(video_res.path.slice(0, -9).concat("frame.jpg"), function (error, file) {
@@ -75,10 +70,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
         console.log(e.code);
         console.log(e.msg);
     }
-
-
-
-    res.redirect(url);
+    res.send("ok");
 });
 
 router.get('/error', (req, res) => res.render('pages/result', { fixed: "false", valid: "admin", user: req.user ? 'yes' : 'no' }));
