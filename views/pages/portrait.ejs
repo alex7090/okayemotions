@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="portrait.css">
-
+<%if (role=="admin" ) { %>
 <button type="button" class="btn btn-danger" onclick="fix()">FIX</button>
+<%}%>
 <script>
     function fix() {
         let id = "<%- data.id %>"
