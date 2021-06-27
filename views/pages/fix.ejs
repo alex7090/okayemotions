@@ -1,0 +1,22 @@
+<p>
+    <%- data.date %>
+</p>
+<a href="javascript:void(0);" id="contrat" class="fas fa-file-contract fa-3x"
+    onclick="window.open('contract?storage=' +  '<%-data.storage%>','_blank')"></a>
+
+
+<form id="myForm" action="/fix/" method="POST" enctype='multipart/form-data'>
+    <div class="modal-body">
+        <div id="clips-modal"></div>
+        <input name="storage" id="storage" type="text" value=<%-data.storage%>
+        hidden>
+        <input name="id" id="id" type="text" value=<%-data.id%> hidden>
+        <div class="form-group">
+            <input class="input-file" id="file" type="file" name="file">
+            <label for="file" class="input-file-trigger"></label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">EDIT CONTRAT</button>
+    </div>
+</form>

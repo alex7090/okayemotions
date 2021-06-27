@@ -70,6 +70,52 @@ router.get("/clip/", ensureAuthenticated, function (req, res, next) {
 
 
 
+const _storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    var { storage, id } = req.body;
+    console.log(id);
+    cb(null, `./${storage}/${file.originalname}`);
+
+  },
+})
+
+const _fix = multer({ storage });
+
+
+
+
+
+
+
+
+router.get("/fix", ensureAuthenticated, ensureAdmin, function (req, res, next) {
+  const ID = req.query.id;
+  const storage = req.query.storage;
+
+  query("SELECT * from public.data WHERE id=" + ID + ";", [], (err, rows) => {
+    if (err) {
+      return console.log(err);
+    } else {
+      res.render('pages/fix', {
+        fixed: "false",
+        user: req.user ? 'yes' : 'no',
+        role: (req.user.id == 1001) ? "admin" : "user",
+        data: rows[0]
+      });
+    }
+  });
+});
+
+router.post('/fix', ensureAuthenticated, ensureAdmin, _fix.single('file'), (req, res) => {
+  let url = `/watch?id=${req.body.id}`;
+  res.redirect(url);
+});
+
+
+
 
 
 

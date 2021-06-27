@@ -1,5 +1,17 @@
 <link rel="stylesheet" type="text/css" href="landscape.css">
 
+<button type="button" class="btn btn-danger" onclick="fix()">FIX</button>
+<script>
+    function fix() {
+        let id = "<%- data.id %>"
+        let storage = "<%- data.storage %>"
+
+        window.open(
+            `fix?id=${id}&storage=${storage}`,
+            '_blank'
+        );
+    }
+</script>
 <div class="video-content">
     <video oncontextmenu="return false;" src=<%- src %> autoplay loop controls muted></video>
 </div>
@@ -154,93 +166,96 @@
                 <div class="video-info-footer">
                     <div class="row ">
                         <div class="col">
-                            
-                <%if (role=="admin" ) { %>
-                            <div class="modal fade" id="info" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label for="information">Information:</label>
-                                                <textarea class="form-control" id="information"
-                                                    rows="3"><%-data.info%></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary"
-                                                onclick="updateInfo('<%-data.id%>')">Save
-                                                changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%}%>
-                            <h6 style="margin-top: 5%;">Additional Information
-                <%if (role=="admin" ) { %>
-                    <button style="border-radius: 5px;"
-                                    class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#info">
-                                    EDIT
-                                </button>
-                                <%}%>
-                            </h6>
-                            <p>
-                                <%-data.info%>
-                            </p>
-                        </div>
-                        <div class="col">
+
                             <%if (role=="admin" ) { %>
-                            <div class="modal fade" id="clips" tabindex="-1" role="dialog"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add Clip</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <form id="myForm" action="/clip/add" method="POST"
-                                            enctype='multipart/form-data'>
+                                <div class="modal fade" id="info" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Edit Information</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
                                             <div class="modal-body">
-                                                <div id="clips-modal"></div>
-                                                <input name="storage" id="storage" type="text" value=<%-data.storage%>
-                                                hidden>
-                                                <input name="id" id="id" type="text" value=<%-data.id%> hidden>
                                                 <div class="form-group">
-                                                    <input class="input-file" id="file" type="file" name="file">
-                                                    <label for="file" class="input-file-trigger"></label>
+                                                    <label for="information">Information:</label>
+                                                    <textarea class="form-control" id="information"
+                                                        rows="3"><%-data.info%></textarea>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Add File</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="updateInfo('<%-data.id%>')">Save
+                                                    changes</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%}%>
-                            <h6 style="margin-top: 5%;">Additional Clips 
-                                <%if (role=="admin" ) { %>
-                                <button style="border-radius: 5px;"
-                                    class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#clips">
-                                    EDIT
-                                </button>
                                 <%}%>
-                            </h6>
-                            <div id="clips-array">
-                                <!-- <%-data.test%> -->
-                            </div>
+                                    <h6 style="margin-top: 5%;">Additional Information
+                                        <%if (role=="admin" ) { %>
+                                            <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                                data-toggle="modal" data-target="#info">
+                                                EDIT
+                                            </button>
+                                            <%}%>
+                                    </h6>
+                                    <p>
+                                        <%-data.info%>
+                                    </p>
+                        </div>
+                        <div class="col">
+                            <%if (role=="admin" ) { %>
+                                <div class="modal fade" id="clips" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add Clip</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form id="myForm" action="/clip/add" method="POST"
+                                                enctype='multipart/form-data'>
+                                                <div class="modal-body">
+                                                    <div id="clips-modal"></div>
+                                                    <input name="storage" id="storage" type="text"
+                                                        value=<%-data.storage%>
+                                                    hidden>
+                                                    <input name="id" id="id" type="text" value=<%-data.id%> hidden>
+                                                    <div class="form-group">
+                                                        <input class="input-file" id="file" type="file" name="file">
+                                                        <label for="file" class="input-file-trigger"></label>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Add File</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%}%>
+                                    <h6 style="margin-top: 5%;">Additional Clips
+                                        <%if (role=="admin" ) { %>
+                                            <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                                data-toggle="modal" data-target="#clips">
+                                                EDIT
+                                            </button>
+                                            <%}%>
+                                    </h6>
+                                    <div id="clips-array">
+                                        <!-- <%-data.test%> -->
+                                    </div>
                         </div>
                     </div>
                 </div>
@@ -268,7 +283,7 @@
     var clips = raw_clips.split(',');
     var clips_html = document.getElementById('clips-array');
     if (role == 'admin') {
-    console.log('<%-role%>');
+        console.log('<%-role%>');
         var clips_modal = document.getElementById('clips-modal');
     }
     for (i in clips) {
