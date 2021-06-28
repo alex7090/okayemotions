@@ -1,18 +1,5 @@
 <link rel="stylesheet" type="text/css" href="portrait.css">
-<%if (role=="admin" ) { %>
-<button type="button" class="btn btn-danger" onclick="fix()">FIX</button>
-<%}%>
-<script>
-    function fix() {
-        let id = "<%- data.id %>"
-        let storage = "<%- data.storage %>"
 
-        window.open(
-            `fix?id=${id}&storage=${storage}`,
-            '_blank'
-        );
-    }
-</script>
 <div class="row">
     <div class="col">
         <div class="video-container">
