@@ -939,7 +939,7 @@ module.exports = function (firstName, lastName, email, name, plateform, credit, 
                 .moveDown()
                 .moveDown()
                 .font('Times-Italic')
-                .text(moment().format('MMMM Do YYYY, h:mm:ss a'))
+                .text(moment().utc().format('MMMM Do YYYY, h:mm:ss a') + '  GMT')
                 .text(`                                                              `, {
                     underline: true,
                 })
