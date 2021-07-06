@@ -40,6 +40,23 @@
             transform: rotateY(180deg) rotateX(180deg);
         }
     }
+
+    @media (max-width: 1400px) {
+
+
+        .tohide {
+            display: none;
+        }
+
+        .bg-image {
+            display: none !important;
+        }
+
+        .login-heading {
+            text-align: center !important;
+        }
+
+    }
 </style>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -55,7 +72,7 @@
 
 <div class="container-fluid">
     <div class="row no-gutter">
-        <div class="col-md-8 col-lg-6 col-lg-offset-3">
+        <div id="form-col" class=" col-lg-6 col-lg-offset-3">
             <div class="login d-flex align-items-center py-5">
                 <div class="container">
                     <div class="row">
@@ -89,8 +106,7 @@
                                 <div id="f" class="form-label-group">
                                     <select id="my_select" class="form-control rounded-pill" name="plateform"
                                         id="plateform" required>
-                                        <option value="">--Choose a platform to be credited on--
-                                        </option>
+                                        <option value="">Choose a platform to be credited on</option>
                                         <option value="Youtube">YouTube</option>
                                         <option value="TikTok">TikTok</option>
                                         <option value="Instagram">Instagram</option>
@@ -122,7 +138,8 @@
                                 </div>
                                 <div id="j" class="form-label-group">
                                     <input name="city" id="city" class="form-control" placeholder="City" required>
-                                    <label for="city">Where did you record this video (city, country)?</label>
+                                    <label for="city" class="test-text">Where did you record this video<span
+                                            class="tohide"> (city, country) </span> ?</label>
                                 </div>
                                 <div id="j" class="form-label-group">
                                     <textarea id="description" name="description" class="form-control"
@@ -218,7 +235,7 @@
                 </div>
             </div>
         </div>
-        <div class="d-none d-md-flex col-md-4 col-lg-6 bg-image" style="position:fixed; left: 50%;">
+        <div class="d-none d-md-flex  col-lg-6 bg-image" style="position:fixed; left: 50%;">
             <div class="video-container">
                 <div class="laptop-wrapper">
                     <video autoplay muted loop>
@@ -469,5 +486,20 @@
             searchResultLimit: 5,
             renderChoiceLimit: 5
         });
+    });
+</script>
+
+<script>
+    $(window).on('resize', function () {
+        var win = $(this);
+        console.log(win.width())
+        if (win.width() < 1390) {
+            $('#form-col').removeClass('col-lg-6');
+            $('#form-col').addClass('col-lg-12');
+
+        } else {
+            $('#form-col').removeClass('col-lg-12');
+            $('#form-col').addClass('col-lg-6');
+        }
     });
 </script>

@@ -1,5 +1,88 @@
 <link rel="stylesheet" type="text/css" href="new_data.css">
+<style>
+    .card-img-top-mobile {
+        opacity: 0.5;
+        object-fit: fill;
+        height: 100%;
+        width: 100%;
+    }
 
+    .bottom-left {
+        color: white;
+        z-index: 10;
+        position: absolute;
+        bottom: 9%;
+        left: 0%;
+        font-family: "apercu";
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .bottom-bottom-left {
+
+        color: white;
+        z-index: 10;
+        position: absolute;
+        bottom: 0%;
+        left: 0%;
+        font-family: "apercu";
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .bottom-bottom-right {
+
+        color: white;
+        z-index: 10;
+        position: absolute;
+        bottom: 0%;
+        right: 0%;
+        font-family: "apercu";
+        font-size: 1em;
+        font-weight: normal;
+    }
+
+    .bottom-right {
+
+        color: white;
+        z-index: 10;
+        position: absolute;
+        bottom: 9%;
+        right: 0%;
+        font-family: "apercu";
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    #mobile-video {
+        max-width: 75%;
+        overflow-y: hidden;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
+
+    .filter-mobile,
+    #button-addon2 {
+        display: none;
+    }
+
+    @media (max-width: 650px) {
+
+        .filter-mobile,
+        #button-addon2 {
+            display: inline;
+        }
+
+        .filter {
+            display: none !important;
+        }
+
+
+    }
+</style>
 <%- include ('./partials/card_template') %>
 
 
@@ -7,61 +90,117 @@
         <div class="row">
             <div class="col-2">
                 <div class="filter">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="featured">
-                        <label class="custom-control-label" for="featured">
-                            <p>Featured</p>
-                        </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="notfeatured">
-                        <label class="custom-control-label" for="notfeatured">
-                            <p>Not Featured</p>
-                        </label>
-                    </div>
-                    <hr />
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="animals">
-                        <label class="custom-control-label" for="animals">
-                            <p>Animals</p>
-                        </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="family">
-                        <label class="custom-control-label" for="family">
-                            <p>Family</p>
-                        </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="inspiring">
-                        <label class="custom-control-label" for="inspiring">
-                            <p>Inspiring</p>
-                        </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="lovestory">
-                        <label class="custom-control-label" for="lovestory">
-                            <p>Love Story</p>
-                        </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="other">
-                        <label class="custom-control-label" for="other">
-                            <p>Other</p>
-                        </label>
-                    </div>
+                    <%if (role==="admin" ) { %>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="featured">
+                            <label class="custom-control-label" for="featured">
+                                <p>Featured</p>
+                            </label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="notfeatured">
+                            <label class="custom-control-label" for="notfeatured">
+                                <p>Not Featured</p>
+                            </label>
+                        </div>
+                        <hr />
+                        <%} %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="animals">
+                                <label class="custom-control-label" for="animals">
+                                    <p>Animals</p>
+                                </label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="family">
+                                <label class="custom-control-label" for="family">
+                                    <p>Family</p>
+                                </label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="inspiring">
+                                <label class="custom-control-label" for="inspiring">
+                                    <p>Inspiring</p>
+                                </label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="lovestory">
+                                <label class="custom-control-label" for="lovestory">
+                                    <p>Love Story</p>
+                                </label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="other">
+                                <label class="custom-control-label" for="other">
+                                    <p>Other</p>
+                                </label>
+                            </div>
                 </div>
             </div>
-            <div class="col-10">
-                <div class="search-bar p-1 bg-light rounded rounded-pill shadow-sm mb-4"
+            <div id="right-col" class="col-10">
+                <div class="search-bar p-1 bg-light rounded rounded-pill shadow mb-4"
                     style=" margin-left: 10%;margin-right: 10%;">
-                    <div class="input-group rounded rounded-pill">
-                        <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1"
+                    <div class="search-bar-inner input-group rounded rounded-pill">
+                        <input type="search" placeholder="Search..." aria-describedby="button-addon1"
                             class="form-control border-0 bg-light rounded rounded-pill">
                         <div class="input-group-append rounded rounded-pill">
-                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i
+                            <button id="button-addon1" type="submit" style="color: #00bfdb;" class="btn"><i
                                     class="fa fa-search"></i></button>
+
+                            <button onclick="changeChevron()" id="button-addon2" class="btn" style="color: #00bfdb;"
+                                data-toggle="collapse" data-target="#collapseFiltre"><i id="chevron"
+                                    class="fas fa-chevron-circle-down"></i></button>
+
                         </div>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseFiltre">
+                    <div class="filter-mobile">
+                        <%if (role==="admin" ) { %>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="featured">
+                                <label class="custom-control-label" for="featured">
+                                    <p>Featured</p>
+                                </label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="notfeatured">
+                                <label class="custom-control-label" for="notfeatured">
+                                    <p>Not Featured</p>
+                                </label>
+                            </div>
+                            <hr />
+                            <%} %>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="animals">
+                                    <label class="custom-control-label" for="animals">
+                                        <p>Animals</p>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="family">
+                                    <label class="custom-control-label" for="family">
+                                        <p>Family</p>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="inspiring">
+                                    <label class="custom-control-label" for="inspiring">
+                                        <p>Inspiring</p>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="lovestory">
+                                    <label class="custom-control-label" for="lovestory">
+                                        <p>Love Story</p>
+                                    </label>
+                                </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" id="other">
+                                    <label class="custom-control-label" for="other">
+                                        <p>Other</p>
+                                    </label>
+                                </div>
                     </div>
                 </div>
                 <div id="_list" class="d-flex flex-column flex-nowrap">
@@ -116,50 +255,92 @@
             // }
         }
 
-        var card_counter = 1;
-        var deck_counter = 1;
-        var counter = -1;
-        var data = '<%- JSON.stringify(data) %>';
-        var data_json = JSON.parse(data);
-
-        var list = $("#_list");
-        console.log("new card deck")
-
-
-        var new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
-        deck_counter++;
-
-        list.append(new_deck);
-        jQuery.each(data_json, function (i, val) {
-            counter++;
-            if (counter == 3) {
-                new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
-                deck_counter++;
-                list.append(new_deck);
-                counter = 0;
+        function changeChevron() {
+            if ($("#chevron").attr('class') == "fas fa-chevron-circle-down") {
+                $("#chevron").removeClass('fas fa-chevron-circle-down');
+                $("#chevron").addClass('fas fa-chevron-circle-up');
+            } else {
+                $("#chevron").removeClass('fas fa-chevron-circle-up');
+                $("#chevron").addClass('fas fa-chevron-circle-down');
             }
-            template = $("#template").clone();
-            template.attr("id", val.id);
-            template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
-            template.find("h4").text(val.vname)
-            template.find("p").text(val.fname + "  " + val.lname)
-            template.find("#type").find("i").text(val.tag)
-            template.find("#city").text(val.date + " - " + val.city)
-            if (val.posted == 1) {
-                console.log(val.posted);
-                template.find('#tiktok-off').attr("id", "tiktok-on");
-            }
-            template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
-            template.removeAttr('hidden');
-            template.appendTo(`#${deck_counter - 1}`);
-            card_counter++;
-            console.log(val)
-        });
-        while (counter < 2) {
-            console.log("add 1");
-            template = $("#empty_template").clone();
-            template.removeAttr('hidden');
-            template.appendTo(`#${deck_counter - 1}`);
-            counter++;
         }
+
+        function loadAssets() {
+            let support = "#template";
+            let width = $(window).width();
+            let counter_max = 3;
+            if (width < 1401) {
+                counter_max = 2;
+            }
+            if (width < 851) {
+                counter_max = 1;
+            }
+            if (width < 651) {
+                support = "#template";
+                $('#right-col').removeClass('col-10');
+                $('#right-col').addClass('col-12');
+            } else {
+                $('#right-col').removeClass('col-12');
+                $('#right-col').addClass('col-10');
+            }
+
+            let card_counter = 1;
+            let deck_counter = 1;
+            let counter = -1;
+            let data = '<%- JSON.stringify(data) %>';
+            let data_json = JSON.parse(data);
+
+            let list = $("#_list");
+
+
+            let new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+            deck_counter++;
+
+            list.append(new_deck);
+            jQuery.each(data_json, function (i, val) {
+                counter++;
+                if (counter == counter_max) {
+                    new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+                    deck_counter++;
+                    list.append(new_deck);
+                    counter = 0;
+                }
+                template = $(support.toString()).clone();
+                template.attr("id", val.id);
+                template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
+                template.find("h4").text(val.vname)
+                template.find("p").text(val.fname + "  " + val.lname)
+                template.find("#type").find("i").text(val.tag.charAt(0).toUpperCase() + val.tag.slice(1))
+                template.find("#date").text(val.date)
+                template.find("#city").text(val.city)
+                template.find("#mobile-video").text(val.vname)
+                template.find("#mobile-name").text(val.fname + "  " + val.lname)
+                // TO DO//template.find("#mobile-time").text(val.city)
+                template.find("#mobile-date").text(val.date)
+                if (val.posted == 1) {
+                    template.find('#tiktok-off').attr("id", "tiktok-on");
+                }
+                template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
+                template.removeAttr('hidden');
+                template.appendTo(`#${deck_counter - 1}`);
+                card_counter++;
+            });
+            while (counter < counter_max - 1) {
+                template = $("#empty_template").clone();
+                template.removeAttr('hidden');
+                template.appendTo(`#${deck_counter - 1}`);
+                counter++;
+            }
+        }
+
+        $(window).on('resize', function () {
+            $("#_list").empty();
+            loadAssets();
+        });
+
+        $(document).ready(function () {
+            loadAssets();
+        });
+
+
     </script>

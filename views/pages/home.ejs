@@ -1,0 +1,357 @@
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+    /* Scroll Custom */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+
+
+
+    /* Font apercu */
+    @font-face {
+        font-family: "apercu";
+        src: url('ApercuProLight.otf');
+    }
+
+    @font-face {
+        font-family: "apercu";
+        font-style: italic;
+        src: url('ApercuProItalic.otf');
+    }
+
+    @font-face {
+        font-family: "apercu";
+        font-weight: bold;
+        src: url('ApercuProBold.otf');
+    }
+
+
+    .container-fluid {
+        position: relative;
+        height: 80vh;
+        color: white;
+    }
+
+    .nofluid {
+        width: 100%;
+    }
+
+    .sec1 {
+        background: black;
+    }
+
+    .col {
+        margin: 0;
+        padding: 0;
+    }
+
+    .bottom-left {
+        z-index: 10;
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        font-family: "apercu";
+        font-weight: bold;
+        font-size: 3em;
+    }
+
+    .col img {
+        opacity: 0.5;
+        object-fit: fill;
+        height: 100%;
+        width: 100%;
+    }
+
+    .numbers {
+        font-family: "apercu";
+        font-weight: bold;
+        font-size: 6em;
+        color: #00bfdb;
+    }
+
+    .contact-us {
+        font-family: "apercu";
+        font-weight: bold;
+        font-size: 5em;
+        color: #00bfdb;
+    }
+
+    .numbers-desc {
+        font-family: "apercu";
+        font-weight: normal;
+        font-size: 2.2em;
+        color: black;
+    }
+
+    .video-title {
+        font-family: "apercu";
+        font-weight: bold;
+        font-size: 3em;
+        color: #00bfdb;
+    }
+
+    .video-desc {
+        font-family: "apercu";
+        font-weight: normal;
+        font-size: 1.5em;
+        color: black;
+    }
+
+    .numbers-row {
+        margin-top: 5vh;
+    }
+
+    #video1,
+    #video2 {
+        height: 60vh;
+    }
+
+    .form-text-over {
+        margin: 0;
+        margin-top: 10px;
+        font-family: "apercu";
+        font-weight: normal;
+        font-size: 1em;
+        color: black;
+    }
+
+    .form-control {
+        border-radius: 0 !important;
+        border-color: rgba(0, 0, 0, 0.7);
+        ;
+    }
+
+    .btn-primary,
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:visited {
+        background-color: #00bfdb !important;
+        border-radius: 0 !important;
+        border-color: #00bfdb !important;
+    }
+
+    .btn:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    @media (max-width: 1000px) {
+
+
+        /* .first-section {
+            display: none;
+        } */
+
+        .bottom-left {
+            z-index: 10;
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            font-family: "apercu";
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .numbers {
+            font-family: "apercu";
+            font-weight: bold;
+            font-size: 3em;
+            color: #00bfdb;
+        }
+
+        .numbers-desc {
+            font-family: "apercu";
+            font-weight: normal;
+            font-size: 1.2em;
+            color: black;
+        }
+
+        .numbers-row {
+            margin-top: 1vh;
+        }
+
+        .video-col {
+            display: none !important;
+        }
+
+        .video-title {
+            font-family: "apercu";
+            font-weight: bold;
+            font-size: 2.2em;
+            color: #00bfdb;
+        }
+
+        .video-desc {
+            font-family: "apercu";
+            font-weight: normal;
+            font-size: 1.2em;
+            color: black;
+        }
+
+        .contact-us {
+            font-family: "apercu";
+            font-weight: bold;
+            font-size: 3em;
+            color: #00bfdb;
+        }
+
+        .hidden-form {
+            display: none !important;
+        }
+
+        #form-col {
+            margin-left: 5%;
+            margin-right: 5%;
+        }
+
+        .container-fluid {
+            height: 37vh !important;
+        }
+    }
+</style>
+
+<div class="container-fluid ">
+    <div class="bottom-left first-section">We bring the wholesome content<br> you need into your life.</div>
+    <div class="row first-section" style="height: 100%;" data-aos="fade-right" data-aos-duration="1000">
+        <div class="sec1 col h-100">
+            <img src="photo1-crop.png" class="nofluid">
+        </div>
+        <div class="sec1 col h-100">
+            <img src="photo2-crop.png" class="nofluid">
+        </div>
+        <div class="sec1 col h-100">
+            <img src="photo3-crop.png" class="nofluid">
+        </div>
+    </div>
+    <div class="row numbers-row" style="height: 100%;" data-aos-duration="1000" data-aos="fade-up">
+        <div class="col-12  align-self-center text-center">
+            <p><span class="numbers">1M</span><br><span class="numbers-desc">global audience</span></p>
+        </div>
+        <div class="col-12  align-self-center text-center">
+            <p><span class="numbers">200M</span><br><span class="numbers-desc">monthly views</span></p>
+        </div>
+        <div class="col-12  align-self-center text-center">
+            <p><span class="numbers">750K</span><br><span class="numbers-desc">monthly profile visits</span></p>
+        </div>
+    </div>
+    <div class="row video-row" style="height: 100%;" data-aos="fade-up-left" data-aos-duration="1000">
+        <div class="video-col-text col-7  align-self-center text-left">
+            <p style="padding-left: 10%;padding-right: 10%;"><span class="video-title">We share emotional stories to the
+                    world.</span><br><span class="video-desc">Okayemotions is also a powerful community of dedicated
+                    fans wanting to share
+                    their stories to the world.</span></p>
+        </div>
+        <div class="video-col col-5 align-self-center text-center">
+            <video id="video1" autoplay="true" muted="muted">
+                <source src="video1.mov" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="row video-row" style="height: 100%;" data-aos="fade-up-right" data-aos-duration="1000">
+        <div class="video-col col-5 align-self-center text-center">
+            <video id="video2" autoplay="true" muted="muted">
+                <source src="video2.mov" type="video/mp4">
+            </video>
+        </div>
+        <div class="video-col-text col-7  align-self-center text-right">
+            <p style="padding-left: 10%;padding-right: 10%;"><span class="video-title">The most premium heartwarming
+                    content.</span><br><span class="video-desc">Okayemotions' main mission is to supply top publishers
+                    around the world with the
+                    content that will drive the most engagement.</span></p>
+        </div>
+    </div>
+
+    <div class="row" style="height: 100%;" data-aos="fade-up" data-aos-duration="1000">
+        <div class="hidden-form col  align-self-center text-center">
+        </div>
+        <div id="form-col" class="col">
+            <p style="text-align: center;"><span class="contact-us">Get In Touch</span></p>
+            <form>
+                <p class="form-text-over">Name *</p>
+                <div class="row">
+                    <div class="col-md">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleFormControlInput1"
+                                placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <p class="form-text-over">Company *</p>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <p class="form-text-over">Inquiry *</p>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <p class="form-text-over">Email *</p>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <p class="form-text-over">Description *</p>
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Send</button>
+            </form>
+        </div>
+        <div class="hidden-form col align-self-center text-center">
+        </div>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        offset: 200,
+        delay: 50,
+        once: true
+    });
+
+    $(document).ready(function () {
+        var $window = $(window);
+        var $pane = $('#pane1');
+
+        function checkWidth() {
+            var windowsize = $window.width();
+            if (windowsize < 990) {
+                $('.video-col-text').removeClass('col-7');
+                $('.video-col-text').addClass('col-12');
+
+            }
+        }
+        checkWidth();
+    });
+
+    $(window).on('resize', function () {
+        var win = $(this);
+        if (win.width() < 990) {
+            $('.video-col-text').removeClass('col-7');
+            $('.video-col-text').addClass('col-12');
+
+        } else {
+            $('.video-col-text').removeClass('col-12');
+            $('.video-col-text').addClass('col-7');
+        }
+    });
+</script>

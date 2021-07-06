@@ -40,9 +40,9 @@ const upload = multer({ storage });
 
 
 router.post('/upload', upload.single('file'), (req, res) => {
-    var video_file = fs.createReadStream(req.file.path); // Storing File path
-    var video_String = JSON.stringify(video_file); // Converting Json into String of req.file.path
-    var video_res = JSON.parse(video_String); // Parsing req.file.path
+    var video_file = fs.createReadStream(req.file.path);
+    var video_String = JSON.stringify(video_file);
+    var video_res = JSON.parse(video_String);
     try {
         var process = new ffmpeg(video_res.path);
         process.then(function (video) {
@@ -117,7 +117,9 @@ router.post('/delete', ensureAuthenticated, (req, res, next) => {
 
 });
 
-router.get('/', (req, res) => res.render('pages/form', { fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
+router.get('/', (req, res) => res.render('pages/home', { fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
+
+router.get('/submit', (req, res) => res.render('pages/form', { fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
 
 router.get('/moderate', ensureAuthenticated, ensureAdmin, (req, res, next) => {
     query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data WHERE mod=0 order by id desc;", [], (err, rows) => {

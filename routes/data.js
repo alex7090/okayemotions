@@ -98,53 +98,14 @@ router.get("/watch", ensureAuthenticated, function (req, res, next) {
       if (err) return console.log(err);
     } else {
       var src = `video?storage=${rows[0].storage}&video=video${rows[0].ext}`;
-      try {
-        var process = new ffmpeg(`uploads/${rows[0].storage}/video${rows[0].ext}`);
-        process.then(function (video) {
-          if (video.metadata.video.resolution.h > video.metadata.video.resolution.w) {
-            console.log("PORTAIT")
-            res.render('pages/portrait', {
-              fixed: "false",
-              user: req.user ? 'yes' : 'no',
-              data: rows[0],
-              src: src,
-              role: (req.user.id == 1001) ? "admin" : "user",
-              info: JSON.stringify(rows[0].info)
-            });
-          } else {
-            console.log("LANDSCAPE")
-            res.render('pages/landscape', {
-              fixed: "false",
-              user: req.user ? 'yes' : 'no',
-              data: rows[0],
-              src: src,
-              role: (req.user.id == 1001) ? "admin" : "user",
-              info: rows[0].info
-            });
-          }
-        }, function (err) {
-          console.log('Error: ' + err);
-          res.render('pages/landscape', {
-            fixed: "false",
-            user: req.user ? 'yes' : 'no',
-            data: rows[0],
-            src: src,
-            role: (req.user.id == 1001) ? "admin" : "user",
-            info: rows[0].info
-          });
-        });
-      } catch (e) {
-        console.log(e.code);
-        console.log(e.msg);
-        res.render('pages/landscape', {
-          fixed: "false",
-          user: req.user ? 'yes' : 'no',
-          data: rows[0],
-          src: src,
-          role: (req.user.id == 1001) ? "admin" : "user",
-          info: rows[0].info
-        });
-      }
+      res.render('pages/landscape', {
+        fixed: "false",
+        user: req.user ? 'yes' : 'no',
+        data: rows[0],
+        src: src,
+        role: (req.user.id == 1001) ? "admin" : "user",
+        info: rows[0].info
+      });
     }
   });
 });
@@ -178,10 +139,10 @@ router.get("/image", ensureAuthenticated, function (req, res, next) {
     if (fs.existsSync(folder)) {
       res.sendFile(path.resolve(folder))
     } else {
-      res.sendFile(path.resolve('public/images/not.png'))
+      res.sendFile(path.resolve('public/images/photo3-crop.png'))
     }
   } catch (err) {
-    res.sendFile(path.resolve('public/images/not.png'))
+    res.sendFile(path.resolve('public/images/photo3-crop.png'))
   }
 
 });
