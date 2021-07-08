@@ -148,7 +148,7 @@
     }
 
     .nav-link {
-        color: #00bfdb !important;
+        color: black !important;
         font-weight: bold;
         transition: all 200ms linear;
     }
@@ -272,14 +272,18 @@
         background-color: rgba(129, 103, 169, .6);
     }
 
+    .active {
+        color: #00bfdb !important;
+    }
+
 
     /* #Media */
 
     @media (max-width: 767px) {
         .nav li {
             font-family: "apercu";
-            font-size:medium;
-            font-weight:normal;
+            font-size: medium;
+            font-weight: normal;
             padding-right: 5px;
         }
 
@@ -326,7 +330,7 @@
             margin-bottom: 20px !important;
         }
 
-        
+
     }
 </style>
 
@@ -350,14 +354,25 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="nav navbar-nav ml-auto" style="padding-right: 2vw;">
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a style="color: #000 !important;" class="nav-link" href="/">ABOUT US</a>
+
+                                    <% if(page && page=="home" ) { %>
+                                        <a class="nav-link active" href="/">ABOUT US</a>
+                                        <% } else {%>
+                                            <a class="nav-link" href="/">ABOUT US</a>
+
+                                            <% } %>
                                 </li>
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                    <a style="color: #00bfdb;" class="nav-link" href="/submit">SUBMIT A VIDEO</a>
+                                    <% if(page && page=="form" ) { %>
+                                        <a class="nav-link active" href="/submit">SUBMIT A VIDEO</a>
+                                        <% } else {%>
+                                            <a class="nav-link" href="/submit">SUBMIT A VIDEO</a>
+
+                                            <% } %>
                                 </li>
                                 <% if(logged=="yes" ) { %>
                                     <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                                        <a style="color: #000!important;" class="nav-link" href="/auth/logout">LOGOUT</a>
+                                        <a class="nav-link" href="/auth/logout">LOGOUT</a>
                                     </li>
                                     <% } %>
                             </ul>

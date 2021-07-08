@@ -11,6 +11,9 @@ const disk = require('diskusage');
 const os = require('os');
 let _path = os.platform() === 'win32' ? 'c:' : '/';
 var ffmpeg = require('ffmpeg');
+const mergeImages = require('merge-images');
+const { Canvas, Image } = require('canvas');
+var getDimensions = require('get-video-dimensions');
 
 
 const storage = multer.diskStorage({
@@ -46,23 +49,104 @@ router.post('/upload', upload.single('file'), (req, res) => {
     try {
         var process = new ffmpeg(video_res.path);
         process.then(function (video) {
-            let time = '00:00:03';
-            if (video.metadata.duration.seconds > 50) {
-                time = '00:00:30'
+            let vertical = (video.metadata.video.resolution.h > video.metadata.video.resolution.w) ? true : false;
+            console.log(video.metadata)
+            if (vertical) {
+                let tmp = uuid();
+                fs.mkdir(tmp, function (e) {
+                    if (!e || (e && e.code === 'EEXIST')) {
+                        console.log(tmp);
+                    } else {
+                        console.log(e);
+                    }
+                });
+                video.fnExtractFrameToJPG(tmp, {
+                    frame_rate: 1,
+                    file_name: 'frame%i'
+                }, function (error, files) {
+                    if (!error) {
+                        console.log(files);
+                    }
+                    let duration = video.metadata.duration.seconds;
+                    let split = duration / 20;
+                    let a = split * 5;
+                    let b = split * 10;
+                    let c = split * 15;
+                    mergeImages(
+                        [
+                            { src: path.join(tmp, `frame_${Math.floor(a)}.jpg`), x: 0, y: 0 },
+                            { src: path.join(tmp, `frame_${Math.floor(b)}.jpg`), x: video.metadata.video.resolution.w, y: 0 },
+                            { src: path.join(tmp, `frame_${Math.floor(c)}.jpg`), x: video.metadata.video.resolution.w * 2, y: 0 }
+                        ], {
+                        Canvas: Canvas,
+                        Image: Image,
+                        width: video.metadata.video.resolution.w * 3
+                    })
+                        .then(b64 => {
+                            let base;
+                            b64 = b64.replace(/^data:image\/png;base64,/, "");
+
+                            console.log(path.basename(video_res.path).length)
+                            fs.writeFile(video_res.path.slice(0, -path.basename(video_res.path).length).concat("frame.jpg"), b64, { encoding: 'base64' }, function (err) {
+                                console.log('File created');
+                            });
+                        });
+                    fs.rmdir(tmp, { recursive: true }, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log(`${tmp} is deleted!`);
+                    });
+                });
             } else {
-                let div = video.metadata.duration.seconds / 2;
-                if (div >= 10) {
-                    time = `00:00:${div}`
-                } else {
-                    time = `00:00:0${div}`
-                }
+                let tmp = uuid();
+                fs.mkdir(tmp, function (e) {
+                    if (!e || (e && e.code === 'EEXIST')) {
+                        console.log(tmp);
+                    } else {
+                        console.log(e);
+                    }
+                });
+                video.fnExtractFrameToJPG(tmp, {
+                    frame_rate: 1,
+                    file_name: 'frame%i',
+                    keep_aspect_ratio: false
+                }, function (error, files) {
+                    if (!error) {
+                        console.log(files);
+                    }
+                    let duration = video.metadata.duration.seconds;
+                    let split = duration / 20;
+                    let a = split * 5;
+                    let b = split * 10;
+                    let c = split * 15;
+                    mergeImages(
+                        [
+                            { src: path.join(tmp, `frame_${Math.floor(a)}.jpg`), x: 0, y: 0 },
+                            { src: path.join(tmp, `frame_${Math.floor(b)}.jpg`), x: video.metadata.video.resolution.w, y: 0 },
+                            { src: path.join(tmp, `frame_${Math.floor(c)}.jpg`), x: video.metadata.video.resolution.w * 2, y: 0 }
+                        ], {
+                        Canvas: Canvas,
+                        Image: Image,
+                        width: video.metadata.video.resolution.w * 3
+                    })
+                        .then(b64 => {
+                            let base;
+                            b64 = b64.replace(/^data:image\/png;base64,/, "");
+
+                            console.log(path.basename(video_res.path).length)
+                            fs.writeFile(video_res.path.slice(0, -path.basename(video_res.path).length).concat("frame.jpg"), b64, { encoding: 'base64' }, function (err) {
+                                console.log('File created');
+                            });
+                        });
+                    fs.rmdir(tmp, { recursive: true }, (err) => {
+                        if (err) {
+                            throw err;
+                        }
+                        console.log(`${tmp} is deleted!`);
+                    });
+                });
             }
-            video.addCommand('-ss', time)
-            video.addCommand('-vframes', '1')
-            video.save(video_res.path.slice(0, -9).concat("frame.jpg"), function (error, file) {
-                if (!error)
-                    console.log('Video file: ' + file);
-            });
         }, function (err) {
             console.log('Error: ' + err);
         });
@@ -73,9 +157,9 @@ router.post('/upload', upload.single('file'), (req, res) => {
     res.send("ok");
 });
 
-router.get('/error', (req, res) => res.render('pages/result', { fixed: "false", valid: "admin", user: req.user ? 'yes' : 'no' }));
+router.get('/error', (req, res) => res.render('pages/result', { page: "none", fixed: "false", valid: "admin", user: req.user ? 'yes' : 'no' }));
 
-router.get('/upload', (req, res) => res.render('pages/result', { fixed: "false", valid: req.query.valid, user: req.user ? 'yes' : 'no' }));
+router.get('/upload', (req, res) => res.render('pages/result', { page: "none", fixed: "false", valid: req.query.valid, user: req.user ? 'yes' : 'no' }));
 
 router.post('/delete', ensureAuthenticated, (req, res, next) => {
     const { ID } = req.body;
@@ -117,9 +201,9 @@ router.post('/delete', ensureAuthenticated, (req, res, next) => {
 
 });
 
-router.get('/', (req, res) => res.render('pages/home', { fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
+router.get('/', (req, res) => res.render('pages/home', { page: "home", fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
 
-router.get('/submit', (req, res) => res.render('pages/form', { fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
+router.get('/submit', (req, res) => res.render('pages/form', { page: "form", fixed: "false", user: req.user ? 'yes' : 'no', platform: req.device.type.toUpperCase() }));
 
 router.get('/moderate', ensureAuthenticated, ensureAdmin, (req, res, next) => {
     query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data WHERE mod=0 order by id desc;", [], (err, rows) => {
@@ -129,6 +213,7 @@ router.get('/moderate', ensureAuthenticated, ensureAdmin, (req, res, next) => {
         });
         let info = disk.checkSync(_path);
         res.render('pages/moderate', {
+            page: "none",
             fixed: "true",
             user: req.user ? 'yes' : 'no',
             data: rows,
@@ -144,7 +229,8 @@ router.get('/data', ensureAuthenticated, (req, res, next) => {
             obj.description = obj.description.replace(/'/g, " ");
         });
         let info = disk.checkSync(_path);
-        res.render('pages/new_data', {
+        res.render('pages/data', {
+            page: "none",
             fixed: "true",
             user: req.user ? 'yes' : 'no',
             data: rows,
@@ -153,36 +239,4 @@ router.get('/data', ensureAuthenticated, (req, res, next) => {
         });
     });
 });
-
-router.get('/bdd', ensureAuthenticated, (req, res, next) => {
-    console.log(req.user);
-    if (req.user.id == process.env.TMP_ADMIN_ID) {
-        query("SELECT *, COALESCE(to_char(created_at, 'YYYY/MM/DD at HH24:MI'), '') AS signed from public.data order by id desc;", [], (err, rows) => {
-            if (err) return console.log(err);
-            rows.forEach(function (obj) {
-                obj.description = obj.description.replace(/'/g, " ");
-            });
-            let info = disk.checkSync(_path);
-            res.render('pages/data', {
-                fixed: "false",
-                user: req.user ? 'yes' : 'no',
-                data: rows,
-                size: info.available
-            });
-        });
-    } else if (req.user.id == process.env.TMP_USER_ID) {
-        query("SELECT id, vname, platform, type, ext, description, tag, platform, storage, city, date  from public.data order by id desc;", [], (err, rows) => {
-            if (err) return console.log(err);
-            rows.forEach(function (obj) {
-                obj.description = obj.description.replace(/'/g, " ");
-            });
-            res.render('pages/tmp_data', {
-                fixed: "false",
-                user: req.user ? 'yes' : 'no',
-                data: rows
-            });
-        });
-    }
-});
-
 module.exports = router;

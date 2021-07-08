@@ -6,7 +6,7 @@ var query = require('../config/query');
 
 
 router.get('/' , (req, res) => {
-    res.render('pages/password', {fixed: "false", user: req.user ? 'yes' : 'no'});
+    res.render('pages/password', { page: "none", fixed: "false", user: req.user ? 'yes' : 'no'});
 
 });
 

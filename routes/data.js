@@ -61,6 +61,7 @@ router.get("/clip/", ensureAuthenticated, function (req, res, next) {
   let source = `video?storage=${storage}&video=${name}`;
 
   res.render('pages/clip', {
+    page: "none",
     fixed: "false",
     user: req.user ? 'yes' : 'no',
     role: (req.user.id == 1001) ? "admin" : "user",
@@ -99,6 +100,7 @@ router.get("/watch", ensureAuthenticated, function (req, res, next) {
     } else {
       var src = `video?storage=${rows[0].storage}&video=video${rows[0].ext}`;
       res.render('pages/landscape', {
+        page: "none",
         fixed: "false",
         user: req.user ? 'yes' : 'no',
         data: rows[0],
@@ -139,10 +141,10 @@ router.get("/image", ensureAuthenticated, function (req, res, next) {
     if (fs.existsSync(folder)) {
       res.sendFile(path.resolve(folder))
     } else {
-      res.sendFile(path.resolve('public/images/photo3-crop.png'))
+      res.sendFile(path.resolve('public/images/not.png'))
     }
   } catch (err) {
-    res.sendFile(path.resolve('public/images/photo3-crop.png'))
+    res.sendFile(path.resolve('public/images/not.png'))
   }
 
 });
