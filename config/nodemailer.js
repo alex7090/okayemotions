@@ -6,7 +6,7 @@ var poolConfig = {
     pool: true,
     host: 'smtp.ionos.fr',
     port: 465,
-    secure: true, // use SSL
+    secure: true,
     auth: {
         user: process.env.MAIL_NAME,
         pass: process.env.MAIL_PW,
