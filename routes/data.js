@@ -69,6 +69,9 @@ router.get("/clip/", ensureAuthenticated, function (req, res, next) {
   });
 });
 
+router.get('/clip/dl', ensureAuthenticated, ensureAdmin, (req, res) => res.download(`uploads/${req.query.storage}/${req.query.name}`));
+
+
 router.get("/miniature", function (req, res, next) {
   query("SELECT storage, ext FROM public.data", [], (err, rows) => {
     if (err) {

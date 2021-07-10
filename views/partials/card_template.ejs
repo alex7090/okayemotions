@@ -1,13 +1,17 @@
 <div id="empty_template" class="card" hidden style="border: none;background-color: white;">
 </div>
 
-<div id="template" class="card" hidden style="background-color: white; max-height: 50vh;">
+<div class="jumbotron page" id="page_template" hidden>
+</div>
+
+
+<div id="template" class="card shadow mb-4" hidden style="background-color: white; max-height: 50vh;">
     <div id="video-time" class="bottom-bottom-right">00:00</div>
     <a class="card-image-test" id="image" href="javascript:void(0);"><img src='' class="card-img-top"
             alt="Accroche HTML"></a>
     <div id="cardbody" class="card-body">
-        <h4 class="card-title">Titre</h4>
-        <p class="card-text">Du texte sous le titre dans le corps de carte</p>
+        <h4 class="card-title" style="margin-bottom: 0!important">Titre</h4>
+        <p class="card-text" style="margin-bottom: 0!important">Du texte sous le titre dans le corps de carte</p>
         <div class="row">
             <div id="type" class="col-6">
                 <i>type</i>
@@ -18,19 +22,10 @@
             <div id="city" class="col-9">
                 city
             </div>
-            <div class="col-3">
+            <div class="col-3 align-self-right text-right">
                 <i href="javascript:void(0);" id="tiktok-off" class="fab fa-tiktok" onclick="tiktok(this)"></i>
                 <i href="javascript:void(0);" id="dollar-off" class="fas fa-dollar-sign" onclick="dollar(this)"></i>
             </div>
         </div>
     </div>
-</div>
-
-<div id="template-mobile" class="card" hidden style="background-color: white; max-height: 50vh;">
-    <a class="card-image-test" id="image" href="javascript:void(0);"><img src='' class="card-img-top-mobile"
-            alt="Accroche HTML"></a>
-    <div id="mobile-video" class="bottom-left">Name of Video</div>
-    <div id="mobile-name" class="bottom-bottom-left">posted by</div>
-    <div id="mobile-time" class="bottom-bottom-right">03:20</div>
-    <div id="mobile-date" class="bottom-right">Date</div>
 </div>

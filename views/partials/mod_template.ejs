@@ -1,24 +1,27 @@
 <div id="empty_template" class="card" hidden style="border: none;background-color: white;">
 </div>
 
-<div id="template" class="card" hidden style="background-color: white;">
-
+<div id="template" class="card shadow mb-4" hidden style="background-color: white; max-height: 50vh;">
+    <div id="video-time" class="bottom-bottom-right">00:00</div>
     <a class="card-image-test" id="image" href="javascript:void(0);"><img src='' class="card-img-top"
             alt="Accroche HTML"></a>
     <div id="cardbody" class="card-body">
-        <h4 class="card-title">Titre</h4>
-            <p class="card-text">Du texte sous le titre dans le corps de carte</p>
-            <div class="row">
-                <div id="type" class="col-3">
-                    <i>One</i>
-                </div>
-                <div id="city" class="col-7">
-                    two
-                </div>
-                <div id="action" class="col-2">
-                    <a href="javascript:void(0);" id="add" class="fas fa-check"></a>
-                    <a href="javascript:void(0);" id="remove" class="fas fa-times"></a>
-                </div>
+        <h4 class="card-title" style="margin-bottom: 0!important">Titre</h4>
+        <p class="card-text" style="margin-bottom: 0!important">Du texte sous le titre dans le corps de carte</p>
+        <div class="row">
+            <div id="type" class="col-6">
+                <i>type</i>
             </div>
+            <div id="date" class="col-6" style="text-align: right;">
+                date
+            </div>
+            <div id="city" class="col-9">
+                city
+            </div>
+            <div id="action" class="col-3 align-self-right text-right">
+                <a href="javascript:void(0);" id="add" class="fas fa-check"></a>
+                <a href="javascript:void(0);" id="remove" class="fas fa-times"></a>
+            </div>
+        </div>
     </div>
 </div>

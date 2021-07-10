@@ -1,110 +1,5 @@
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
 <style>
-    /* 
-    html,
-    body {
-        height: 100%;
-        margin: 0;
-    }
-
-
-    .tag {
-        color: #00bfdb;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .video-content {
-        height: 70%;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-    }
-
-    .video-info {
-        margin-top: 3%;
-        height: 50%;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
-    }
-
-    .video-info-description {
-        margin-top: 3%;
-    }
-
-    .video-info-footer {
-        margin-top: 3%;
-    }
-
-    .email,
-    .social {
-        text-align: right;
-
-    }
-
-    .social {
-        vertical-align: text-bottom;
-    }
-
-    video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        position: absolute;
-    }
-
-    .dot {
-        height: 5px;
-        width: 5px;
-        background-color: black;
-        border-radius: 50%;
-        display: inline-block;
-    }
-
-    .add-info {
-        margin-bottom: 10%;
-    }
-
-    .carousel-control-prev {
-        margin-left: -150px;
-    }
-
-    .carousel-control-next {
-        margin-right: -150px;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        height: 100px;
-        width: 100px;
-        outline: black;
-        background-size: 100%, 100%;
-        border-radius: 50%;
-        background-image: none;
-    }
-
-    .carousel-control-next-icon:after {
-        content: '>';
-        font-size: 55px;
-        color: red;
-    }
-
-    .carousel-control-prev-icon:after {
-        content: '<';
-        font-size: 55px;
-        color: red;
-    }
-
-    .carousel-item {
-        height: 400px;
-    } */
-
     @font-face {
         font-family: "apercu";
         src: url('ApercuProLight.otf');
@@ -122,23 +17,20 @@
         src: url('ApercuProBold.otf');
     }
 
-    body {
-        /* display: flex; */
-        /* flex-direction: column; */
-    }
-
+    /* .right-extremity{
+    margin-right: 10%;
+} */
     body,
     p,
     .btn {
         font-family: "apercu";
     }
 
-    /* .video-content {
-        margin-left: auto;
-        margin-right: auto;
-        height: 80vh;
-        position: relative;
-    } */
+
+    .dw-insta {
+        margin-left: 2%;
+        color: #01a6c0 !important;
+    }
 
     .plyr {
         height: 100%;
@@ -146,10 +38,12 @@
     }
 
     .video-content {
+        margin-left: 10vw;
+        margin-right: 10vw;
         display: flex;
         justify-content: center;
         /* width: 900px; */
-        height: 75vh;
+        height: 80vh;
         /* background-color: green; */
     }
 
@@ -157,10 +51,6 @@
         height: 100%;
     }
 
-    .plyr__video-wrapper iframe {
-        width: 100%;
-        height: 100%;
-    }
 
     .video-info {
         margin-left: auto;
@@ -189,6 +79,41 @@
         border-color: #00bfdb !important;
         background-color: #00bfdb !important;
     }
+
+    @media (max-width: 650px) {
+        .text-smalll {
+            font-size: small;
+        }
+
+        .additional {
+            font-size: small
+        }
+
+        h1 {
+            font-size: 1.25rem !important;
+        }
+
+        h5 {
+            font-size: 1em !important;
+        }
+
+        p {
+            font-size: 1em;
+        }
+
+        .video-info-description>p {
+            font-size: 01em;
+        }
+
+        .tohide {
+            display: none;
+        }
+
+        .mob {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
 </style>
 
 
@@ -205,7 +130,7 @@
             <%- data.vname %>
         </h1>
 
-        <div class="row">
+        <div class="row desktop-header">
             <div class="col-4 align-self-center text-left">
                 <h5>
                     <%- data.fname %>
@@ -228,11 +153,11 @@
                 <%if (role==="admin" ) { %>
                     <h6 class="social">
                         <% switch (data.platform) { case 'TikTok' : %>
-                            <a href="javascript:void(0);" id="tiktok" class="fab fa-tiktok"></a>
+                            <a href="javascript:void(0);" class="fab fa-tiktok"></a>
                             <% break; case 'Instagram' : %>
-                                <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                                <a href="javascript:void(0);" class="fab fa-instagram"></a>
                                 <% break; case 'Youtube' : %>
-                                    <a href="javascript:void(0);" id="youtube" class="fab fa-youtube"></a>
+                                    <a href="javascript:void(0);" class="fab fa-youtube"></a>
                                     <% break; } %>
                                         <%- data.credit %>
                     </h6>
@@ -257,7 +182,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
+                                        <button type="button" class="btn btn-primary"
                                             data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-primary"
                                             onclick="insta('<%-data.id%>')">Save
@@ -267,15 +192,15 @@
                             </div>
                         </div>
                         <%if (data.instagram) { %>
-                            <a href="javascript:void(0);" id="instagram" class="fab fa-instagram"></a>
+                            <a href="javascript:void(0);" class="fab fa-instagram"></a>
                             <%- data.instagram %>
-                                <button style="border-radius: 5px;" class="btn btn-secondary btn-sm" data-toggle="modal"
+                                <button style="border-radius: 5px;" class="btn btn-primary btn-sm" data-toggle="modal"
                                     data-target="#insta">
                                     EDIT
                                 </button>
 
                                 <%}else { %>
-                                    <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                    <button style="border-radius: 5px;" class="btn btn-primary btn-sm"
                                         data-toggle="modal" data-target="#insta">
                                         Add instagram
                                     </button>
@@ -284,6 +209,99 @@
                     <%} %>
             </div>
         </div>
+
+
+
+
+
+
+
+
+        <div class="row mobile-header" hidden>
+            <div class="col-8 align-self-center text-left">
+                <h5>
+                    <%- data.fname %>
+                        <%- data.lname %>
+                </h5>
+                <p>
+                    <%- data.city %> <span class="dot"></span>
+                        <%- data.date %>
+                </p>
+            </div>
+            <div class="col-4 align-self-center text-left" style="top: 0%;">
+                <%if (role==="admin" ) { %>
+                    <a href="javascript:void(0);" id="contrat" style="color: #00bfdb;"
+                        class="fas fa-file-contract fa-3x"
+                        onclick="window.open('contract?storage=' +  '<%-data.storage%>','_blank')"></a>
+                    <%} %>
+            </div>
+            <div class="col-12 align-self-center text-left">
+
+                <%if (role==="admin" ) { %>
+                    <h6 class="social">
+                        <% switch (data.platform) { case 'TikTok' : %>
+                            <a href="javascript:void(0);" class="fab fa-tiktok"></a>
+                            <% break; case 'Instagram' : %>
+                                <a href="javascript:void(0);" class="fab fa-instagram"></a>
+                                <% break; case 'Youtube' : %>
+                                    <a href="javascript:void(0);" class="fab fa-youtube"></a>
+                                    <% break; } %>
+                                        <%- data.credit %>
+                    </h6>
+                    <h6 class="email">
+                        <%- data.email %>
+                    </h6>
+                    <h6 class="social">
+                        <div class="modal fade" id="_insta" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Instagram</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="_instagram" class="col-form-label">Instagram:</label>
+                                            <input type="text" class="form-control" id="_instagram">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary"
+                                            onclick="insta('<%-data.id%>')">Save
+                                            changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <%if (data.instagram) { %>
+                            <a href="javascript:void(0);" class="fab fa-instagram"></a>
+                            <%- data.instagram %>
+                                <button style="border-radius: 5px;" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#_insta">
+                                    EDIT
+                                </button>
+
+                                <%}else { %>
+                                    <button style="border-radius: 5px;" class="btn btn-primary btn-sm"
+                                        data-toggle="modal" data-target="#_insta">
+                                        Add instagram
+                                    </button>
+                                    <%} %>
+                    </h6>
+                    <%} %>
+            </div>
+        </div>
+
+
+
+
+
+
         <h4 class="tag">
             <%- data.tag.charAt(0).toUpperCase() + data.tag.slice(1) %>
         </h4>
@@ -308,7 +326,7 @@
 
             <%} %>
                 <div class="row ">
-                    <div class="col align-self-center text-center">
+                    <div class="col mob align-self-center text-center">
 
                         <%if (role==="admin" ) { %>
                             <div class="modal fade" id="info" tabindex="-1" role="dialog"
@@ -329,7 +347,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
+                                            <button type="button" class="btn btn-primary"
                                                 data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary"
                                                 onclick="updateInfo('<%-data.id%>')">Save
@@ -340,20 +358,19 @@
                             </div>
 
                             <%} %>
-                                <h6 style="margin-top: 5%;">Additional Information
+                                <h6 class="additional" style="margin-top: 5%;"><span class="tohide">Additional
+                                    </span>Information
 
                                     <%if (role==="admin" ) { %>
-                                        <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                        <button style="border-radius: 5px;" class="btn btn-primary btn-sm"
                                             data-toggle="modal" data-target="#info">
                                             EDIT
                                         </button>
                                         <%} %>
                                 </h6>
-                                <p>
-                                    <%-data.info%>
-                                </p>
+
                     </div>
-                    <div class="col align-self-center text-center">
+                    <div class="mob col align-self-center text-center">
                         <%if (role==="admin" ) { %>
                             <div class="modal fade" id="clips" tabindex="-1" role="dialog"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -378,7 +395,7 @@
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
+                                                <button type="button" class="btn btn-primary"
                                                     data-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-primary">Add File</button>
                                             </div>
@@ -387,20 +404,30 @@
                                 </div>
                             </div>
                             <%} %>
-                                <h6 style="margin-top: 5%;">Additional Clips
+                                <h6 class="additional" style="margin-top: 5%;"><span class="tohide">Additional</span>
+                                    Clips
                                     <%if (role==="admin" ) { %>
-                                        <button style="border-radius: 5px;" class="btn btn-secondary btn-sm"
+                                        <button style="border-radius: 5px;" class="btn btn-primary btn-sm"
                                             data-toggle="modal" data-target="#clips">
                                             EDIT
                                         </button>
                                         <%} %>
                                 </h6>
-                                <div id="clips-array">
-                                    <!-- <%-data.test%> -->
-                                </div>
                     </div>
                 </div>
 
+
+                <div class="row">
+                    <div class="col align-self-center text-center">
+                        <p class="text-smalll">
+                            <%-data.info%>
+                        </p>
+                    </div>
+                    <div class="col align-self-right text-right">
+                        <div id="clips-array">
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>
 
@@ -411,30 +438,63 @@
 <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
+    let _width = $(window).width();
+    if (_width < 651) {
+        $(".desktop-header").attr("hidden", true);
+        $(".mobile-header").attr("hidden", false);
+    }
+</script>
+<script>
+    const player = new Plyr('#player');
     let role = '<%-role%>';
     var raw_clips = '<%-data.clips%>';
-    var clips = raw_clips.split(',');
-    var clips_html = document.getElementById('clips-array');
+    let clips = null;
+    if (raw_clips) {
+        clips = raw_clips.split(',');
+    }
+    var clips_html = document.getElementById('clips-array')
     if (role == 'admin') {
         console.log('<%-role%>');
         var clips_modal = document.getElementById('clips-modal');
     }
+    console.log(raw_clips);
     for (i in clips) {
+
+        //ROW//
+        let row = document.createElement("div");
+        row.className = "row justify-content-center align-items-center"
+
+        //NAME TO ACCESS VIDEO//
         let a = document.createElement("a");
         a.href = '/clip?storage=' + '<%-data.storage%>' + '&name=' + clips[i];
         a.target = '_blank'
         a.innerHTML = clips[i];
+
+        // P REMOVE //
         let p = document.createElement("p");
         let template = $("#clips-remove").clone();
         template.removeAttr('hidden');
         p.innerHTML = clips[i];
+
+        // BR //
         let br = document.createElement("br");
         a.appendChild(br);
         template.appendTo(p);
+
+
         if (role == 'admin') {
             clips_modal.appendChild(p);
         }
-        clips_html.appendChild(a);
+        row.appendChild(a);
+        if (role == 'admin') {
+            let dl = document.createElement("a");
+            dl.target = '_blank'
+            dl.href = `/clip/dl?storage=${'<%-data.storage%>'}&name=${clips[i]}`;
+            dl.className = "dw-insta fas fa-file-download"
+            dl.setAttribute('download', "download");
+            row.appendChild(dl)
+        }
+        clips_html.appendChild(row);
     }
 
 
@@ -481,6 +541,10 @@
 
     function insta(id) {
         var e = document.getElementById('instagram');
+        let _width = $(window).width();
+        if (_width < 651) {
+            e = document.getElementById('_instagram');
+        }
         var data = {
             ID: id,
             value: e.value

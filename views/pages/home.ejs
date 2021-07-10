@@ -38,6 +38,10 @@
         src: url('ApercuProBold.otf');
     }
 
+    .tohide {
+        display: none;
+    }
+
 
     .container-fluid {
         position: relative;
@@ -70,7 +74,7 @@
 
     .col img {
         opacity: 0.5;
-        object-fit: fill;
+        object-fit: cover;
         height: 100%;
         width: 100%;
     }
@@ -128,37 +132,213 @@
         color: black;
     }
 
-    .form-control {
-        border-radius: 0 !important;
-        border-color: rgba(0, 0, 0, 0.7);
-        ;
-    }
-
-    .btn-primary,
-    .btn-primary:hover,
-    .btn-primary:active,
-    .btn-primary:visited {
-        background-color: #00bfdb !important;
-        border-radius: 0 !important;
-        border-color: #00bfdb !important;
-    }
-
     .btn:focus {
         outline: none;
         box-shadow: none;
     }
 
-    @media (max-width: 1000px) {
+
+    :root {
+        --input-padding-x: 1.5rem;
+        --input-padding-y: 0.75rem;
+    }
+
+    .form-empty-shell {
+        position: relative;
+        margin-bottom: 2.5rem;
+    }
 
 
-        /* .first-section {
+    .form-label-group {
+        position: relative;
+        margin-bottom: 0.5rem;
+        margin-bottom: 3.5%;
+    }
+
+    .form-label-group-test {
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-label-group>input,
+    .form-label-group>label,
+    .form-label-group>textarea {
+        padding: var(--input-padding-y) var(--input-padding-x);
+        height: auto;
+        border-radius: 2rem;
+    }
+
+    .form-label-group>select {
+        height: 3.1rem;
+        color: #919191;
+    }
+
+    .form-label-group>input,
+    .form-label-group>select,
+    .form-label-group>textarea {
+        background-color: #f6f6f6;
+    }
+
+    .form-label-group>label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+        /* Override default `<label>` margin */
+        line-height: 1.5;
+        color: #919191;
+        cursor: text;
+        /* Match the input under the label */
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        transition: all .1s ease-in-out;
+    }
+
+    .form-label-group input::-webkit-input-placeholder,
+    .form-label-group>textarea::-webkit-textarea-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input:-ms-input-placeholder,
+    .form-label-group>textarea:-ms-textarea-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::-ms-input-placeholder,
+    .form-label-group>textarea::-ms-textarea-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::-moz-placeholder,
+    .form-label-group>textarea::-moz-placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input::placeholder,
+    .form-label-group>textarea::placeholder {
+        color: transparent;
+    }
+
+    .form-label-group input:not(:placeholder-shown) {
+        padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+        padding-bottom: calc(var(--input-padding-y) / 3);
+    }
+
+    .form-label-group input:not(:placeholder-shown)~label {
+        padding-top: calc(var(--input-padding-y) / 3);
+        padding-bottom: calc(var(--input-padding-y) / 3);
+        /* font-size: 0.9rem; */
+        font-size: smaller;
+        color: #777;
+    }
+
+    .form-label-group textarea:not(:placeholder-shown) {
+        padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+        padding-bottom: calc(var(--input-padding-y) / 3);
+    }
+
+    .form-label-group textarea:not(:placeholder-shown)~label {
+        padding-top: calc(var(--input-padding-y) / 3);
+        padding-bottom: calc(var(--input-padding-y) / 3);
+        /* font-size: 0.9rem; */
+        font-size: smaller;
+        color: #777;
+    }
+
+    .form-row {
+        padding-bottom: 3.5%;
+    }
+
+    /* Fallback for Edge
+-------------------------------------------------- */
+
+    @supports (-ms-ime-align: auto) {
+        .form-label-group>label {
+            display: none;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: #777;
+        }
+    }
+
+    /* Fallback for IE
+-------------------------------------------------- */
+
+    @media all and (-ms-high-contrast: none),
+    (-ms-high-contrast: active) {
+        .form-label-group>label {
+            display: none;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: #777;
+        }
+    }
+
+
+
+
+
+
+    .btn-primary,
+    .btn-primary:active,
+    .btn-primary:visited,
+    .btn-primary:focus {
+        font-family: apercu;
+        background-color: #00bfdb;
+        border-color: #00bfdb;
+    }
+
+    .btn-primary:hover {
+        font-family: apercu;
+        background-color: #01a6c0;
+        border-color: #01a6c0;
+    }
+
+    .btn {
+        font-size: 0.9rem !important;
+        letter-spacing: 0.05rem !important;
+        padding: 0.75rem 1rem !important;
+        border-radius: 2rem !important;
+    }
+
+
+
+    .sec {
+            margin-bottom: 1vh;
+        }
+
+
+
+
+
+
+
+
+    @media (max-width: 1001px) {
+
+        .sec {
+            margin-bottom: 10vh;
+        }
+
+        .tohide {
+            display: block;
+        }
+
+        /* .form-row {
             display: none;
         } */
 
         .bottom-left {
             z-index: 10;
             position: absolute;
-            bottom: 10%;
+            bottom: -10%;
             left: 5%;
             font-family: "apercu";
             font-weight: bold;
@@ -218,14 +398,18 @@
         }
 
         .container-fluid {
-            height: 37vh !important;
+            height: 50vh !important;
+        }
+
+        .first-section {
+            height: 33vh !important;
         }
     }
 </style>
 
 <div class="container-fluid ">
     <div class="bottom-left first-section">We bring the wholesome content<br> you need into your life.</div>
-    <div class="row first-section" style="height: 100%;" data-aos="fade-right" data-aos-duration="1000">
+    <div class="row first-section sec" style="height: 100%;" data-aos="fade-right" data-aos-duration="1000">
         <div class="sec1 col h-100">
             <img src="photo1-crop.png" class="nofluid">
         </div>
@@ -236,82 +420,96 @@
             <img src="photo3-crop.png" class="nofluid">
         </div>
     </div>
-    <div class="row numbers-row" style="height: 100%;" data-aos-duration="1000" data-aos="fade-up">
-        <div class="col-12  align-self-center text-center">
+    <div class="row numbers-row sec" style="height: 100%;" data-aos-duration="500" data-aos="fade-up">
+        <div id="a" class="col-4  align-self-center text-center">
             <p><span class="numbers">1M</span><br><span class="numbers-desc">global audience</span></p>
         </div>
-        <div class="col-12  align-self-center text-center">
+        <div id="b" class="col-4  align-self-center text-center">
             <p><span class="numbers">200M</span><br><span class="numbers-desc">monthly views</span></p>
         </div>
-        <div class="col-12  align-self-center text-center">
+        <div id="c" class="col-4  align-self-center text-center">
             <p><span class="numbers">750K</span><br><span class="numbers-desc">monthly profile visits</span></p>
         </div>
     </div>
-    <div class="row video-row" style="height: 100%;" data-aos="fade-up-left" data-aos-duration="1000">
+    <div class="row video-row sec" style="height: 100%; padding-left: 10vw;padding-right: 10vw;" data-aos="fade-up-left"
+        data-aos-duration="1000">
         <div class="video-col-text col-7  align-self-center text-left">
-            <p style="padding-left: 10%;padding-right: 10%;"><span class="video-title">We share emotional stories to the
+            <p><span class="video-title">We share emotional stories to the
                     world.</span><br><span class="video-desc">Okayemotions is also a powerful community of dedicated
                     fans wanting to share
                     their stories to the world.</span></p>
         </div>
-        <div class="video-col col-5 align-self-center text-center">
+        <div class="video-col col-5 align-self-center text-right">
             <video id="video1" autoplay="true" muted="muted">
                 <source src="video1.mov" type="video/mp4">
             </video>
         </div>
     </div>
-    <div class="row video-row" style="height: 100%;" data-aos="fade-up-right" data-aos-duration="1000">
-        <div class="video-col col-5 align-self-center text-center">
+    <div class="row video-row sec" style="height: 100%; padding-left: 10vw;padding-right: 10vw;" data-aos="fade-up-right"
+        data-aos-duration="1000">
+        <div class="video-col col-5 align-self-center text-left">
             <video id="video2" autoplay="true" muted="muted">
                 <source src="video2.mov" type="video/mp4">
             </video>
         </div>
         <div class="video-col-text col-7  align-self-center text-right">
-            <p style="padding-left: 10%;padding-right: 10%;"><span class="video-title">The most premium heartwarming
+            <p><span class="video-title">The most premium heartwarming
                     content.</span><br><span class="video-desc">Okayemotions' main mission is to supply top publishers
                     around the world with the
                     content that will drive the most engagement.</span></p>
         </div>
     </div>
 
-    <div class="row" style="height: 100%;" data-aos="fade-up" data-aos-duration="1000">
+    <div class="row sec" style="height: 100%;" data-aos="fade-up" data-aos-duration="1000">
         <div class="hidden-form col  align-self-center text-center">
         </div>
         <div id="form-col" class="col">
             <p style="text-align: center;"><span class="contact-us">Get In Touch</span></p>
-            <form>
-                <p class="form-text-over">Name *</p>
-                <div class="row">
+            <form method="POST" action="/contact">
+                <div class="row form-row">
                     <div class="col-md">
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="First Name">
+                        <div class="form-label-group" style="margin-bottom: 0!important;">
+                            <input name="firstName" id="firstName" class="form-control str-input"
+                                placeholder="First Name*">
+                            <label for="firstName">First Name*</label>
                         </div>
                     </div>
                     <div class="col-md">
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="exampleFormControlInput1"
-                                placeholder="Last Name">
+                        <div class="form-label-group" style="margin-bottom: 0!important;">
+                            <input name="lastName" id="lastName" class="form-control str-input" placeholder="Last Name*"
+                                required>
+                            <label for="lastName">Last Name*</label>
                         </div>
                     </div>
                 </div>
-                <p class="form-text-over">Company *</p>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                <!-- <div class="form-label-group tohide">
+                    <input name="firstName" id="firstName" class="form-control str-input" placeholder="First Name*">
+                    <label for="firstName">First Name*</label>
                 </div>
-                <p class="form-text-over">Inquiry *</p>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                <div class="form-label-group tohide">
+                    <input name="lastName" id="lastName" class="form-control str-input" placeholder="Last Name*"
+                        required>
+                    <label for="lastName">Last Name*</label>
+                </div> -->
+                <div class="form-label-group">
+                    <input name="Company" id="Company" class="form-control" placeholder="Company" required>
+                    <label for="Company">Company*</label>
                 </div>
-                <p class="form-text-over">Email *</p>
-                <div class="form-group">
-                    <input type="email" class="form-control" id="exampleFormControlInput1">
+                <div class="form-label-group">
+                    <input name="Inquiry" id="Inquiry" class="form-control" placeholder="Inquiry" required>
+                    <label for="Inquiry">Inquiry*</label>
                 </div>
-                <p class="form-text-over">Description *</p>
-                <div class="form-group">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div class="form-label-group">
+                    <input name="email" id="email" class="form-control" placeholder="Email address" required>
+                    <label for="email">Email*</label>
                 </div>
-                <button style="margin-top: 10px;" type="submit" class="btn btn-primary">Send</button>
+                <div class="form-label-group">
+                    <textarea id="description" name="description" class="form-control" placeholder="Description"
+                        rows="2" required></textarea>
+                    <label id="desc-label" for="description">Description *</label>
+                </div>
+                <button class="btn btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2"
+                    type="submit">Send</button>
             </form>
         </div>
         <div class="hidden-form col align-self-center text-center">
@@ -321,6 +519,22 @@
 
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    let _width = $(window).width();
+    if (_width < 1150) {
+        $('.numbers-row').removeAttr("data-aos-duration")
+        $('.numbers-row').removeAttr("data-aos")
+        $('#a').removeClass('col-4');
+        $('#a').addClass('col-12');
+        $('#b').removeClass('col-4');
+        $('#b').addClass('col-12');
+        $('#c').removeClass('col-4');
+        $('#c').addClass('col-12');
+    }
+    // if (_width < 851) {
+    //     page_size = 7
+    // }
+</script>
 <script>
     AOS.init({
         offset: 200,

@@ -15,7 +15,7 @@
     src: url('ApercuProBold.otf');
 }
 
-body, p {
+body, p, h1, h2, h3, h4, h5, h6 {
     font-family: "apercu";
 }
 
@@ -25,7 +25,6 @@ body, p {
 
 
 .content {
-    margin-top: 10%;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -33,10 +32,9 @@ body, p {
 .filter {
     position: fixed;
     top: 20%;
-    /* margin: 10%; */
 }
 #_list {
-    top: 15%;
+    top: 5%;
 }
 .search-bar {
     z-index: 289;

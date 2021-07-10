@@ -1,57 +1,18 @@
 <link rel="stylesheet" type="text/css" href="new_data.css">
 <style>
-    .card-img-top-mobile {
-        opacity: 0.5;
-        object-fit: fill;
-        height: 100%;
-        width: 100%;
-    }
-
-    .bottom-left {
-        color: white;
-        z-index: 10;
-        position: absolute;
-        bottom: 9%;
-        left: 0%;
-        font-family: "apercu";
-        font-size: 1em;
-        font-weight: bold;
-    }
-
-    .bottom-bottom-left {
-
-        color: white;
-        z-index: 10;
-        position: absolute;
-        bottom: 0%;
-        left: 0%;
-        font-family: "apercu";
-        font-size: 1em;
-        font-weight: normal;
-    }
-
+    
     .bottom-bottom-right {
-
-        color: red;
-        z-index: 10;
-        position: absolute;
-        top: 50%;
-        right: 2%;
-        font-family: "apercu";
-        font-size: 1em;
-        font-weight: normal;
-    }
-
-    .bottom-right {
-
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 5px;
+        padding: 1%;
         color: white;
         z-index: 10;
         position: absolute;
-        bottom: 9%;
-        right: 0%;
+        top: 1%;
+        right: 1%;
         font-family: "apercu";
         font-size: 1em;
-        font-weight: bold;
+        font-weight: normal;
     }
 
     #mobile-video {
@@ -69,6 +30,12 @@
         display: none;
     }
 
+    @media (max-width: 500px) {
+        /* .bottom-bottom-right {
+            top: 51.5% !important;
+        } */
+    }
+
     @media (max-width: 650px) {
 
         .filter-mobile,
@@ -81,6 +48,20 @@
         }
 
 
+    }
+
+    .page {
+        display: none;
+    }
+
+    .page-active {
+        display: block !important;
+    }
+
+    .jumbotron {
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: rgba(0, 123, 255, 0) !important;
     }
 </style>
 <%- include ('./partials/card_template') %>
@@ -161,283 +142,433 @@
                 </form>
                 <div class="collapse" id="collapseFiltre">
                     <div class="filter-mobile">
-                        <%if (role==="admin" ) { %>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="featured">
-                                <label class="custom-control-label" for="featured">
-                                    <p>Featured</p>
-                                </label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="notfeatured">
-                                <label class="custom-control-label" for="notfeatured">
-                                    <p>Not Featured</p>
-                                </label>
-                            </div>
-                            <hr />
-                            <%} %>
+
+                        <form id="filters-mobile">
+                            <%if (role==="admin" ) { %>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="animals">
-                                    <label class="custom-control-label" for="animals">
-                                        <p>Animals</p>
+                                    <input type="checkbox" class="opt-mobile custom-control-input" id="_featured">
+                                    <label class="custom-control-label" for="_featured">
+                                        <p>Featured</p>
                                     </label>
                                 </div>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="family">
-                                    <label class="custom-control-label" for="family">
-                                        <p>Family</p>
+                                    <input type="checkbox" class="opt-mobile custom-control-input" id="_notfeatured">
+                                    <label class="custom-control-label" for="_notfeatured">
+                                        <p>Not Featured</p>
                                     </label>
                                 </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="inspiring">
-                                    <label class="custom-control-label" for="inspiring">
-                                        <p>Inspiring</p>
-                                    </label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="lovestory">
-                                    <label class="custom-control-label" for="lovestory">
-                                        <p>Love Story</p>
-                                    </label>
-                                </div>
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="other">
-                                    <label class="custom-control-label" for="other">
-                                        <p>Other</p>
-                                    </label>
-                                </div>
+                                <hr />
+                                <%} %>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="opt-mobile custom-control-input" id="_animals">
+                                        <label class="custom-control-label" for="_animals">
+                                            <p>Animals</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="opt-mobile custom-control-input" id="_family">
+                                        <label class="custom-control-label" for="_family">
+                                            <p>Family</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="opt-mobile custom-control-input" id="_inspiring">
+                                        <label class="custom-control-label" for="_inspiring">
+                                            <p>Inspiring</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="opt-mobile custom-control-input" id="_lovestory">
+                                        <label class="custom-control-label" for="_lovestory">
+                                            <p>Love Story</p>
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="opt-mobile custom-control-input" id="_other">
+                                        <label class="custom-control-label" for="_other">
+                                            <p>Other</p>
+                                        </label>
+                                    </div>
+                        </form>
                     </div>
                 </div>
+                <style>
+                    /* .page-link {
+                        color: #000000;
+                        background-color: #00bfdb;
+                        border: 1px solid #00bfdb;
+                    }
+
+                    .page-item.disabled .page-link {
+                        color: #6c757d;
+                        background-color: #00bfdb;
+                        border-color: #00bfdb;
+                    }
+
+                    .page-item.active .page-link {
+                        color: #fff;
+                        background-color: #00bfdb;
+                        border-color: #00bfdb;
+                    }
+
+                    .page-link:hover {
+                        color: #0056b3;
+                        background-color: #00bfdb;
+                        border-color: #00bfdb;
+                    }
+
+                    .page-link:focus {
+                        box-shadow: 0 0 0 .2rem rgba(0, 123, 255, .25);
+                    }
+
+                    .prev .page-link {
+                        background-color: #80DEEA;
+                    }
+
+                    .first .page-link {
+                        background-color: #80DEEA;
+                    }
+
+                    .next .page-link {
+                        background-color: #80DEEA;
+                    }
+
+                    .last .page-link {
+                        background-color: #80DEEA;
+                    } */
+                </style>
+
                 <div id="_list" class="d-flex flex-column flex-nowrap">
                 </div>
+                <nav aria-label="Page navigation example">
+                    <ul id="pagination-demo" class="pagination justify-content-center">
+                    </ul>
+                </nav>
+
+
             </div>
         </div>
-    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js"
+            integrity="sha512-uzuo1GprrBscZGr+iQSv8+YQQsKY+rSHJju0FruVsGHV2CZNZPymW/4RkxoHxAxw3Lo5UQaxDMF8zINUfAsGeg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            var width = $(window).width(), height = $(window).height();
+            let data = '<%- JSON.stringify(data) %>';
+            let data_json = JSON.parse(data);
+            let search = null;
 
-    <script>
+            let _width = $(window).width();
+            let page_size = 21;
+            if (_width < 1401) {
+                page_size = 14
+            }
+            if (_width < 851) {
+                page_size = 7
+            }
+            let pages = Math.ceil(data_json.length / page_size)
 
-        let data = '<%- JSON.stringify(data) %>';
-        let data_json = JSON.parse(data);
-        let search = null;
-
-        $("#search-form").submit(function (event) {
-            let value = $("#search-id").val().trim();
-            console.log(data_json);
-            if (value) {
-                search = value;
-                data_json = data_json.filter(function (jsonObject) {
-                    for (var key of Object.keys(jsonObject)) {
-                        if (jsonObject[key] && jsonObject[key].toString().toLowerCase().includes(value.toString().toLowerCase())) {
-                            console.log("contains");
-                            return true
+            $("#search-form").submit(function (event) {
+                let value = $("#search-id").val().trim();
+                console.log(data_json);
+                if (value) {
+                    search = value;
+                    data_json = data_json.filter(function (jsonObject) {
+                        for (var key of Object.keys(jsonObject)) {
+                            if (jsonObject[key] && jsonObject[key].toString().toLowerCase().includes(value.toString().toLowerCase())) {
+                                console.log("contains");
+                                return true
+                            }
                         }
-                    }
-                    return false;
-                });
+                        return false;
+                    });
 
+                    console.log(data_json);
+                    $("#_list").empty();
+                    loadAssets();
+                } else {
+                    search = null;
+                }
+                event.preventDefault();
+            });
+
+
+            $('#filters').change(function () {
+                let arr = [];
+
+                let feature = $('#featured').is(":checked");
+                let notfeature = $('#notfeatured').is(":checked");
+                $('input.opt:checkbox:checked').each(function () {
+                    arr.push($(this).attr("id"));
+                });
+                data_json = JSON.parse(data);
+                console.log(arr.length)
+                console.log(data_json)
+                if (arr != 0) {
+                    data_json = data_json.filter(function (jsonObject) {
+                        let i = 0;
+                        if (!arr.includes('animals') && !arr.includes('family') && !arr.includes('inspiring') && !arr.includes('lovestory') && !arr.includes('other')) {
+                            if (feature && !notfeature && jsonObject.posted == 1) {
+                                return true;
+                            } else if (!feature && notfeature && jsonObject.posted == 0) {
+                                return true;
+                            } else if ((feature && notfeature) || (!feature && !notfeature)) {
+                                return true;
+                            }
+                        } else {
+                            while (i != arr.length) {
+                                if (jsonObject.tag == arr[i]) {
+                                    if (feature && !notfeature && jsonObject.posted == 1) {
+                                        return true;
+                                    } else if (!feature && notfeature && jsonObject.posted == 0) {
+                                        return true;
+                                    } else if ((feature && notfeature) || (!feature && !notfeature)) {
+                                        return true;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+
+                        return false;
+                    });
+                }
                 console.log(data_json);
                 $("#_list").empty();
                 loadAssets();
-            } else {
-                search = null;
-            }
-            event.preventDefault();
-        });
-
-
-        $('#filters').change(function () {
-            var arr = [];
-
-            let feature = $('#featured').is(":checked");
-            let notfeature = $('#notfeatured').is(":checked");
-            $('input.opt:checkbox:checked').each(function () {
-                arr.push($(this).attr("id"));
             });
-            data_json = JSON.parse(data);
-            console.log(arr.length)
-            console.log(data_json)
-            if (arr != 0) {
-                data_json = data_json.filter(function (jsonObject) {
-                    let i = 0;
-                    if (!arr.includes('animals') && !arr.includes('family') && !arr.includes('inspiring') && !arr.includes('lovestory') && !arr.includes('other')) {
-                        if (feature && !notfeature && jsonObject.posted == 1) {
-                            return true;
-                        } else if (!feature && notfeature && jsonObject.posted == 0) {
-                            return true;
-                        } else if ((feature && notfeature) || (!feature && !notfeature)) {
-                            return true;
-                        }
-                    } else {
-                        while (i != arr.length) {
-                            if (jsonObject.tag == arr[i]) {
-                                if (feature && !notfeature && jsonObject.posted == 1) {
-                                    return true;
-                                    // if (search != null) {
-                                    // for (var key of Object.keys(jsonObject)) {
-                                    //     if (jsonObject[key] && jsonObject[key].toString().toLowerCase().includes(value.toString().toLowerCase())) {
-                                    //         return true;
-                                    //     }
-                                    // }
-                                    // }
-                                } else if (!feature && notfeature && jsonObject.posted == 0) {
-                                    return true;
-                                    // if (search != null) {
-                                    //     for (var key of Object.keys(jsonObject)) {
-                                    //         if (jsonObject[key] && jsonObject[key].toString().toLowerCase().includes(value.toString().toLowerCase())) {
-                                    //             return true;
-                                    //         }
-                                    //     }
-                                    // }
-                                } else if ((feature && notfeature) || (!feature && !notfeature)) {
-                                    return true;
-                                    // if (search != null) {
-                                    //     for (var key of Object.keys(jsonObject)) {
-                                    //         if (jsonObject[key] && jsonObject[key].toString().toLowerCase().includes(value.toString().toLowerCase())) {
-                                    //             return true;
-                                    //         }
-                                    //     }
-                                    // }
-                                }
-                            }
-                            i++;
-                        }
-                    }
 
-                    return false;
+
+            $('#filters-mobile').change(function () {
+                console.log("change")
+                let arr = [];
+
+                let feature = $('#_featured').is(":checked");
+                let notfeature = $('#_notfeatured').is(":checked");
+                $('input.opt-mobile:checkbox:checked').each(function () {
+                    arr.push($(this).attr("id"));
+                });
+            
+                data_json = JSON.parse(data);
+                if (arr != 0) {
+                    arr = arr.map(s => s.slice(1));
+                    data_json = data_json.filter(function (jsonObject) {
+                        let i = 0;
+                        if (!arr.includes('animals') && !arr.includes('family') && !arr.includes('inspiring') && !arr.includes('lovestory') && !arr.includes('other')) {
+                            if (feature && !notfeature && jsonObject.posted == 1) {
+                                return true;
+                            } else if (!feature && notfeature && jsonObject.posted == 0) {
+                                return true;
+                            } else if ((feature && notfeature) || (!feature && !notfeature)) {
+                                return true;
+                            }
+                        } else {
+                            while (i != arr.length) {
+                                if (jsonObject.tag == arr[i]) {
+                                    if (feature && !notfeature && jsonObject.posted == 1) {
+                                        return true;
+                                    } else if (!feature && notfeature && jsonObject.posted == 0) {
+                                        return true;
+                                    } else if ((feature && notfeature) || (!feature && !notfeature)) {
+                                        return true;
+                                    }
+                                }
+                                i++;
+                            }
+                        }
+
+                        return false;
+                    });
+                }
+                $("#_list").empty();
+                loadAssets();
+            });
+
+
+            function tiktok(e) {
+                let role = '<%-role%>';
+                if (role == 'admin') {
+                    if (e.id == "tiktok-off") {
+                        var data = {
+                            ID: e.parentNode.parentNode.parentNode.parentNode.id
+                        };
+                        var json = JSON.stringify(data);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/update/tiktok/on");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                e.id = "tiktok-on";
+                            }
+                        }
+                        xhr.send(json);
+                    } else {
+                        var data = {
+                            ID: e.parentNode.parentNode.parentNode.parentNode.id
+                        };
+                        var json = JSON.stringify(data);
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("POST", "/update/tiktok/off");
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.onreadystatechange = function () {
+                            if (xhr.readyState === 4) {
+                                e.id = "tiktok-off";
+                            }
+                        }
+                        xhr.send(json);
+                    }
+                }
+            }
+
+
+            function dollar(e) {
+            }
+
+            function changeChevron() {
+                if ($("#chevron").attr('class') == "fas fa-chevron-circle-down") {
+                    $("#chevron").removeClass('fas fa-chevron-circle-down');
+                    $("#chevron").addClass('fas fa-chevron-circle-up');
+                } else {
+                    $("#chevron").removeClass('fas fa-chevron-circle-up');
+                    $("#chevron").addClass('fas fa-chevron-circle-down');
+                }
+            }
+
+            function loadAssets() {
+                let support = "#template";
+                let width = $(window).width();
+                let counter_max = 3;
+                let counter = 0;
+                let page_size = 21;
+                let page_counter = 1;
+                let card_page_counter = 0;
+                if (width < 1401) {
+                    page_size = 14
+                    counter_max = 2;
+                }
+                if (width < 851) {
+                    page_size = 7
+                    counter_max = 1;
+                }
+                if (width < 651) {
+                    support = "#template";
+                    $('#right-col').removeClass('col-10');
+                    $('#right-col').addClass('col-12');
+                } else {
+                    $('#right-col').removeClass('col-12');
+                    $('#right-col').addClass('col-10');
+                }
+
+                let card_counter = 1;
+                let deck_counter = 1;
+                pages = Math.ceil(data_json.length / page_size)
+
+                let list = $("#_list");
+
+                let new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+                deck_counter++;
+
+                let _page = $("#page_template").clone();
+                _page.attr("id", `page${page_counter}`);
+                _page.removeAttr('hidden');
+                list.append(_page)
+
+                _page.append(new_deck);
+                jQuery.each(data_json, function (i, val) {
+                    if (page_size <= card_page_counter) {
+                        console.log("new page");
+                        card_page_counter = 0;
+                        page_counter++;
+                        let _page = $("#page_template").clone();
+                        _page.attr("id", `page${page_counter}`);
+                        _page.removeAttr('hidden');
+                        list.append(_page)
+                    }
+                    if (counter == counter_max) {
+                        new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
+                        deck_counter++;
+
+                        new_deck.appendTo(`#page${page_counter}`);
+                        counter = 0;
+                    }
+                    template = $(support.toString()).clone();
+                    template.attr("id", val.id);
+                    template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
+                    template.find("h4").text(val.vname)
+                    template.find("p").text(val.fname + "  " + val.lname)
+                    template.find("#type").find("i").text(val.tag.charAt(0).toUpperCase() + val.tag.slice(1))
+                    template.find("#date").text(val.date)
+                    template.find("#city").text(val.city)
+                    template.find("#mobile-video").text(val.vname)
+                    template.find("#mobile-name").text(val.fname + "  " + val.lname)
+                    template.find("#video-time").text((val.time > 3600) ? new Date(val.time * 1000).toISOString().substr(11, 8) : new Date(val.time * 1000).toISOString().substr(14, 5))
+                    template.find("#mobile-date").text(val.date)
+                    if (val.posted == 1) {
+                        template.find('#tiktok-off').attr("id", "tiktok-on");
+                    }
+                    template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
+                    template.removeAttr('hidden');
+                    template.appendTo(`#${deck_counter - 1}`);
+                    console.log(`page${page_counter}`);
+                    card_counter++;
+                    counter++;
+                    card_page_counter++;
+                });
+                while (counter < counter_max) {
+                    template = $("#empty_template").clone();
+                    template.removeAttr('hidden');
+                    template.appendTo(`#${deck_counter - 1}`);
+                    counter++;
+                }
+                // let _nav = $("#nav_template").clone();
+                // _nav.removeAttr('hidden');
+                // list.append(_nav)
+                $('#pagination-demo').removeData("twbs-pagination");
+                setPagination();
+            }
+
+            $(window).on('resize', function () {
+                if ($(window).width() != width) {
+                    $("#_list").empty();
+                    loadAssets();
+                }
+            });
+
+            $(document).ready(function () {
+                loadAssets();
+            });
+
+            function setPagination() {
+                $('#pagination-demo').twbsPagination({
+                    totalPages: pages,
+                    startPage: 1,
+                    visiblePages: 5,
+                    initiateStartPageClick: true,
+                    hideOnlyOnePage: false,
+                    href: false,
+                    pageVariable: '{{page}}',
+                    totalPagesVariable: '{{total_pages}}',
+                    page: null,
+                    first: 'First',
+                    prev: 'Previous',
+                    next: 'Next',
+                    last: 'Last',
+                    loop: false,
+                    beforePageClick: null,
+                    onPageClick: function (event, page) {
+                        $('.page-active').removeClass('page-active');
+                        $('#page' + page).addClass('page-active');
+                    },
+                    paginationClass: 'pagination',
+                    nextClass: 'page-item next',
+                    prevClass: 'page-item prev',
+                    lastClass: 'page-item last',
+                    firstClass: 'page-item first',
+                    pageClass: 'page-item',
+                    activeClass: 'active',
+                    disabledClass: 'disabled',
+                    anchorClass: 'page-link'
                 });
             }
-            console.log(data_json);
-            $("#_list").empty();
-            loadAssets();
-        });
 
 
-        function tiktok(e) {
-            let role = '<%-role%>';
-            if (role == 'admin') {
-                if (e.id == "tiktok-off") {
-                    var data = {
-                        ID: e.parentNode.parentNode.parentNode.parentNode.id
-                    };
-                    var json = JSON.stringify(data);
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/update/tiktok/on");
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4) {
-                            e.id = "tiktok-on";
-                        }
-                    }
-                    xhr.send(json);
-                } else {
-                    var data = {
-                        ID: e.parentNode.parentNode.parentNode.parentNode.id
-                    };
-                    var json = JSON.stringify(data);
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("POST", "/update/tiktok/off");
-                    xhr.setRequestHeader("Content-Type", "application/json");
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === 4) {
-                            e.id = "tiktok-off";
-                        }
-                    }
-                    xhr.send(json);
-                }
-            }
-        }
-
-
-        function dollar(e) {
-        }
-
-        function changeChevron() {
-            if ($("#chevron").attr('class') == "fas fa-chevron-circle-down") {
-                $("#chevron").removeClass('fas fa-chevron-circle-down');
-                $("#chevron").addClass('fas fa-chevron-circle-up');
-            } else {
-                $("#chevron").removeClass('fas fa-chevron-circle-up');
-                $("#chevron").addClass('fas fa-chevron-circle-down');
-            }
-        }
-
-        function loadAssets() {
-            let support = "#template";
-            let width = $(window).width();
-            let counter_max = 3;
-            let counter = 2;
-            if (width < 1401) {
-                counter = 1;
-                counter_max = 2;
-            }
-            if (width < 851) {
-                counter_max = 1;
-                counter = 0;
-            }
-            if (width < 651) {
-                support = "#template";
-                $('#right-col').removeClass('col-10');
-                $('#right-col').addClass('col-12');
-            } else {
-                $('#right-col').removeClass('col-12');
-                $('#right-col').addClass('col-10');
-            }
-
-            let card_counter = 1;
-            let deck_counter = 1;
-
-            let list = $("#_list");
-
-
-            let new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
-            deck_counter++;
-
-            list.append(new_deck);
-            console.log(data_json)
-            jQuery.each(data_json, function (i, val) {
-                counter++;
-                if (counter == counter_max) {
-                    new_deck = $("<div>", { id: deck_counter, "class": "card-deck" });
-                    deck_counter++;
-                    list.append(new_deck);
-                    counter = 0;
-                }
-                template = $(support.toString()).clone();
-                template.attr("id", val.id);
-                template.find("img").attr('src', "image?storage=" + val.storage + '&video=video' + val.ext);
-                template.find("h4").text(val.vname)
-                template.find("p").text(val.fname + "  " + val.lname)
-                template.find("#type").find("i").text(val.tag.charAt(0).toUpperCase() + val.tag.slice(1))
-                template.find("#date").text(val.date)
-                template.find("#city").text(val.city)
-                template.find("#mobile-video").text(val.vname)
-                template.find("#mobile-name").text(val.fname + "  " + val.lname)
-                // TO DO//template.find("#mobile-time").text(val.city)
-                template.find("#mobile-date").text(val.date)
-                if (val.posted == 1) {
-                    template.find('#tiktok-off').attr("id", "tiktok-on");
-                }
-                template.find("#image").attr("onclick", "window.open('watch?id=" + val.id + "');");
-                template.removeAttr('hidden');
-                template.appendTo(`#${deck_counter - 1}`);
-                card_counter++;
-            });
-            while (counter < counter_max - 1) {
-                template = $("#empty_template").clone();
-                template.removeAttr('hidden');
-                template.appendTo(`#${deck_counter - 1}`);
-                counter++;
-            }
-        }
-
-        $(window).on('resize', function () {
-            $("#_list").empty();
-            loadAssets();
-        });
-
-        $(document).ready(function () {
-            loadAssets();
-        });
-
-
-    </script>
+        </script>

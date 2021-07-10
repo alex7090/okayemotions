@@ -4,6 +4,8 @@ const { ensureAuthenticated, ensureAdmin } = require('../config/auth');
 const multer = require('multer');
 const path = require('path');
 var query = require('../config/query');
+
+var transporter = require('../config/nodemailer');
 var contrat = require('../config/contrat');
 const uuid = require('uuid').v4;
 const fs = require("fs");
@@ -14,6 +16,7 @@ var ffmpeg = require('ffmpeg');
 const mergeImages = require('merge-images');
 const { Canvas, Image } = require('canvas');
 var getDimensions = require('get-video-dimensions');
+const { getVideoDurationInSeconds } = require('get-video-duration')
 
 
 const storage = multer.diskStorage({
@@ -31,6 +34,9 @@ const storage = multer.diskStorage({
         const ext = path.extname(file.originalname);
         const id = uuid();
         const filepath = `${file.originalname}`;
+        // getVideoDurationInSeconds(file.originalname).then((duration) => {
+        //     console.log(duration)
+        //   })
         contrat(firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city, ext, id, filepath);
         query("INSERT INTO public.data (fname, lname, email, vname, credit, platform, link, type, ext, description, tag, storage, city, date, mod) values('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', '" + id + "', 'file', '" + ext + "', '" + description + "', '" + tag + "', '" + id + "', '" + city + "', '" + date + "', 0)", [], (err, rows) => {
             cb(null, `./${id}/video${ext}`);
@@ -43,6 +49,13 @@ const upload = multer({ storage });
 
 
 router.post('/upload', upload.single('file'), (req, res) => {
+    var { firstName, lastName, email, name, plateform, credit, tag, description, customCheck1, customCheck2, signature, link, date, city } = req.body;
+    firstName = firstName.replace(/'/g, "''");
+    lastName = lastName.replace(/'/g, "''");
+    name = name.replace(/'/g, "''");
+    credit = credit.replace(/'/g, "''");
+    description = description.replace(/'/g, "''");
+    description = description.replace(/[\r\n]+/g, " ");
     var video_file = fs.createReadStream(req.file.path);
     var video_String = JSON.stringify(video_file);
     var video_res = JSON.parse(video_String);
@@ -50,7 +63,7 @@ router.post('/upload', upload.single('file'), (req, res) => {
         var process = new ffmpeg(video_res.path);
         process.then(function (video) {
             let vertical = (video.metadata.video.resolution.h > video.metadata.video.resolution.w) ? true : false;
-            console.log(video.metadata)
+            // console.log(video.metadata)
             if (vertical) {
                 let tmp = uuid();
                 fs.mkdir(tmp, function (e) {
@@ -88,7 +101,11 @@ router.post('/upload', upload.single('file'), (req, res) => {
 
                             console.log(path.basename(video_res.path).length)
                             fs.writeFile(video_res.path.slice(0, -path.basename(video_res.path).length).concat("frame.jpg"), b64, { encoding: 'base64' }, function (err) {
-                                console.log('File created');
+                                query("SELECT id FROM public.data where (fname, lname, email, vname, credit, platform, type, description, tag, city, date, mod) = ('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', 'file', '" + description + "', '" + tag + "', '" + city + "', '" + date + "', 0) ORDER BY id DESC", [], (err, rows) => {
+                                    query("UPDATE public.data SET time=" + duration + " WHERE id = " + rows[0].id + ";", [], (err, rows) => {
+                                        console.log("time set")
+                                    });
+                                });
                             });
                         });
                     fs.rmdir(tmp, { recursive: true }, (err) => {
@@ -136,7 +153,11 @@ router.post('/upload', upload.single('file'), (req, res) => {
 
                             console.log(path.basename(video_res.path).length)
                             fs.writeFile(video_res.path.slice(0, -path.basename(video_res.path).length).concat("frame.jpg"), b64, { encoding: 'base64' }, function (err) {
-                                console.log('File created');
+                                query("SELECT id FROM public.data where (fname, lname, email, vname, credit, platform, type, description, tag, city, date, mod) = ('" + firstName + "', '" + lastName + "', '" + email + "', '" + name + "', '" + credit + "', '" + plateform + "', 'file', '" + description + "', '" + tag + "', '" + city + "', '" + date + "', 0) ORDER BY id DESC", [], (err, rows) => {
+                                    query("UPDATE public.data SET time=" + duration + " WHERE id = " + rows[0].id + ";", [], (err, rows) => {
+                                        console.log("time set")
+                                    });
+                                });
                             });
                         });
                     fs.rmdir(tmp, { recursive: true }, (err) => {
@@ -239,4 +260,21 @@ router.get('/data', ensureAuthenticated, (req, res, next) => {
         });
     });
 });
+
+
+
+
+router.post('/contact', (req, res, next) => {
+    transporter.sendMail({ 
+        from: 'alexandre@de-charry.com',// sender address
+        to: 'business@okayemotions.com', // list of receivers
+        subject: req.body.Inquiry, // Subject line
+        text: `${req.body.firstName} ${req.body.lastName} from  ${req.body.Company} asked: ${req.body.description}\nContact him with ${req.body.email} `, // plain text body
+      })
+      res.redirect("/");
+});
+
+
+
+
 module.exports = router;
