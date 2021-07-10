@@ -8,8 +8,8 @@ var poolConfig = {
     port: 465,
     secure: true, // use SSL
     auth: {
-        user: 'alexandre@de-charry.com',
-        pass: '/aF,eZL7aM+ctU&'
+        user: process.env.MAIL_NAME,
+        pass: process.env.MAIL_PW,
     }
 };
 
