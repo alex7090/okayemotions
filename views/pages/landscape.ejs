@@ -1,4 +1,8 @@
 <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css"
+    integrity="sha512-riZwnB8ebhwOVAUlYoILfran/fH0deyunXyJZ+yJGDyU0Y8gsDGtPHn1eh276aNADKgFERecHecJgkzcE9J3Lg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
     @font-face {
         font-family: "apercu";
@@ -436,13 +440,32 @@
 
 
 <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"
+    integrity="sha512-mBSqtiBr4vcvTb6BCuIAgVx4uF3EVlVvJ2j+Z9USL0VwgL9liZ638rTANn5m1br7iupcjjg/LIl5cCYcNae7Yg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     let _width = $(window).width();
     if (_width < 651) {
         $(".desktop-header").attr("hidden", true);
         $(".mobile-header").attr("hidden", false);
     }
+</script>
+
+<script>
+    $("#myForm").submit(function (e) {
+        console.log(e);
+        let file = $('#file').prop('files');
+        console.log(file.length);
+        if (file.length != 1) {
+            Swal.fire('Please upload exactly one file')
+            e.preventDefault();
+        } else {
+            if (file[0].name.slice(0, 6) == "video.") {
+                Swal.fire('Please change the name of the video, you cannot upload a video named video')
+                e.preventDefault();
+            }
+        }
+    });
 </script>
 <script>
     const player = new Plyr('#player');
