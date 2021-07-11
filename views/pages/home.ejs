@@ -311,17 +311,41 @@
 
 
     .sec {
-            margin-bottom: 1vh;
+        margin-bottom: 1vh;
+    }
+
+
+
+
+    @media (max-width: 760px) {
+
+        #fn {
+            padding-bottom: 4%;
+        }
+    }
+
+    @media (max-width: 350px) {
+
+
+
+        .video-title {
+            font-family: "apercu";
+            font-weight: bold;
+            font-size: 1.8em;
+            color: #00bfdb;
         }
 
-
-
-
-
-
+        .video-desc {
+            font-family: "apercu";
+            font-weight: normal;
+            font-size: 1em;
+            color: black;
+        }
+    }
 
 
     @media (max-width: 1001px) {
+
 
         .sec {
             margin-bottom: 10vh;
@@ -370,7 +394,7 @@
         .video-title {
             font-family: "apercu";
             font-weight: bold;
-            font-size: 2.2em;
+            font-size: 2em;
             color: #00bfdb;
         }
 
@@ -445,16 +469,16 @@
             </video>
         </div>
     </div>
-    <div class="row video-row sec" style="height: 100%; padding-left: 10vw;padding-right: 10vw;" data-aos="fade-up-right"
-        data-aos-duration="1000">
+    <div class="row video-row sec" style="height: 100%; padding-left: 10vw;padding-right: 10vw;"
+        data-aos="fade-up-right" data-aos-duration="1000">
         <div class="video-col col-5 align-self-center text-left">
             <video id="video2" autoplay="true" muted="muted">
                 <source src="video2.MOV" type="video/mp4">
             </video>
         </div>
         <div class="video-col-text col-7  align-self-center text-right">
-            <p><span class="video-title">The most premium heartwarming
-                    content.</span><br><span class="video-desc">Okayemotions' main mission is to supply top publishers
+            <p><span class="video-title">The most premium heartwarming content.</span><br><span
+                    class="video-desc">Okayemotions' main mission is to supply top publishers
                     around the world with the
                     content that will drive the most engagement.</span></p>
         </div>
@@ -468,14 +492,14 @@
             <form method="POST" action="/contact">
                 <div class="row form-row">
                     <div class="col-md">
-                        <div class="form-label-group" style="margin-bottom: 0!important;">
+                        <div id="fn" class="form-label-group" style="margin-bottom: 0!important;">
                             <input name="firstName" id="firstName" class="form-control str-input"
                                 placeholder="First Name*">
                             <label for="firstName">First Name*</label>
                         </div>
                     </div>
                     <div class="col-md">
-                        <div class="form-label-group" style="margin-bottom: 0!important;">
+                        <div id="ln" class="form-label-group" style="margin-bottom: 0!important;">
                             <input name="lastName" id="lastName" class="form-control str-input" placeholder="Last Name*"
                                 required>
                             <label for="lastName">Last Name*</label>
@@ -483,13 +507,13 @@
                     </div>
                 </div>
                 <!-- <div class="form-label-group tohide">
-                    <input name="firstName" id="firstName" class="form-control str-input" placeholder="First Name*">
-                    <label for="firstName">First Name*</label>
+                    <input name="firstName" id="_firstName" class="form-control str-input" placeholder="First Name*">
+                    <label for="_firstName">First Name*</label>
                 </div>
                 <div class="form-label-group tohide">
-                    <input name="lastName" id="lastName" class="form-control str-input" placeholder="Last Name*"
+                    <input name="lastName" id="_lastName" class="form-control str-input" placeholder="Last Name*"
                         required>
-                    <label for="lastName">Last Name*</label>
+                    <label for="_lastName">Last Name*</label>
                 </div> -->
                 <div class="form-label-group">
                     <input name="Company" id="Company" class="form-control" placeholder="Company" required>

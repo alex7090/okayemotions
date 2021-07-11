@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+<link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.css"
     integrity="sha512-riZwnB8ebhwOVAUlYoILfran/fH0deyunXyJZ+yJGDyU0Y8gsDGtPHn1eh276aNADKgFERecHecJgkzcE9J3Lg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -121,12 +121,30 @@
 </style>
 
 
-
+<style>
+    .video-js {
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+</style>
 
 <div class="video-content">
-    <video class="shadow-lg" id="player" playsinline controls>
-        <source src=<%- src %> />
+    <video id="my-video" class="video-js" controls preload="auto" data-setup="{}">
+        <source src=<%- src %> type="video/mp4" />
+        <source src=<%- src %> type="video/webm" />
+        <source src=<%- src %> type="video/quicktime" />
+        <source src=<%- src %> type="video/ogg" />
+        <p class="vjs-no-js">
+            To view this video please enable JavaScript, and consider upgrading to a
+            web browser that
+            <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
     </video>
+    <!-- <video src=<%- src %> autoplay loop controls muted playsinline></video> -->
+    <!-- <video class="shadow-lg" id="player" playsinline>
+        <source src=<%- src %> />
+    </video> -->
 </div>
 <div class="video-info">
     <div class="video-info-header">
@@ -439,7 +457,7 @@
     onclick="removeclip(this)"></a>
 
 
-<script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+<script src="https://vjs.zencdn.net/7.11.4/video.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.18/sweetalert2.min.js"
     integrity="sha512-mBSqtiBr4vcvTb6BCuIAgVx4uF3EVlVvJ2j+Z9USL0VwgL9liZ638rTANn5m1br7iupcjjg/LIl5cCYcNae7Yg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -468,7 +486,41 @@
     });
 </script>
 <script>
-    const player = new Plyr('#player');
+    // if (iOS()) {
+    //     const options = {
+    //         autoplay: true,
+    //         playsinline: false,
+    //         clickToPlay: false,
+    //         controls: ["play", "progress", "mute", "fullscreen"],
+    //         debug: true,
+    //         loop: { active: true }
+    //     }
+    //     const player = new Plyr('#player', options);
+    // } else {
+    //     const options = {
+    //         autoplay: true,
+    //         playsinline: false,
+    //         clickToPlay: false,
+    //         controls: ["play", "progress", "mute", "fullscreen"],
+    //         debug: true,
+    //         loop: { active: true }
+    //     }
+    //     const player = new Plyr('#player', options);
+    // }
+    function iOS() {
+        return [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+        ].includes(navigator.platform)
+            // iPad on iOS 13 detection
+            || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+    }
+</script>
+<script>
     let role = '<%-role%>';
     var raw_clips = '<%-data.clips%>';
     let clips = null;
